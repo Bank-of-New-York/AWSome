@@ -1,0 +1,134 @@
+{
+	"data": {
+		"id": "0",
+		"type": "dividend_investing",
+		"attributes": {
+			"trending_dividend_stocks": [
+				{
+					"slug": "INTC",
+					"name": "Intel Corporation"
+				},
+				{
+					"slug": "PFE",
+					"name": "Pfizer Inc."
+				},
+				{
+					"slug": "T",
+					"name": "AT&T Inc."
+				},
+				{
+					"slug": "O",
+					"name": "Realty Income Corporation"
+				},
+				{
+					"slug": "MO",
+					"name": "Altria Group, Inc."
+				},
+				{
+					"slug": "BAC",
+					"name": "Bank of America Corporation"
+				},
+				{
+					"slug": "KO",
+					"name": "The Coca-Cola Company"
+				},
+				{
+					"slug": "ABBV",
+					"name": "AbbVie Inc."
+				},
+				{
+					"slug": "IBM",
+					"name": "International Business Machines Corporation"
+				},
+				{
+					"slug": "JNJ",
+					"name": "Johnson & Johnson"
+				}
+			],
+			"dividend_increases": [
+				{
+					"slug": "CIF",
+					"name": "MFS Intermediate High Income Fund"
+				},
+				{
+					"slug": "DEX",
+					"name": "Delaware Enhanced Global Dividend&Income Fund"
+				},
+				{
+					"slug": "MFV",
+					"name": "MFS Special Value Trust"
+				},
+				{
+					"slug": "DDF",
+					"name": "Delaware Investments Dividend&Income Fund"
+				},
+				{
+					"slug": "MCR",
+					"name": "MFS Charter Income Trust"
+				},
+				{
+					"slug": "MMT",
+					"name": "MFS Multimarket Income Trust"
+				},
+				{
+					"slug": "TEI",
+					"name": "Templeton Emerging Markets Income Fund"
+				},
+				{
+					"slug": "NRIM",
+					"name": "Northrim BanCorp, Inc."
+				},
+				{
+					"slug": "KRC",
+					"name": "Kilroy Realty Corporation"
+				},
+				{
+					"slug": "MTEX",
+					"name": "Mannatech, Incorporated"
+				}
+			],
+			"upcoming_exdates": [
+				{
+					"slug": "PWOD",
+					"name": "Penns Woods Bancorp, Inc."
+				},
+				{
+					"slug": "HWC",
+					"name": "Hancock Whitney Corporation"
+				},
+				{
+					"slug": "FAF",
+					"name": "First American Financial Corporation"
+				},
+				{
+					"slug": "MFA.PB",
+					"name": "MFA Financial, Inc. PFD SER B"
+				},
+				{
+					"slug": "MFA.PC",
+					"name": "MFA Financial, Inc. 6.50 PFD SER C"
+				},
+				{
+					"slug": "CMS.PB",
+					"name": "Consumers Energy Company PFD $4.50"
+				},
+				{
+					"slug": "BPOP",
+					"name": "Popular, Inc."
+				},
+				{
+					"slug": "ANAT",
+					"name": "American National Group, Inc."
+				},
+				{
+					"slug": "CMUV",
+					"name": "CMUV Bancorp"
+				},
+				{
+					"slug": "UVSP",
+					"name": "Univest Financial Corporation"
+				}
+			]
+		}
+	}
+}

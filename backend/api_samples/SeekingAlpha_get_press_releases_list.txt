@@ -1,0 +1,832 @@
+{
+	"data": [
+		{
+			"id": "17991819",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-09-01T17:03:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "The top 10 movies on the iTunes Store"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17991819-top-10-movies-on-itunes-store"
+			}
+		},
+		{
+			"id": "17981929",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-24T18:23:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Salesforce.com, Amgen and Honeywell International Set to Join Dow Jones Industrial Average"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "6",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17981929-salesforce-com-amgen-and-honeywell-international-set-to-join-dow-jones-industrial-average"
+			}
+		},
+		{
+			"id": "17980768",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-24T06:00:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 1,
+				"title": "Apple CEO Tim Cook is fulfilling another Steve Jobs vision"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "97",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17980768-apple-ceo-tim-cook-is-fulfilling-another-steve-jobs-vision"
+			}
+		},
+		{
+			"id": "17977353",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-19T10:54:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple reaches $2 trillion market value as tech fortunes soar"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17977353-apple-reaches-2-trillion-market-value-tech-fortunes-soar"
+			}
+		},
+		{
+			"id": "17977349",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-19T10:51:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple becomes first US company to be worth $2 trillion; shares of iPhone maker have risen nearly 60% this year"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17977349-apple-becomes-first-us-company-to-be-worth-2-trillion-shares-of-iphone-maker-risen-nearly-60"
+			}
+		},
+		{
+			"id": "17976384",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-18T18:04:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "How can Wall Street be so healthy when Main Street isn't?"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17976384-how-can-wall-street-be-healthy-when-main-street-isnt"
+			}
+		},
+		{
+			"id": "17975359",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-18T08:36:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple Announces Apple Music Radio"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "1",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17975359-apple-announces-apple-music-radio"
+			}
+		},
+		{
+			"id": "17970261",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-12T17:31:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "How can Wall Street be so healthy when Main Street isn't?"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17970261-how-can-wall-street-be-healthy-when-main-street-isnt"
+			}
+		},
+		{
+			"id": "17966666",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-11T02:31:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Late drop leaves S&P 500 lower, breaking a 7-day win streak"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17966666-late-drop-leaves-s-and-p-500-lower-breaking-7-day-win-streak"
+			}
+		},
+		{
+			"id": "17965678",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-10T09:00:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "MTA asks Apple's help to solve iPhone mask issues"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17965678-mta-asks-apples-help-to-solve-iphone-mask-issues"
+			}
+		},
+		{
+			"id": "17960483",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-05T13:20:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple Announces Updated 27\" iMac with More Speed, More Power, and Better Webcam; Available at B&H Photo"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "1",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17960483-apple-announces-updated-27-imac-speed-power-and-better-webcam-available-b-and-h-photo"
+			}
+		},
+		{
+			"id": "17958511",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-04T13:00:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Phil Schiller Advances to Apple Fellow"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "1",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17958511-phil-schiller-advances-to-apple-fellow"
+			}
+		},
+		{
+			"id": "17958317",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-04T11:00:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 1,
+				"title": "27-inch iMac Gets a Major Update"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "1",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17958317-27-inch-imac-gets-major-update"
+			}
+		},
+		{
+			"id": "17956807",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-08-03T17:27:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Google unveils budget Pixel phone as pandemic curbs spending"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17956807-google-unveils-budget-pixel-phone-pandemic-curbs-spending"
+			}
+		},
+		{
+			"id": "17954963",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-31T16:33:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple, Merck rise; Caterpillar, Expedia fall"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17954963-apple-merck-rise-caterpillar-expedia-fall"
+			}
+		},
+		{
+			"id": "17953621",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-30T16:40:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple: Fiscal 3Q Earnings Snapshot"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17953621-apple-fiscal-3q-earnings-snapshot"
+			}
+		},
+		{
+			"id": "17953579",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-30T16:30:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Apple Reports Third Quarter Results"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "1",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17953579-apple-reports-third-quarter-results"
+			}
+		},
+		{
+			"id": "17951473",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-30T00:10:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Lawmakers batter Big Tech CEOs, but don't land many blows"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17951473-lawmakers-batter-big-tech-ceos-dont-land-many-blows"
+			}
+		},
+		{
+			"id": "17950739",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-29T14:40:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "The Latest: Zuckerberg questioned on viral misinformation"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17950739-latest-zuckerberg-questioned-on-viral-misinformation"
+			}
+		},
+		{
+			"id": "17949327",
+			"type": "pressRelease",
+			"attributes": {
+				"publishOn": "2020-07-29T00:10:00-04:00",
+				"isLockedPro": false,
+				"commentCount": 0,
+				"title": "Lawmakers batter Big Tech CEOs, but don't land many blows"
+			},
+			"relationships": {
+				"author": {
+					"data": {
+						"id": "68",
+						"type": "pressReleaseAuthor"
+					}
+				},
+				"sentiments": {
+					"data": []
+				},
+				"primaryTickers": {
+					"data": [
+						{
+							"id": "146",
+							"type": "tag"
+						}
+					]
+				},
+				"secondaryTickers": {
+					"data": []
+				},
+				"otherTags": {
+					"data": []
+				}
+			},
+			"links": {
+				"self": "/pr/17949327-lawmakers-batter-big-tech-ceos-dont-land-many-blows"
+			}
+		}
+	],
+	"included": [
+		{
+			"id": "68",
+			"type": "pressReleaseAuthor",
+			"attributes": {
+				"nick": "Associated Press"
+			}
+		},
+		{
+			"id": "146",
+			"type": "tag",
+			"attributes": {
+				"slug": "aapl",
+				"name": "AAPL"
+			},
+			"links": {
+				"self": "/symbol/AAPL"
+			}
+		},
+		{
+			"id": "6",
+			"type": "pressReleaseAuthor",
+			"attributes": {
+				"nick": "PR Newswire"
+			}
+		},
+		{
+			"id": "97",
+			"type": "tag",
+			"attributes": {
+				"slug": "nflx",
+				"name": "NFLX"
+			},
+			"links": {
+				"self": "/symbol/NFLX"
+			}
+		},
+		{
+			"id": "1",
+			"type": "pressReleaseAuthor",
+			"attributes": {
+				"nick": "Business Wire"
+			}
+		}
+	],
+	"meta": {
+		"page": {
+			"title": "Apple Inc. (AAPL) Latest Press Releases",
+			"description": "Stay up to date with all latest press releases from Apple Inc. (AAPL).",
+			"listTitle": "Press Releases",
+			"proStatus": 0,
+			"size": 20,
+			"totalPages": 5,
+			"total": 83,
+			"minmaxPublishOn": {
+				"min": 1595995800,
+				"max": 1598994180
+			}
+		},
+		"ads": {
+			"zone": ""
+		},
+		"mone": {
+			"params": {
+				"pu": ""
+			}
+		}
+	}
+}

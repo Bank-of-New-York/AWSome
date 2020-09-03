@@ -1,0 +1,27 @@
+import requests
+from Config import X_RAPIAPI_KEY
+
+# url = "https://seeking-alpha.p.rapidapi.com/auto-complete"
+# querystring = {"term":"apple"}
+
+# url = "https://seeking-alpha.p.rapidapi.com/market/get-realtime-prices"
+# querystring = {"symbols":"aapl%2Ctsla"}
+
+# url = "https://seeking-alpha.p.rapidapi.com/market/get-dividend-investing"
+# querystring = None
+
+# url = "https://seeking-alpha.p.rapidapi.com/press-releases/list"
+# querystring = {"until":"0","size":"20","id":"aapl"}
+
+url = "https://seeking-alpha.p.rapidapi.com/press-releases/get-details"
+querystring = {"id":"17991819"} # Change as required
+
+def get_response(url, querystring):
+  headers = {
+    'x-rapidapi-host': "seeking-alpha.p.rapidapi.com",
+    'x-rapidapi-key': X_RAPIAPI_KEY
+  }
+  return requests.request("GET", url, headers=headers, params=querystring)
+
+
+print(get_response(url, querystring).text)

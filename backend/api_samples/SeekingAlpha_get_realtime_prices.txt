@@ -1,0 +1,62 @@
+{
+	"data": [
+		{
+			"type": "real_time_price",
+			"attributes": {
+				"identifier": "AAPL",
+				"name": "Apple, Inc.",
+				"last": 122.44,
+				"change": -8.96,
+				"percentChange": -6.819,
+				"previousClose": 131.4,
+				"open": 126.97,
+				"high": 128.84,
+				"low": 120.72,
+				"volume": 142719241,
+				"dateTime": "2020-09-03 12:48:14",
+				"quoteInfo": "IEX real time price",
+				"close": 131.4,
+				"changeFromPreviousClose": null,
+				"percentChangeFromPreviousClose": null,
+				"low52Week": 51.06,
+				"high52Week": 137.98,
+				"extendedHoursPrice": null,
+				"extendedHoursChange": null,
+				"extendedHoursPercentChange": null,
+				"extendedHoursDateTime": null,
+				"extendedHoursType": null,
+				"sourceAPI": "IEX Stream"
+			},
+			"id": "AAPL"
+		},
+		{
+			"type": "real_time_price",
+			"attributes": {
+				"identifier": "TSLA",
+				"name": "Tesla, Inc.",
+				"last": 411.1,
+				"change": -36.27,
+				"percentChange": -8.107000000000001,
+				"previousClose": 447.37,
+				"open": 407.12,
+				"high": 431.8,
+				"low": 405,
+				"volume": 54172443,
+				"dateTime": "2020-09-03 12:47:55",
+				"quoteInfo": "IEX real time price",
+				"close": 447.37,
+				"changeFromPreviousClose": null,
+				"percentChangeFromPreviousClose": null,
+				"low52Week": 43.67,
+				"high52Week": 502.49,
+				"extendedHoursPrice": null,
+				"extendedHoursChange": null,
+				"extendedHoursPercentChange": null,
+				"extendedHoursDateTime": null,
+				"extendedHoursType": null,
+				"sourceAPI": "IEX Stream"
+			},
+			"id": "TSLA"
+		}
+	]
+}
