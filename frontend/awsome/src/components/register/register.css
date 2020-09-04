@@ -1,0 +1,28 @@
+h1 {
+    font-size: 3rem;
+}
+
+.container {
+    width: 70%;
+}
+
+.react-datepicker-wrapper input {
+    border: none;
+    border-bottom: #5CD4EF 2px solid;
+    margin-top: 9px;
+}
+
+.form-group input {
+    border: none;
+    border-bottom: #5CD4EF 2px solid;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-bottom: #FFA861 2px solid;
+    box-shadow: none;
+}
+
+#submit {
+    float: right;
+}

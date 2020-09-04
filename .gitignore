@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# frontend
+frontend/awsome/node_modules/*
+frontend/dashboard/node_modules/*

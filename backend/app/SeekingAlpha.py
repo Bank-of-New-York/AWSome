@@ -10,6 +10,12 @@ from Config import X_RAPIAPI_KEY
 # url = "https://seeking-alpha.p.rapidapi.com/market/get-dividend-investing"
 # querystring = None
 
+# url = "https://seeking-alpha.p.rapidapi.com/news/list"
+# querystring = {"until":"0","size":"20","id":"aapl"}
+
+# url = "https://seeking-alpha.p.rapidapi.com/news/list-trending"
+# querystring = {"id":"3611577"}
+
 # url = "https://seeking-alpha.p.rapidapi.com/press-releases/list"
 # querystring = {"until":"0","size":"20","id":"aapl"}
 
