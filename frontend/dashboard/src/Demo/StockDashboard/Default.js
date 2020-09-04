@@ -106,7 +106,7 @@ class StockDashboard extends React.Component {
             <Aux>
                 <Row>
 
-                    <Col xl={4}>
+                    <Col md={7} xl={7}>
                         <Card className='card-social'>
                             <Card.Body className='border-bottom'>
                                 <div className="row align-items-center justify-content-center">
@@ -138,7 +138,29 @@ class StockDashboard extends React.Component {
                         </Card>
                     </Col>
                     
-                    <Col xl={4}>
+                    <Col md={5} xl={5}>
+                        <Card className='card-event'>
+                            <Card.Body>
+                                <div className="row align-items-center justify-content-center">
+                                    <div className="col">
+                                        <h5 className="m-0">Upcoming Event</h5>
+                                    </div>
+                                    <div className="col-auto">
+                                        <label className="label theme-bg2 text-white f-14 f-w-400 float-right">34%</label>
+                                    </div>
+                                </div>
+                                <h2 className="mt-2 f-w-300">45<sub className="text-muted f-14">Competitors</sub></h2>
+                                <h6 className="text-muted mt-3 mb-0">You can participate in event </h6>
+                                <i className="fa fa-angellist text-c-purple f-50"/>
+                                <br></br>
+                            </Card.Body>
+                        </Card>
+                        
+                    </Col>
+                    </Row>
+                    <Row>
+                    
+                    <Col>
                         <Card>
                             <Card.Body>
                                 <h6 className='mb-4'>Yearly Sales</h6>
@@ -167,7 +189,11 @@ class StockDashboard extends React.Component {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={8} xl={10}>
+                    
+                    </Row>
+                    <Row>
+                    
+                    <Col >
                         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
                             <Tab eventKey="today" title="Today">
                                 {tabContent}
@@ -241,24 +267,7 @@ class StockDashboard extends React.Component {
                             </Card.Body>
                         </Card> */}
                     </Col>
-                    <Col md={4} xl={2}>
-                        <Card className='card-event'>
-                            <Card.Body>
-                                <div className="row align-items-center justify-content-center">
-                                    <div className="col">
-                                        <h5 className="m-0">Upcoming Event</h5>
-                                    </div>
-                                    <div className="col-auto">
-                                        <label className="label theme-bg2 text-white f-14 f-w-400 float-right">34%</label>
-                                    </div>
-                                </div>
-                                <h2 className="mt-2 f-w-300">45<sub className="text-muted f-14">Competitors</sub></h2>
-                                <h6 className="text-muted mt-3 mb-0">You can participate in event </h6>
-                                <i className="fa fa-angellist text-c-purple f-50"/>
-                            </Card.Body>
-                        </Card>
-                        
-                    </Col>
+                    
                     
                 </Row>
             </Aux>

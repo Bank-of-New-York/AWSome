@@ -1,77 +1,83 @@
-import React, { Component } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
-import Form from "react-bootstrap/Form"
-import Input from "react-bootstrap/InputGroup"
-import "bootstrap/dist/css/bootstrap.min.css"
-import DatePicker from 'react-datepicker'
-import { Link } from "react-router-dom" 
+import React from 'react';
+import {NavLink} from 'react-router-dom';
 
-import "./register.css"
-export default class Register extends Component {
-    render() {
-        return (
-            <Container>
+import './../../assets/scss/style.scss';
+import Aux from "../../hoc/_Aux";
+import Breadcrumb from "../../layout/AdminLayout/Breadcrumb";
 
-                <Row>
-                    <Col>
-                        <br></br>
-                        <h1>Let's get started...</h1>
-                    </Col>
-                
-                </Row>
+class Login extends React.Component {
 
-                <br></br>
-                <br></br>
+    constructor() {
+        super();
+        this.state = {
+            username: null ,
+            password: null
+        }
 
-                <Row>
-                    <Col>
-                 
-                        <div>
-                            <Form>
-                                <Row>
-                                    <Col>
-                                        <Form.Group controlId="first_name">
-                                            <Form.Label>What's your first name?</Form.Label>
-                                            <Form.Control type="text" placeholder="First Name"></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col>
-                                        <Form.Group controlId="last_name">
-                                            <Form.Label>What's your last name?</Form.Label>
-                                            <Form.Control type="text" placeholder="Last Name"></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                
-                                <Row>
-                                    <Col xs={8}>
-                                        <Form.Group controlId="email">
-                                            <Form.Label>What's your email?</Form.Label>
-                                            <Form.Control type="text" placeholder="Email"></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col>
-                                        <Form.Group controlId="birthday">
-                                            <Form.Label>When's your birthday?</Form.Label><br></br>
-                                            <DatePicker/>
-                                        </Form.Group>
-                                    </Col>
-                                    
-                                </Row>
-                                <br></br><br></br>
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
 
-                                <Link to="/riskAssessment">
-                                    <Button id="submit" variant="primary" type="submit">Next</Button>
-                                </Link>
-                            </Form>
+    handleInputChange(event) {
+        const target = event.target;
+        var value = target.value;
+        const name = target.name; 
+        
+        this.setState({
+            [name] : value
+        })
+    }
+
+    handleSubmit = () => {
+        fetch("http://localhost:5000/register", {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type' : "application/json"
+            },
+            body: JSON.stringify({'username' : this.state.username, "password" : this.state.password})
+        }).then((response => {
+            console.log(response.status)
+            if (response.status == 404) {
+                alert("Your username has been taken")
+            } else {
+                window.location.href="/detailsForm"
+            }
+        }))
+    }
+
+    render () {
+        return(
+            <Aux>
+                <Breadcrumb/>
+                <div className="auth-wrapper">
+                    <div className="auth-content">
+                        <div className="auth-bg">
+                            <span className="r"/>
+                            <span className="r s"/>
+                            <span className="r s"/>
+                            <span className="r"/>
                         </div>
-                        
-                    </Col>
-                </Row>
-            </Container>
-        )
+                        <div className="card">
+                            <div className="card-body text-center">
+                                <div className="mb-4">
+                                    <i className="feather icon-unlock auth-icon"/>
+                                </div>
+                                <h3 className="mb-4">Sign Up</h3>
+                                <div className="input-group mb-3">
+                                    <input type="text" name="username" onChange={this.handleInputChange} className="form-control" placeholder="Username"/>
+                                </div>
+                                <div className="input-group mb-4">
+                                    <input type="password" name="password" onChange={this.handleInputChange} className="form-control" placeholder="password"/>
+                                </div>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Sign Up</button>
+                                <p className="mb-0 text-muted">Already have an account? <NavLink to="/login">Login</NavLink></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Aux>
+        );
     }
 }
+
+export default Login;

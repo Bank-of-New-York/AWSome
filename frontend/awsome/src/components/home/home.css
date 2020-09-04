@@ -3,11 +3,16 @@ h1 {
 }
 
 .btn {
-    font-size: 2rem;
+    font-size: 2rem !important;
     font-family: 'Work Sans', sans-serif;
-    background-color: #FFA861;
-    outline: none;
-    border: none;
+    background-color: #FFA861 !important;
+    outline: none !important;
+    border: none !important;
     border-radius: 10px;
     width: 20rem;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
 }
