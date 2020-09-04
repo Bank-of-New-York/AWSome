@@ -1,3 +1,0 @@
-
-# ONLY 500 REQUESTS A MONTH (Will have to rotate accounts)
-X_RAPIAPI_KEY = "d982515a8bmsh50fa0787e5890bcp11308ejsnf7790f908263"
