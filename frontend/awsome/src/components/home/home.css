@@ -1,0 +1,13 @@
+h1 {
+    font-size: 3.5rem;
+}
+
+.btn {
+    font-size: 2rem;
+    font-family: 'Work Sans', sans-serif;
+    background-color: #FFA861;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    width: 20rem;
+}
