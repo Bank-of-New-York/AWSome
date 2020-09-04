@@ -20,7 +20,7 @@ export default class Home extends Component {
                         <br></br>
                         <br></br>
 
-                        <div>
+                        <div class="center">
                             <h1>Want to start investing<br></br>but don't know how?</h1>
                             <br></br>
 
