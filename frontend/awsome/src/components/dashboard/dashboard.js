@@ -61,7 +61,7 @@ class StockDashboard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("/api_stock_prices", 
+        fetch("/api_stock_trends", 
         {
           method: 'POST',
           headers: {
@@ -73,15 +73,12 @@ class StockDashboard extends React.Component {
             end_date: this.state.end_date,
             stock_symb: this.state.stock_symb
           })
-        }).then((response => {
-            console.log(response.status)
-            if (response.status == 200) {
-                return response.json()
-            } else {
-                alert("There has been a problem")
-            }
-        })).then(({ stock_prices }) => {
+        }).then(response => 
+            response.json()
+        ).then(({ stock_prices }) => {
             this.processStockPrices(stock_prices)
+        }).catch(error => {
+            alert("There has been a problem")
         })
     }
 
