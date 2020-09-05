@@ -1,0 +1,73 @@
+{
+	"result": [
+		{
+			"name": "Key Statistics",
+			"table": [
+				{
+					"name": "Current P/E Ratio (ttm)",
+					"value": "36.78"
+				},
+				{
+					"name": "Estimated P/E",
+					"value": "37.35",
+					"comment": "(2020-09)"
+				},
+				{
+					"name": "Relative P/E",
+					"value": "1.37",
+					"comment": "vs SPX:IND"
+				},
+				{
+					"name": "Earnings Per Share (ttm)",
+					"value": "3.29"
+				},
+				{
+					"name": "Est. EPS",
+					"value": "3.24",
+					"comment": "(2020-09)"
+				},
+				{
+					"name": "Est. PEG Ratio",
+					"value": "4.48"
+				},
+				{
+					"name": "Market Cap (M)",
+					"value": "2,067,354.55"
+				},
+				{
+					"name": "Shares Outstanding (M)",
+					"value": "17,102.54"
+				},
+				{
+					"name": "Price/Book (mrq)",
+					"value": "28.66"
+				},
+				{
+					"name": "Price/Sales (ttm)",
+					"value": "7.76"
+				},
+				{
+					"name": "Dividend Indicated Gross Yield",
+					"value": "0.68%"
+				},
+				{
+					"name": "Next Earnings Announcement",
+					"value": "2020-10-30"
+				},
+				{
+					"name": "Last Dividend Reported",
+					"value": "0.20",
+					"comment": "(2020-08-07)"
+				},
+				{
+					"name": "5Y Net Dividend Growth",
+					"value": "9.94%"
+				},
+				{
+					"name": "Average Volume (30-day)",
+					"value": "190,460,192"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,156 @@
+{
+	"result": {
+		"aapl:us": {
+			"info": "Apple Inc. designs, manufactures, and markets personal computers and related personal computing and mobile communication devices along with a variety of related software, services, peripherals, and networking solutions. Apple sells its products worldwide through its online stores, its retail stores, its direct sales force, third-party wholesalers, and resellers.",
+			"securityType": "Common Stock",
+			"symbol": "AAPL",
+			"exchange": "NASDAQ GS",
+			"currency": "USD",
+			"resourceType": "Company",
+			"fundamentalDataCurrency": "USD",
+			"resourceSubtype": "Public",
+			"website": "www.apple.com",
+			"phone": "1-408-996-1010",
+			"address": "1 Infinite Loop\nCupertino, CA 95014\nUnited States",
+			"region": "AMERICAS",
+			"ticker": "aapl:us",
+			"tickerName": "AAPL:US",
+			"template": "Stock",
+			"name": "Apple Inc",
+			"executives": [
+				{
+					"id": "14014370",
+					"title": "Chief Executive Officer",
+					"name": "Timothy Donald Cook \"Tim\"",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iOIEqOOiLpFY/v3/80x80.jpg",
+					"tenureStart": "8/2011"
+				},
+				{
+					"id": "16886071",
+					"title": "Chief Operating Officer",
+					"name": "Jeffrey E Williams \"Jeff\"",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i0ATPxWvkGV4/v1/80x80.jpg",
+					"tenureStart": "12/2015"
+				},
+				{
+					"id": "15738533",
+					"title": "Senior VP/CFO",
+					"name": "Luca Maestri",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ioxE787rGco8/v3/80x80.jpg",
+					"tenureStart": "5/2014"
+				},
+				{
+					"id": "3408236",
+					"title": "Senior VP/Secy/Gen Cnsl",
+					"name": "Katherine L Adams \"Kate\"",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/igc8uQxddsLU/v3/80x80.jpg",
+					"tenureStart": "10/2018"
+				},
+				{
+					"id": "7325661",
+					"title": "Senior VP:Internet Software & Svcs",
+					"name": "Eduardo H Cue \"Eddy\"",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_GbTJmOpCBU/v2/80x80.png",
+					"tenureStart": "9/2011"
+				},
+				{
+					"id": "6190419",
+					"title": "Senior VP:Software Engineering",
+					"name": "Craig Federighi",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i7_gpEFtbPQA/v1/80x80.jpg",
+					"tenureStart": "10/2012"
+				},
+				{
+					"id": "19653674",
+					"title": "Senior VP:Machine Learning & AI Strategy",
+					"name": "John Giannandrea",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iBupD8hBdMe8/v2/80x80.jpg",
+					"tenureStart": "12/2018"
+				},
+				{
+					"id": "21119802",
+					"title": "Senior VP:Operations",
+					"name": "Sabih Khan",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iGtFcJV8Hk3k/v2/80x80.png",
+					"tenureStart": "6/2019"
+				},
+				{
+					"id": "20268957",
+					"title": "Senior VP:Retail & People",
+					"name": "Deirdre O'Brien",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQdxshQSnAZA/v2/80x80.png",
+					"tenureStart": "2/2019"
+				},
+				{
+					"id": "17674956",
+					"title": "Senior VP:Hardware Engineering",
+					"name": "Daniel Riccio \"Dan\"",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i4LbUfuqPFTc/v3/80x80.png",
+					"tenureStart": "8/2012"
+				},
+				{
+					"id": "19052877",
+					"title": "Senior VP:Hardware Technologies",
+					"name": "Johny Srouji",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/izv2licDqJKA/v3/80x80.png",
+					"tenureStart": "1/2014"
+				},
+				{
+					"id": "20263447",
+					"title": "VP & Mng Dir:Greater China",
+					"name": "Isabel Ge Mahe",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ijkalMGMrAQw/v3/80x80.png"
+				},
+				{
+					"id": "7568663",
+					"title": "VP:Environment",
+					"name": "Lisa Perez Jackson",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iXnZ1EZL1ebw/v1/80x80.jpg",
+					"tenureStart": "6/2015"
+				},
+				{
+					"id": "16472237",
+					"title": "VP:Marketing Communications",
+					"name": "Tor Myhren",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i3uPakdR3o80/v3/80x80.jpg",
+					"tenureStart": "1/2016"
+				},
+				{
+					"id": "16405044",
+					"title": "VP:Corporate Development",
+					"name": "Adrian Perica",
+					"thumbnailImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQTp3lfY9E5w/v1/80x80.png",
+					"tenureStart": "4/2019"
+				},
+				{
+					"id": "20432011",
+					"title": "Senior Analyst:Corporate Finance & Investor Relations",
+					"name": "Tejas Gala",
+					"thumbnailImage": null
+				}
+			],
+			"watchlist": true,
+			"resourceId": "AAPL:US",
+			"totalReturn1Y": "133.43",
+			"subSector": "Communications Equipment",
+			"last": "120.88",
+			"netChange": "-10.52",
+			"lastPriceTime": 1599105600,
+			"peRatio": "36.78",
+			"open": "126.91",
+			"close": "131.40",
+			"industry": "Hardware",
+			"yearHigh": "137.98",
+			"dayHigh": "128.84",
+			"volume": 257599640.0,
+			"sector": "Technology",
+			"yearLow": "51.83",
+			"dayLow": "120.50",
+			"marketCap": 2067354551680.0,
+			"lastPriceAllSessions": "120.18",
+			"pctChange": "-8.01",
+			"sectorPercentChange1Day": "-5.83",
+			"industryPercentChange1Day": "-7.24"
+		}
+	}
+}

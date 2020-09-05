@@ -1,0 +1,286 @@
+{
+	"result": [
+		{
+			"name": "Income Statement",
+			"securityID": "aapl:us",
+			"timeBasedSheets": [
+				{
+					"name": "Quarterly",
+					"columnHeadings": [
+						"9/2019",
+						"12/2019",
+						"3/2020",
+						"6/2020"
+					],
+					"chartData": [
+						{
+							"name": "Revenue",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								64040000000.0,
+								91819000000.0,
+								58313000000.0,
+								59685000000.0
+							]
+						},
+						{
+							"name": "Net Income",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								13686000000.0,
+								22236000000.0,
+								11249000000.0,
+								11253000000.0
+							]
+						},
+						{
+							"name": "Profit Margin",
+							"chartType": "line",
+							"isPercentage": true,
+							"values": [
+								21.371,
+								24.2172,
+								19.2907,
+								18.854
+							]
+						}
+					]
+				},
+				{
+					"name": "Annual",
+					"columnHeadings": [
+						"2016",
+						"2017",
+						"2018",
+						"2019"
+					],
+					"chartData": [
+						{
+							"name": "Revenue",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								215639000000.0,
+								229234000000.0,
+								265595000000.0,
+								260174000000.0
+							]
+						},
+						{
+							"name": "Net Income",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								45687000000.0,
+								48351000000.0,
+								59531000000.0,
+								55256000000.0
+							]
+						},
+						{
+							"name": "Profit Margin",
+							"chartType": "line",
+							"isPercentage": true,
+							"values": [
+								21.1868,
+								21.0924,
+								22.4142,
+								21.2381
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Balance Sheet",
+			"securityID": "aapl:us",
+			"timeBasedSheets": [
+				{
+					"name": "Quarterly",
+					"columnHeadings": [
+						"9/2019",
+						"12/2019",
+						"3/2020",
+						"6/2020"
+					],
+					"chartData": [
+						{
+							"name": "Total Assets",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								338516000000.0,
+								340618000000.0,
+								320400000000.0,
+								317344000000.0
+							]
+						},
+						{
+							"name": "Total Liabilities",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								248028000000.0,
+								251087000000.0,
+								241975000000.0,
+								245062000000.0
+							]
+						},
+						{
+							"name": "Debt to Assets",
+							"chartType": "line",
+							"isPercentage": true,
+							"values": [
+								31.9178,
+								34.2762,
+								37.0665,
+								38.5027
+							]
+						}
+					]
+				},
+				{
+					"name": "Annual",
+					"columnHeadings": [
+						"2016",
+						"2017",
+						"2018",
+						"2019"
+					],
+					"chartData": [
+						{
+							"name": "Total Assets",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								321686000000.0,
+								375319000000.0,
+								365725000000.0,
+								338516000000.0
+							]
+						},
+						{
+							"name": "Total Liabilities",
+							"chartType": "bar",
+							"isPercentage": false,
+							"values": [
+								193437000000.0,
+								241272000000.0,
+								258578000000.0,
+								248028000000.0
+							]
+						},
+						{
+							"name": "Debt to Assets",
+							"chartType": "line",
+							"isPercentage": true,
+							"values": [
+								27.055,
+								30.8218,
+								31.303,
+								31.9178
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cash Flow",
+			"securityID": "aapl:us",
+			"timeBasedSheets": [
+				{
+					"name": "Quarterly",
+					"columnHeadings": [
+						"9/2019",
+						"12/2019",
+						"3/2020",
+						"6/2020"
+					],
+					"chartData": [
+						{
+							"name": "Operating",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								19910000000.0,
+								30516000000.0,
+								13311000000.0,
+								16271000000.0
+							]
+						},
+						{
+							"name": "Investing",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								-798000000.0,
+								-13668000000.0,
+								9013000000.0,
+								-5165000000.0
+							]
+						},
+						{
+							"name": "Financing",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								-21039000000.0,
+								-25407000000.0,
+								-20940000000.0,
+								-19116000000.0
+							]
+						}
+					]
+				},
+				{
+					"name": "Annual",
+					"columnHeadings": [
+						"2016",
+						"2017",
+						"2018",
+						"2019"
+					],
+					"chartData": [
+						{
+							"name": "Operating",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								66231000000.0,
+								64225000000.0,
+								77434000000.0,
+								69391000000.0
+							]
+						},
+						{
+							"name": "Investing",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								-45977000000.0,
+								-46446000000.0,
+								16066000000.0,
+								45896000000.0
+							]
+						},
+						{
+							"name": "Financing",
+							"chartType": "line",
+							"isPercentage": false,
+							"values": [
+								-20890000000.0,
+								-17974000000.0,
+								-87876000000.0,
+								-90976000000.0
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

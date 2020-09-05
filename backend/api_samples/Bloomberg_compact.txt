@@ -1,0 +1,34 @@
+{
+	"result": {
+		"aapl:us": {
+			"securityType": "Common Stock",
+			"symbol": "AAPL",
+			"exchange": "NASDAQ GS",
+			"country": "United States",
+			"currency": "USD",
+			"resourceType": "Company",
+			"fundamentalDataCurrency": "USD",
+			"resourceSubtype": "Public",
+			"region": "AMERICAS",
+			"ticker": "aapl:us",
+			"tickerName": "AAPL:US",
+			"template": "Stock",
+			"tinyName": "Apple Inc",
+			"name": "Apple Inc",
+			"watchlist": true,
+			"resourceId": "AAPL:US",
+			"last": "120.88",
+			"netChange": "-10.52",
+			"lastPriceTime": 1599105600,
+			"pctChange1M": "10.23",
+			"yearHigh": "137.98",
+			"dayHigh": "128.84",
+			"volume": 257599640.0,
+			"yearLow": "51.83",
+			"dayLow": "120.50",
+			"pctChangeYTD": "64.66",
+			"lastPriceAllSessions": "119.11",
+			"pctChange": "-8.01"
+		}
+	}
+}
