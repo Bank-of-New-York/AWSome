@@ -24,8 +24,7 @@ COPY ./app /app
 
 COPY ./supervisord.conf /etc/supervisord.conf
 
-RUN python models.py \
- && chmod 644 /app/__init__.py
+RUN chmod 644 /app/__init__.py
 
 EXPOSE 80
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

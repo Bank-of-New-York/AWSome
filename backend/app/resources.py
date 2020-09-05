@@ -1,9 +1,12 @@
 from flask_restful import reqparse, abort, Resource, fields, marshal_with
 from flask import g, jsonify
 
+from sqlalchemy import create_engine
+from Config import DB_URI
 
 from models import SportSpot
 from models import User
+from models import Base
 
 from YahooFinance import get_stock_hist_list
 
@@ -154,9 +157,9 @@ def verify_password(username_or_token, password):
     return True
 
 
-class YahooPrice(Resource):
+class StockTrend(Resource):
     @marshal_with(stock_price_fields)
-    def get(self):
+    def post(self):
         args = parser.parse_args()
         stock_symb, end_date, start_date = args['stock_symb'], args['end_date'], args['start_date']
 
@@ -165,3 +168,12 @@ class YahooPrice(Resource):
             abort(404, message="Check that stock symbol is correct or that dates are valid")
 
         return { "stock_prices": stock_history_values }
+
+class Database(Resource):
+    def delete(self):
+        
+        engine = create_engine(DB_URI)
+        Base.metadata.drop_all(engine)
+        Base.metadata.create_all(engine)
+
+        return { "status": "success" }
