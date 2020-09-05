@@ -28,20 +28,24 @@ class Login extends React.Component {
     }
 
     handleSubmit = () => {
-        // fetch("http://localhost:5000/home_auth", {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type' : "application/json"
-        //     },
-        //     body: JSON.stringify({'username' : this.state.username, "password" : this.state.password})
-        // }).then((response => {
-        //     console.log(response.status)
-        //     // if (response.status == 404) {
-        //     //     alert("Your username has been taken")
-        //     // } else {
-        //     //     window.location.href="/detailsForm"
-        //     // }
-        // }))
+        fetch("/api_token", {
+            method: 'GET',
+            headers: {
+                'Content-Type' : "application/json",
+                "Authorization": `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
+            },
+        }).then((response => {
+            console.log(response.status)
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                alert("Your username has been taken")
+            }
+        })).then( token => {
+            sessionStorage.setItem("token", token.token)
+            window.location.href="/detailsForm"
+        })
+                
     }
 
     render () {
@@ -71,8 +75,8 @@ class Login extends React.Component {
                                 <Link to="/detailsForm" >
                                     <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Login</button>
                                 </Link>
-                                <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p>
-                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup-1">Signup</NavLink></p>
+                                {/* <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p> */}
+                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/register">Register</NavLink></p>
                             </div>
                         </div>
                     </div>

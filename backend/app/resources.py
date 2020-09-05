@@ -1,5 +1,5 @@
 from flask_restful import reqparse, abort, Resource, fields, marshal_with
-from flask import g
+from flask import g, jsonify
 
 
 from models import SportSpot
@@ -129,7 +129,9 @@ class Token(Resource):
     @auth.login_required
     def get(self):
         token = g.user.generate_auth_token()
-        return '{}'.format(token.decode('ascii')) # Token
+        return jsonify({
+            "token": '{}'.format(token.decode('ascii')) # Token
+        })
 
 class HomeAuth(Resource):
     @auth.login_required

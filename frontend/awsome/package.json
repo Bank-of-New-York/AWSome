@@ -1,5 +1,6 @@
 {
   "name": "awsome",
+  "proxy": "http://localhost:5000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "react-bootstrap-date-picker": "^5.1.0",
     "react-datepicker": "^3.1.3",
     "react-dom": "^16.13.1",
+    "react-nvd3": "^0.5.7",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
