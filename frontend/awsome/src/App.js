@@ -12,6 +12,8 @@ import detailsForm from "./components/detailsForm/detailsForm";
 import SignupLanding from './components/signupLanding/signupLanding';
 import Dashboard from './components/dashboard/dashboard';
 
+import { PrivateRoute } from './PrivateRoute';
+
 function App() {
   return (
 
@@ -32,7 +34,9 @@ function App() {
             <Route exact path="/detailsForm" component={detailsForm}></Route>
             <Route exact path="/riskAssessment" component={RiskAssessment}></Route>
             <Route exact path="/retirementForm" component={RetirementForm}></Route>
-            <Route exact path="/dashboard" component={Dashboard}></Route>
+
+            <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
+
             <Route path="/" component={Home}></Route>
           </Switch>
         </Router>

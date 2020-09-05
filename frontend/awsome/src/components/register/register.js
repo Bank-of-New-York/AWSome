@@ -28,7 +28,7 @@ class Login extends React.Component {
     }
 
     handleSubmit = () => {
-        fetch("http://localhost:5000/register", {
+        fetch("/api_register", {
             method: 'POST',
             mode: "cors",
             headers: {
@@ -37,10 +37,10 @@ class Login extends React.Component {
             body: JSON.stringify({'username' : this.state.username, "password" : this.state.password})
         }).then((response => {
             console.log(response.status)
-            if (response.status == 404) {
-                alert("Your username has been taken")
-            } else {
+            if (response.status == 200) {
                 window.location.href="/signupLanding"
+            } else {
+                alert("There has been a problem")
             }
         }))
     }
@@ -62,14 +62,14 @@ class Login extends React.Component {
                                 <div className="mb-4">
                                     <i className="feather icon-unlock auth-icon"/>
                                 </div>
-                                <h3 className="mb-4">Sign Up</h3>
+                                <h3 className="mb-4">Register</h3>
                                 <div className="input-group mb-3">
                                     <input type="text" name="username" onChange={this.handleInputChange} className="form-control" placeholder="Username"/>
                                 </div>
                                 <div className="input-group mb-4">
                                     <input type="password" name="password" onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
                                 </div>
-                                <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Sign Up</button>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Sign up</button>
                                 <p className="mb-0 text-muted">Already have an account? <NavLink to="/login">Login</NavLink></p>
                             </div>
                         </div>
