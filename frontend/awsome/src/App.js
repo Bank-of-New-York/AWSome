@@ -11,6 +11,7 @@ import Login from "./components/login/login";
 import detailsForm from "./components/detailsForm/detailsForm";
 import SignupLanding from './components/signupLanding/signupLanding';
 import Dashboard from './components/dashboard/dashboard';
+import Logout from './components/logout/logout';
 
 import { PrivateRoute } from './PrivateRoute';
 
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/retirementForm" component={RetirementForm}></Route>
 
             <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
+            <PrivateRoute exact path="/logout" component={Logout}></PrivateRoute>
 
             <Route path="/" component={Home}></Route>
           </Switch>
