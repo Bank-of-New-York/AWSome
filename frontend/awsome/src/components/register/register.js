@@ -28,21 +28,23 @@ class Login extends React.Component {
     }
 
     handleSubmit = () => {
-        fetch("http://localhost:5000/register", {
-            method: 'POST',
-            mode: "cors",
-            headers: {
-                'Content-Type' : "application/json"
-            },
-            body: JSON.stringify({'username' : this.state.username, "password" : this.state.password})
-        }).then((response => {
-            console.log(response.status)
-            if (response.status == 404) {
-                alert("Your username has been taken")
-            } else {
-                window.location.href="/signupLanding"
-            }
-        }))
+        window.location.href="/signupLanding"
+
+        // fetch("http://localhost:5000/register", {
+        //     method: 'POST',
+        //     mode: "cors",
+        //     headers: {
+        //         'Content-Type' : "application/json"
+        //     },
+        //     body: JSON.stringify({'username' : this.state.username, "password" : this.state.password})
+        // }).then((response => {
+        //     console.log(response.status)
+        //     if (response.status == 404) {
+        //         alert("Your username has been taken")
+        //     } else {
+        //         window.location.href="/signupLanding"
+        //     }
+        // }))
     }
 
     render () {

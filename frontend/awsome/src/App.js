@@ -10,6 +10,8 @@ import RetirementForm from './components/retirementForm/retirementForm';
 import Login from "./components/login/login";
 import detailsForm from "./components/detailsForm/detailsForm";
 import SignupLanding from './components/signupLanding/signupLanding';
+import BondResult from './components/bondResult/bondResult';
+import EquityResult from './components/equityResult/equityResult';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <Route exact path="/detailsForm" component={detailsForm}></Route>
             <Route exact path="/riskAssessment" component={RiskAssessment}></Route>
             <Route exact path="/retirementForm" component={RetirementForm}></Route>
+            <Route exact path="/bondResult" component={BondResult}></Route>
+            <Route exact path="/equityResult" component={EquityResult}></Route>
             <Route path="/" component={Home}></Route>
           </Switch>
         </Router>
