@@ -15,16 +15,16 @@ function getDatum() {
         cos = [];
     for (var i = 0; i < 100; i++) {
         sin.push({
-            'x': i,
-            'y': Math.sin(i / 10)
+            x: i,
+            y: Math.sin(i / 10)
         });
         sin2.push({
-            'x': i,
-            'y': Math.sin(i / 10) * 0.25 + 0.5
+            x: i,
+            y: Math.sin(i / 10) * 0.25 + 0.5
         });
         cos.push({
-            'x': i,
-            'y': .5 * Math.cos(i / 10)
+            x: i,
+            y: .5 * Math.cos(i / 10)
         });
     }
     return [
@@ -48,6 +48,53 @@ function getDatum() {
 }
 
 class StockDashboard extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            start_date: "2020-06-10",
+            end_date: "2020-08-10",
+            stock_symb: "MSFT",
+            stock_prices: []
+        }
+
+    }
+
+    componentDidMount() {
+        fetch("/api_stock_prices", 
+        {
+          method: 'POST',
+          headers: {
+              'Content-Type' : "application/json",
+              "Authorization": `${sessionStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            stock_symb: this.state.stock_symb
+          })
+        }).then((response => {
+            console.log(response.status)
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                alert("There has been a problem")
+            }
+        })).then(({ stock_prices }) => {
+            this.processStockPrices(stock_prices)
+        })
+    }
+
+    processStockPrices(prices0){
+        const prices1 = prices0.map(({ x , y }) => {
+            return { "x": Math.round(new Date(x).getTime()/1000), "y": parseFloat(y) }
+          }
+        )
+        console.log(prices1)
+        this.setState({ stock_prices: [{ values: prices1, key: "price", color: "#A389D4"}] })
+    }
+
+
     render() {
         const data = getDatum();
 
@@ -105,7 +152,6 @@ class StockDashboard extends React.Component {
         return (
             <Aux>
                 <Row>
-
                     <Col md={7} xl={7}>
                         <Card className='card-social'>
                             <Card.Body className='border-bottom'>
@@ -160,35 +206,37 @@ class StockDashboard extends React.Component {
                     </Row>
                     <Row>
                     
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <h6 className='mb-4'>Yearly Sales</h6>
+                      <Card>
+                          <Card.Body>
+                              <h6 className='mb-4'>Yearly Sales</h6>
+                              {
+                                this.state.stock_prices &&
                                 <div>
-                                    {
-                                        React.createElement(NVD3Chart, {
-                                            xAxis: {
-                                                tickFormat: function(d){ return d; },
-                                                axisLabel: 'Time (ms)'
-                                            },
-                                            yAxis: {
-                                                axisLabel: 'Voltage (v)',
-                                                tickFormat: function(d) {return parseFloat(d).toFixed(2); }
-                                            },
-                                            type:'lineChart',
-                                            datum: data,
-                                            x: 'x',
-                                            y: 'y',
-                                            height: 300,
-                                            renderEnd: function(){
-                                                console.log('renderEnd');
-                                            }
-                                        })
-                                    }
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                                  {
+                                  React.createElement(NVD3Chart, {
+                                      xAxis: {
+                                          tickFormat: function(d){ return d; },
+                                          axisLabel: 'Time (unix)'
+                                      },
+                                      yAxis: {
+                                          axisLabel: 'Price ($ m)',
+                                          tickFormat: function(d) {return parseFloat(d).toFixed(2); }
+                                      },
+                                      type:'lineChart',
+                                      datum: this.state.stock_prices,
+                                      x: 'x',
+                                      y: 'y',
+                                      height: 300,
+                                      renderEnd: function(){
+                                          console.log('renderEnd');
+                                      }
+                                  })
+                                  }
+                              </div>
+                              }
+                              
+                          </Card.Body>
+                      </Card>
                     
                     </Row>
                     <Row>

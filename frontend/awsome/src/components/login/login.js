@@ -38,7 +38,9 @@ class Login extends React.Component {
             console.log(response.status)
             if (response.status == 200) {
                 return response.json()
-            } 
+            } else {
+                alert("There has been a problem")
+            }
         })).then( token => {
             sessionStorage.setItem("token", token.token)
             window.location.href="/detailsForm"
