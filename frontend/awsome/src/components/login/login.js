@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 import './../../assets/scss/style.scss';
 import Aux from "../../hoc/_Aux";
@@ -19,7 +19,7 @@ class Login extends React.Component {
 
     handleInputChange(event) {
         const target = event.target;
-        var value = target.value;
+        const value = target.value;
         const name = target.name; 
         
         this.setState({
@@ -33,17 +33,16 @@ class Login extends React.Component {
             headers: {
                 'Content-Type' : "application/json",
                 "Authorization": `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
-            },
-        }).then((response => {
-            console.log(response.status)
-            if (response.status == 200) {
-                return response.json()
-            } else {
-                alert("There has been a problem")
             }
-        })).then( token => {
-            sessionStorage.setItem("token", token.token)
-            window.location.href="/detailsForm"
+        }).then(response =>
+            response.json()
+        ).then( data  => {
+            sessionStorage.setItem("token", data.token)
+            this.props.history.push("/detailsForm")
+            // window.location.href="/detailsForm"
+        }).catch(error => {
+            console.log(error)
+            alert("There has been a problem")
         })
                 
     }
@@ -72,9 +71,7 @@ class Login extends React.Component {
                                 <div className="input-group mb-4">
                                     <input type="password" name="password" onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
                                 </div>
-                                <Link to="/detailsForm" >
-                                    <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Login</button>
-                                </Link>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Login</button>
                                 {/* <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p> */}
                                 <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/register">Register</NavLink></p>
                             </div>

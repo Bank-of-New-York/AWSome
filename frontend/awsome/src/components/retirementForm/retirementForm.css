@@ -3,3 +3,11 @@
     margin-left: 1%;
 }
 
+.drag-input {
+    width: 85px;
+    border: #5CD4EF 2px solid;
+    text-align: center;
+    text-indent: 13px;
+}
+
+

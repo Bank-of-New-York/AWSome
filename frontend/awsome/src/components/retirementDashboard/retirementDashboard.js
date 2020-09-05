@@ -9,11 +9,9 @@ import avatar1 from '../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../assets/images/user/avatar-3.jpg';
 
-import GaugeChart from "react-gauge-chart";
+import HorizontalTimeline from "@nhuthuy96/react-horizontal-timeline"
 
-import NewsContent from './NewsContent.js';
-
-import "./dashboard.css"
+import "./retirementDashboard.css"
 
 function getDatum() {
     var sin = [],
@@ -53,7 +51,8 @@ function getDatum() {
     ];
 }
 
-class StockDashboard extends React.Component {
+
+class RetirementDashboard extends React.Component {
 
     constructor() {
         super();
@@ -61,32 +60,38 @@ class StockDashboard extends React.Component {
             start_date: "2020-06-10",
             end_date: "2020-08-10",
             stock_symb: "MSFT",
-            stock_prices: []
+            stock_prices: [],
+            value: 0,
+            previous: 0,
+            timelineDates : ["2020-01-01", "2040-01-01", "2050-01-01"]
         }
 
     }
 
     componentDidMount() {
-        fetch("/api_stock_trends", 
-        {
-          method: 'POST',
-          headers: {
-              'Content-Type' : "application/json",
-              "Authorization": `${sessionStorage.getItem("token")}`
-          },
-          body: JSON.stringify({
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            stock_symb: this.state.stock_symb
-          })
-        }).then(response => 
-            response.json()
-        ).then(({ stock_prices }) => {
-            this.processStockPrices(stock_prices)
-        }).catch(error => {
-            console.log(error)
-            alert("There has been a problem")
-        })
+        fetch("http://localhost:5000/api_stock_prices",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": `${sessionStorage.getItem("token")}`
+                },
+                body: JSON.stringify({
+                    start_date: this.state.start_date,
+                    end_date: this.state.end_date,
+                    stock_symb: this.state.stock_symb
+                })
+            }).then((response => {
+                if (response) {
+
+                    return response.json()
+                } else {
+                    console.log(response)
+                    // alert("There has been a problem")
+                }
+            })).then(({ stock_prices }) => {
+                this.processStockPrices(stock_prices)
+            })
     }
 
     processStockPrices(prices0) {
@@ -159,19 +164,141 @@ class StockDashboard extends React.Component {
 
         return (
             <Aux >
-                <Row>
-                    <Col xs={11}>
+                <Row style={{width: "93vw"}}>
+                    <Col >
                         <br></br>
-                        <h1>Name of Stock</h1>
+                        <h1>Retirement Plan</h1>
                         <br></br>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={8}>
-
-                        <Card>
+                <Row style={{width: "93vw"}}>
+                    
+                    <Col>
+                        <Card style={{"height" : "30vh", "width" : "90vw"}}className='card-event center'>
                             <Card.Body>
-                                <h3 className='mb-4'>Stock Prices</h3>
+                                <Row style={{width: "80vw"}}>
+                                    <Col l={2}>
+                                        <h3>Retire By:</h3>
+                                        <h3>62</h3>
+                                    </Col>
+                                    <Col l={1} style={{left: "-70px"}}>
+                                        <div style={{"height" : "20vh"}} className="vertical-line"></div>
+                                    </Col>
+                                    <Col l={3} style={{left: "-140px"}}>
+                                        <h3>Amount Needed:</h3>
+                                        <h3>$150,000</h3>
+                                    </Col>
+                                    <Col l={6} style={{left: "-70px", textAlign: "left"}}>
+                                        <h5>Wedding: $10,000</h5>
+                                        <h5>Honeymoon: $10,000</h5>
+                                        <h5>House: $10,000</h5>
+                                        <h5>2 Children: $10,000</h5>
+                                    </Col>
+                                </Row>
+                                
+                                <br></br>
+                                <br></br>
+                            </Card.Body>
+                        </Card>
+
+                    </Col>
+                </Row>
+                <br></br>
+                <Row style={{width: "93vw"}}>
+                    <Col sm={6} >
+                    <br></br>
+                        <Card className='Recent-Users' style={{height: "40vh", top: "-20px"}}>
+                            <Card.Header>
+                                <Card.Title as='h5'>Suitable Stocks</Card.Title>
+                            </Card.Header>
+                            <Card.Body className='px-0 py-2' style={{width: "40vw"}}>
+                                <Table responsive hover size="sm" >
+                                    <tbody >
+                                    <tr className="unread" >
+                                        <td>
+                                            <h6 className="mb-1">Isabella Christensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>11 MAY 12:56</h6>
+                                        </td>
+                                    </tr>
+                                    <tr className="unread">
+                                        <td>
+                                            <h6 className="mb-1">Karla Sorensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>9 MAY 17:38</h6>
+                                        </td>
+                                    </tr>
+                                    <tr className="unread">
+                                        <td>
+                                            <h6 className="mb-1">Ida Jorgensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15"/>19 MAY 12:56</h6>
+                                        </td>
+                                    </tr>
+                            
+                                    </tbody>
+                                </Table>
+                                <br></br>
+                            </Card.Body>
+                        </Card>
+
+                        <br></br>
+
+                        <Card className='Recent-Users' style={{height: "40vh", top: "-20px"}}>
+                            <Card.Header>
+                                <Card.Title as='h5'>Compounding Calculator</Card.Title>
+                            </Card.Header>
+                            <Card.Body className='px-0 py-2' style={{width: "40vw"}}>
+                                <Table responsive hover size="sm" >
+                                    <tbody >
+                                    <tr className="unread" >
+                                        <td>
+                                            <h6 className="mb-1">Isabella Christensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>11 MAY 12:56</h6>
+                                        </td>
+                                    </tr>
+                                    <tr className="unread">
+                                        <td>
+                                            <h6 className="mb-1">Karla Sorensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>9 MAY 17:38</h6>
+                                        </td>
+                                    </tr>
+                                    <tr className="unread">
+                                        <td>
+                                            <h6 className="mb-1">Ida Jorgensen</h6>
+                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                        </td>
+                                        <td>
+                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15"/>19 MAY 12:56</h6>
+                                        </td>
+                                    </tr>
+                            
+                                    </tbody>
+                                </Table>
+                                <br></br>
+                            </Card.Body>
+                        </Card>
+                        
+                    
+                    </Col>
+
+                    <Col xs={6} >
+
+                        <Card style={{height: "84vh"}}>
+                            <Card.Body>
+                                <h3 className='mb-4'>Growth Potential</h3>
                                 {
                                     this.state.stock_prices &&
                                     <div>
@@ -190,7 +317,7 @@ class StockDashboard extends React.Component {
                                                 x: 'x',
                                                 y: 'y',
                                                 height: 300,
-                                                width: 700,
+                                                width: 400,
                                                 renderEnd: function () {
                                                     console.log('renderEnd');
                                                 }
@@ -233,95 +360,6 @@ class StockDashboard extends React.Component {
                         </Card> */}
                     </Col>
 
-                    <Col xs={4}>
-                        <Card className='card-event center'>
-                            <Card.Body>
-                                <Row>
-                                    <Col>
-                                    <br></br>
-
-                                        <h1>79</h1>
-                                        <p>Stock Score</p>
-                                    </Col>
-                                </Row>
-                                <br></br>
-                                <br></br>
-                                <Row>
-                                    <Col>
-                                        <h3>Bullish Indicator</h3>
-                                        <GaugeChart textColor="black" id="bullish"/>
-                                    </Col>
-                                </Row>
-                                <br></br>
-                                <br></br>
-                            </Card.Body>
-                        </Card>
-
-                    </Col>
-                </Row>
-                <br></br>
-                <Row>
-                    <Col sm={7}>
-                    <br></br>
-                        <Card className='Recent-Users'>
-                            <Card.Header>
-                                <Card.Title as='h5'>Information</Card.Title>
-                            </Card.Header>
-                            <Card.Body className='px-0 py-2'>
-                                <Table responsive hover>
-                                    <tbody>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Isabella Christensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>11 MAY 12:56</h6>
-                                        </td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar3} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Karla Sorensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>9 MAY 17:38</h6>
-                                        </td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Ida Jorgensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15"/>19 MAY 12:56</h6>
-                                        </td>
-                                    </tr>
-                            
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col sm={5}>
-                    <br></br>
-                        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
-                            <Tab eventKey="today" title="Today">
-                                <NewsContent />
-                            </Tab>
-                            <Tab eventKey="week" title="This Week">
-                                {tabContent}
-                            </Tab>
-                            <Tab eventKey="all" title="All">
-                                {tabContent}
-                            </Tab>
-
-                        </Tabs>
-
-                    </Col>
 
 
 
@@ -334,4 +372,4 @@ class StockDashboard extends React.Component {
     }
 }
 
-export default StockDashboard;
+export default RetirementDashboard;
