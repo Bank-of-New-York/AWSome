@@ -38,7 +38,7 @@ class Login extends React.Component {
         }).then((response => {
             console.log(response.status)
             if (response.status == 200) {
-                window.location.href="/signupLanding"
+                this.props.history.push("/login")
             } else {
                 alert("There has been a problem")
             }

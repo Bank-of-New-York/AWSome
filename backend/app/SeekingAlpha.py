@@ -27,7 +27,13 @@ def get_response(url, querystring):
     'x-rapidapi-host': "seeking-alpha.p.rapidapi.com",
     'x-rapidapi-key': X_RAPIAPI_KEY
   }
-  return requests.request("GET", url, headers=headers, params=querystring)
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  try:
+    response.raise_for_status()
+    return response
+  except requests.exceptions.HTTPError as e:
+    # Whoops it wasn't a 200
+    print("Error: " + str(e))
 
 
 print(get_response(url, querystring).text)

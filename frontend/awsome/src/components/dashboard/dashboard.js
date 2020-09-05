@@ -65,29 +65,25 @@ class StockDashboard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:5000/api_stock_prices",
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': "application/json",
-                    "Authorization": `${sessionStorage.getItem("token")}`
-                },
-                body: JSON.stringify({
-                    start_date: this.state.start_date,
-                    end_date: this.state.end_date,
-                    stock_symb: this.state.stock_symb
-                })
-            }).then((response => {
-                if (response) {
-
-                    return response.json()
-                } else {
-                    console.log(response)
-                    // alert("There has been a problem")
-                }
-            })).then(({ stock_prices }) => {
-                this.processStockPrices(stock_prices)
-            })
+        fetch("/api_stock_trends", 
+        {
+          method: 'POST',
+          headers: {
+              'Content-Type' : "application/json",
+              "Authorization": `${sessionStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            stock_symb: this.state.stock_symb
+          })
+        }).then(response => 
+            response.json()
+        ).then(({ stock_prices }) => {
+            this.processStockPrices(stock_prices)
+        }).catch(error => {
+            alert("There has been a problem")
+        })
     }
 
     processStockPrices(prices0) {

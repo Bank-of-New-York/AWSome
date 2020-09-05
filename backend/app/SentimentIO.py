@@ -8,7 +8,13 @@ def get_response(url, querystring):
   headers = {
     'Authorization': f"Token {SENTIMENTIO_API_KEY}"
   }
-  return requests.request("GET", url, headers=headers, params=querystring)
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  try:
+    response.raise_for_status()
+    return response
+  except requests.exceptions.HTTPError as e:
+    # Whoops it wasn't a 200
+    print("Error: " + str(e))
 
 
 print(get_response(url, querystring).text)
