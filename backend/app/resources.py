@@ -4,106 +4,31 @@ from flask import g, jsonify
 from sqlalchemy import create_engine
 from Config import DB_URI
 
-from models import SportSpot
 from models import User
 from models import Base
 
 from YahooFinance import get_stock_hist_list
+from GeneralNews import get_news
 
 from db import session
 
 from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth()
-
 parser = reqparse.RequestParser()
-parser.add_argument('title', type=str)
-parser.add_argument('address', type=str)
 
-parser.add_argument('username', type=str)
-parser.add_argument('password', type=str)
-
-parser.add_argument('stock_symb', type=str)
-parser.add_argument('start_date', type=str)
-parser.add_argument('end_date', type=str)
-
-
-sportspot_fields = {
-    'id': fields.Integer,
-    'title': fields.String,
-    'address': fields.String,
-}
-
-user_fields = {
-    'id': fields.Integer,
-    'username': fields.String,
-    'password_hash': fields.String,
-}
-
-token_field = {
-    'title': fields.String
-}
-
-stock_price_fields = {
-    'stock_prices': fields.List(fields.Nested({"x": fields.String, "y": fields.String}))
-}
 
 class Home(Resource):
     def get(self):
         return 'Dockerized', 200
 
-
-class Spot(Resource):
-    @marshal_with(sportspot_fields)
-    def get(self, spot_id):
-        spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
-        if not spot:
-            abort(404, message="Spot {} doesn't exist".format(spot_id))
-        return spot
-
-    @auth.login_required
-    def delete(self, spot_id):
-        spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
-        if not spot:
-            abort(404, message="Spot {} doesn't exist".format(spot_id))
-        session.delete(spot)
-        session.commit()
-        return {}, 204
-
-
-    @auth.login_required
-    @marshal_with(sportspot_fields)
-    def put(self, spot_id):
-        parsed_args = parser.parse_args()
-        spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
-        spot.title = parsed_args['title']
-        spot.address = parsed_args['address']
-        session.add(spot)
-        session.commit()
-        return spot, 201
-
-
-class SpotList(Resource):
-    @marshal_with(sportspot_fields)
-    def get(self):
-        spots = session.query(SportSpot).all()
-        return spots
-
-    @auth.login_required
-    @marshal_with(sportspot_fields)
-    def post(self):
-        args = parser.parse_args()
-
-        print(args['title'])
-        s = SportSpot()
-        s.title = args['title']
-        s.address = args['address']
-        s.author_id = session.query(User).filter(User.username == g.user.username).first().id
-
-        session.add(s)
-        session.commit()
-
-        return session.query(SportSpot).order_by(SportSpot.id.desc()).first(), 201
+user_fields = {
+    'id': fields.Integer,
+    'username': fields.String,
+    'password_hash': fields.String 
+}
+parser.add_argument('username', type=str)
+parser.add_argument('password', type=str)
 
 class Register(Resource):
     @marshal_with(user_fields)
@@ -128,6 +53,10 @@ class Register(Resource):
             abort(404, message="User {} doesn't exist".format(username))
         return reged_user
 
+
+token_field = {
+    'title': fields.String
+}
 
 class Token(Resource):
     @auth.login_required
@@ -159,6 +88,13 @@ def verify_password(username_or_token, password):
     return True
 
 
+stock_price_fields = {
+    'stock_prices': fields.List(fields.Nested({"x": fields.String, "y": fields.String}))
+}
+parser.add_argument('stock_symb', type=str)
+parser.add_argument('start_date', type=str)
+parser.add_argument('end_date', type=str)
+
 class StockTrend(Resource):
     @marshal_with(stock_price_fields)
     def post(self):
@@ -170,6 +106,21 @@ class StockTrend(Resource):
             abort(404, message="Check that stock symbol is correct or that dates are valid")
 
         return { "stock_prices": stock_history_values }
+
+
+parser.add_argument('stock_symb', type=str)
+
+class GeneralNews(Resource):
+    def post(self):
+        print("Getting general news...")
+        args = parser.parse_args()
+        stock_symb = args["stock_symb"]
+
+        try:
+            return jsonify(get_news(stock_symb)) # JSON
+        except Exception as e:
+            return jsonify({ "error": e })
+
 
 class Database(Resource):
     # @auth.login_required
@@ -185,3 +136,57 @@ class Database(Resource):
         print("Resetted schemas..")
 
         return jsonify({ "status": "success" })
+
+
+
+# class Spot(Resource):
+#     @marshal_with(sportspot_fields)
+#     def get(self, spot_id):
+#         spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
+#         if not spot:
+#             abort(404, message="Spot {} doesn't exist".format(spot_id))
+#         return spot
+
+#     @auth.login_required
+#     def delete(self, spot_id):
+#         spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
+#         if not spot:
+#             abort(404, message="Spot {} doesn't exist".format(spot_id))
+#         session.delete(spot)
+#         session.commit()
+#         return {}, 204
+
+
+#     @auth.login_required
+#     @marshal_with(sportspot_fields)
+#     def put(self, spot_id):
+#         parsed_args = parser.parse_args()
+#         spot = session.query(SportSpot).filter(SportSpot.id == spot_id).first()
+#         spot.title = parsed_args['title']
+#         spot.address = parsed_args['address']
+#         session.add(spot)
+#         session.commit()
+#         return spot, 201
+
+
+# class SpotList(Resource):
+#     @marshal_with(sportspot_fields)
+#     def get(self):
+#         spots = session.query(SportSpot).all()
+#         return spots
+
+#     @auth.login_required
+#     @marshal_with(sportspot_fields)
+#     def post(self):
+#         args = parser.parse_args()
+
+#         print(args['title'])
+#         s = SportSpot()
+#         s.title = args['title']
+#         s.address = args['address']
+#         s.author_id = session.query(User).filter(User.username == g.user.username).first().id
+
+#         session.add(s)
+#         session.commit()
+
+#         return session.query(SportSpot).order_by(SportSpot.id.desc()).first(), 201

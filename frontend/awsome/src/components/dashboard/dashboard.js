@@ -11,6 +11,8 @@ import avatar3 from '../../assets/images/user/avatar-3.jpg';
 
 import GaugeChart from "react-gauge-chart";
 
+import NewsContent from './NewsContent.js';
+
 import "./dashboard.css"
 
 function getDatum() {
@@ -82,6 +84,7 @@ class StockDashboard extends React.Component {
         ).then(({ stock_prices }) => {
             this.processStockPrices(stock_prices)
         }).catch(error => {
+            console.log(error)
             alert("There has been a problem")
         })
     }
@@ -307,7 +310,7 @@ class StockDashboard extends React.Component {
                     <br></br>
                         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
                             <Tab eventKey="today" title="Today">
-                                {tabContent}
+                                <NewsContent />
                             </Tab>
                             <Tab eventKey="week" title="This Week">
                                 {tabContent}

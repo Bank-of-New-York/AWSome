@@ -12,19 +12,6 @@ from Bloomberg import get_bb_id, get_bb_statistics, get_bb_financials
 from YahooAPI import get_yf_id, get_yf_analysis, get_yf_financials
 
 Base = declarative_base()
-    
-
-class SportSpot(Base):
-
-    __tablename__ = 'spots'
-    
-    id = Column(Integer, primary_key=True)
-    title = Column(String(80))
-    address = Column(String(200))
-    author_id = Column(Integer, ForeignKey('users.id'))
-
-    def __repr__(self):
-        return '<Spot %r>' % self.title
 
 
 class User(Base):

@@ -14,7 +14,7 @@ def get_response(url, querystring):
     return response
   except requests.exceptions.HTTPError as e:
     # Whoops it wasn't a 200
-    print("Error: " + str(e))
+    print("API Error: " + str(e))
 
 
 print(get_response(url, querystring).text)
