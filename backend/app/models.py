@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.ext.declarative import declarative_base
 from passlib.apps import custom_app_context as pwd_context
 
@@ -53,6 +53,24 @@ class User(Base):
             return None # invalid token
         user = session.query(User).filter(User.id == data['id']).first()
         return user
+
+# class SPFH(Base):
+    
+#     __tablename__ = 'spfh'
+
+#     id = Column(Integer, primary_key = True)
+#     name = Column(String(64), index = True)
+#     bb_id = Column(String(32))
+#     total_asset = Column(Float)
+#     gross_product = Column(Float)
+#     market_cap = Column(Float)
+#     debt = Column(Float)
+
+#     def set_bb_id(self, name):
+#         self.bb_id = get_bb_id(name)
+
+#     def set_market_cap(self, bb_id):
+#         self.market_cap = get_market_cap(bb_id)
 
 
 
