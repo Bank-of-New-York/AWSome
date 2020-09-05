@@ -11,7 +11,13 @@ def get_response(url, querystring):
     'x-rapidapi-host': "bloomberg-market-and-financial-news.p.rapidapi.com",
     'x-rapidapi-key': X_RAPIAPI_KEY
   }
-  return requests.request("GET", url, headers=headers, params=querystring)
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  try:
+    response.raise_for_status()
+    return response
+  except requests.exceptions.HTTPError as e:
+    # Whoops it wasn't a 200
+    print("Error: " + str(e))
 
 
 print(get_response(url, querystring).text)
@@ -33,7 +39,7 @@ def get_bb_id(query):
 
 def get_bb_statistics(stock_id):
   '''
-  returns the market capital in M of stock_id from Boomberg, -1 if not found
+  returns Metrics in return_dict stock_id from Boomberg statistics
   '''
   url = "https://bloomberg-market-and-financial-news.p.rapidapi.com/stock/get-statistics"
   querystring = {"id": stock_id}
@@ -69,7 +75,7 @@ def get_bb_statistics(stock_id):
 
 def get_bb_financials(stock_id):
   '''
-  returns the total asset and debt in M of stock_id from Boomberg, -1 if not found
+  returns Metrics in return_dict stock_id from Boomberg financials
   '''
   url = "https://bloomberg-market-and-financial-news.p.rapidapi.com/stock/get-financials"
   querystring = {"id": stock_id}
@@ -79,8 +85,8 @@ def get_bb_financials(stock_id):
   return_dict = {
     "Total Assets": None, 
     "Debt to Assets": None,
-    "Revenue 2017": None,
-    "Revenue 2019": None
+    "Revenue -3y": None,
+    "Revenue -1y": None
   }
 
   if result == []:
@@ -110,11 +116,11 @@ def get_bb_financials(stock_id):
                 try:
                   # growth over past 2 years: ( ( year0 - year(-2) ) ^0.5 ) - 1
                   # growth_past_2 = ( (revenue_values[3] / revenue_values[1]) ** 0.5 ) - 1
-                  return_dict['Revenue 2017'] = revenue_values[1]
-                  return_dict['Revenue 2019'] = revenue_values[3]
+                  return_dict['Revenue -3y'] = revenue_values[1]
+                  return_dict['Revenue -1y'] = revenue_values[3]
                 except:
-                  return_dict['Revenue 2017'] = None
-                  return_dict['Revenue 2019'] = None
+                  return_dict['Revenue -3y'] = None
+                  return_dict['Revenue -1y'] = None
               
     return return_dict
 
