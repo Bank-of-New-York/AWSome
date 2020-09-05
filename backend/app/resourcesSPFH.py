@@ -29,7 +29,7 @@ stock_fields = {
     'dividend': fields.Float,
     'ave_vol': fields.Float,
 
-    'gp_to_ta': fields.Float,
+    'gpta': fields.Float,
     'ave_sales_growth': fields.Float,
     'debt_to_mcap': fields.Float
 }
