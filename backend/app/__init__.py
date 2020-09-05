@@ -8,6 +8,7 @@ from resources import Register
 from resources import Token
 from resources import HomeAuth
 from resources import YahooPrice
+from resourcesSPFH import AddSPFH
 
 app = Flask(__name__)
 api = Api(app)
@@ -21,6 +22,7 @@ api.add_resource(Register, '/api_register')
 api.add_resource(Token, '/api_token')
 api.add_resource(HomeAuth, '/api_home_auth')
 api.add_resource(YahooPrice, '/api_stock_prices')
+api.add_resource(AddSPFH, '/api_add_spfh')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

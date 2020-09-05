@@ -20,8 +20,6 @@ def get_response(url, querystring):
     print("Error: " + str(e))
 
 
-print(get_response(url, querystring).text)
-
 def get_bb_id(query):
   '''
   returns the bloomberg stock id to be used for other queries

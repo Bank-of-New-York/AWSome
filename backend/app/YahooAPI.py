@@ -15,6 +15,9 @@ def get_response(url, querystring):
     print("Error: " + str(e))
 
 def get_yf_id(query):
+  '''
+  get stock symbol/id to be used for other queries in Yahoo Finance
+  '''
   url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/auto-complete'
   querystring = {"lang":"en","region":"US","query": query}
 
@@ -24,6 +27,7 @@ def get_yf_id(query):
     return response['ResultSet']['Result'][0]['symbol']
   except:
     return ''
+
 
 def get_yf_analysis(stock_id):
   '''
@@ -51,6 +55,7 @@ def get_yf_analysis(stock_id):
 
   return return_dict
 
+
 def get_yf_financials(stock_id):
   '''
   returns the raw Beta from Yahoo Finance financials
@@ -72,4 +77,4 @@ def get_yf_financials(stock_id):
 
   return return_dict
 
-print(get_yf_financials("AAPL"))
+# print(get_yf_financials("AAPL"))
