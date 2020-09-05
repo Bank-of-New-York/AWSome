@@ -11,6 +11,8 @@ from db import session
 from Bloomberg import get_bb_id, get_bb_statistics, get_bb_financials
 from YahooAPI import get_yf_id, get_yf_analysis, get_yf_financials
 
+import time
+
 Base = declarative_base()
 
 
@@ -86,8 +88,12 @@ class SPFH(Base):
         self.bb_id = get_bb_id(name)
         self.yf_id = get_yf_id(name)
 
+    def has_valid_ids(self):
+        return self.bb_id != '' and self.yf_id != ''
+
     def set_bb_metrics(self):
         statistics_dict = get_bb_statistics(self.bb_id)
+        time.sleep(1)
         financials_dict = get_bb_financials(self.bb_id)
         statistics_dict.update(financials_dict)
         bb_dict = statistics_dict.copy()
@@ -97,9 +103,17 @@ class SPFH(Base):
         self.dividend = bb_dict["Dividend Indicated Gross Yield"]
         self.ave_vol = bb_dict["Average Volume (30-day)"]
 
-        self.market_cap = bb_dict["Market Cap (M)"] * 1000000
+        try:
+            self.market_cap = bb_dict["Market Cap (M)"] * 1000000
+        except:
+            self.market_cap = None
+
         self.total_asset = bb_dict["Total Assets"]
-        self.debt = round(bb_dict["Total Assets"] * bb_dict["Debt to Assets"] / 100, 2)
+
+        try:
+            self.debt = round(bb_dict["Total Assets"] * bb_dict["Debt to Assets"] / 100, 2)
+        except:
+            self.debt = None
         
         self.revenue_3y_bk = bb_dict["Revenue -3y"]
         self.revenue_1y_bk = bb_dict["Revenue -1y"]
@@ -107,6 +121,7 @@ class SPFH(Base):
 
     def set_yf_metrics(self):
         analysis_dict = get_yf_analysis(self.yf_id)
+        time.sleep(1)
         financial_dict = get_yf_financials(self.yf_id)
         analysis_dict.update(financial_dict)
         yf_dict= analysis_dict.copy()
@@ -116,12 +131,29 @@ class SPFH(Base):
         self.beta = yf_dict['Beta']
     
     def calc_derived_metrics(self):
-        self.debt_to_mcap = round(self.debt / self.market_cap, 6)
-        self.gpta = round(self.gross_profit / self.total_asset, 6)
+        if self.debt != None and self.market_cap != None:
+            self.debt_to_mcap = round(self.debt / self.market_cap, 6)
 
-        prev_growth_r = ( (self.revenue_1y_bk / self.revenue_3y_bk) ** 0.5 ) - 1
-        future_growth_r = ( (self.revenue_1y_fd / self.revenue_1y_bk) ** 0.5 ) - 1
-        self.ave_sales_growth = round( (prev_growth_r + future_growth_r) / 2, 6)
+        if self.gross_profit != None and self.total_asset != None:
+            self.gpta = round(self.gross_profit / self.total_asset, 6)
+
+        if self.revenue_1y_bk != None and self.revenue_3y_bk != None and self.revenue_1y_fd != None:
+            prev_growth_r = ( (self.revenue_1y_bk / self.revenue_3y_bk) ** 0.5 ) - 1
+            future_growth_r = ( (self.revenue_1y_fd / self.revenue_1y_bk) ** 0.5 ) - 1
+            self.ave_sales_growth = round( (prev_growth_r + future_growth_r) / 2, 6)
+
+    @staticmethod
+    def create(name):
+        spfh = SPFH(name = name)
+        spfh.set_id(name)
+        if not spfh.has_valid_ids():
+            print("Error: Invalid IDs for", name)
+            return None
+        spfh.set_bb_metrics()
+        spfh.set_yf_metrics()
+        spfh.calc_derived_metrics()
+
+        return spfh
 
 
 if __name__ == "__main__":

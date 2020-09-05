@@ -7,7 +7,7 @@ from resources import Register
 from resources import Token
 from resources import HomeAuth
 from resources import StockTrend
-from resourcesSPFH import AddSPFH
+from resourcesSPFH import OneSPFH, MultipleSPFH
 from resourcesUpdateUser import UpdateUser
 from resources import Database
 from resources import GeneralNews
@@ -21,7 +21,8 @@ api.add_resource(Home, '/')
 api.add_resource(Register, '/api_register')
 api.add_resource(Token, '/api_token')
 api.add_resource(HomeAuth, '/api_home_auth')
-api.add_resource(AddSPFH, '/api_add_spfh')
+api.add_resource(OneSPFH, '/api_one_spfh')
+api.add_resource(MultipleSPFH, '/api_multiple_spfh')
 api.add_resource(StockTrend, '/api_stock_trends')
 api.add_resource(Database, '/api_database') # Http DELETE
 api.add_resource(UpdateUser, '/api_update_user')
