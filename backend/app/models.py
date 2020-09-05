@@ -71,16 +71,3 @@ class User(Base):
 
 #     def set_market_cap(self, bb_id):
 #         self.market_cap = get_market_cap(bb_id)
-
-
-
-if __name__ == "__main__":
-    from sqlalchemy import create_engine
-    from Config import DB_URI
-    engine = create_engine(DB_URI)
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
-
-
-
-
