@@ -38,9 +38,7 @@ class Login extends React.Component {
             console.log(response.status)
             if (response.status == 200) {
                 return response.json()
-            } else {
-                alert("Your username has been taken")
-            }
+            } 
         })).then( token => {
             sessionStorage.setItem("token", token.token)
             window.location.href="/detailsForm"
