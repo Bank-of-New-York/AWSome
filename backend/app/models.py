@@ -102,7 +102,7 @@ class SPFH(Base):
 
         self.market_cap = bb_dict["Market Cap (M)"] * 1000000
         self.total_asset = bb_dict["Total Assets"]
-        self.debt = round(bb_dict["Total Assets"] * bb_dict["Debt to Assets"], 2)
+        self.debt = round(bb_dict["Total Assets"] * bb_dict["Debt to Assets"] / 100, 2)
         
         self.revenue_3y_bk = bb_dict["Revenue -3y"]
         self.revenue_1y_bk = bb_dict["Revenue -1y"]
@@ -125,20 +125,7 @@ class SPFH(Base):
         prev_growth_r = ( (self.revenue_1y_bk / self.revenue_3y_bk) ** 0.5 ) - 1
         future_growth_r = ( (self.revenue_1y_fd / self.revenue_1y_bk) ** 0.5 ) - 1
         self.ave_sales_growth = round( (prev_growth_r + future_growth_r) / 2, 6)
-    
-    # def get_all_columns(self):
-    #     result_dict = {}
-    #     for c in SPFH.__table__.columns:
-    #         result_dict[c] = self.
 
-    # def __iter__(self):
-    #         values = vars(self)
-    #         for attr in self.__mapper__.columns.keys():
-    #             if attr in values:
-    #                 yield attr, values[attr]
-
-    # def logme(self):
-    #     return dict(self)
 
 if __name__ == "__main__":
     from sqlalchemy import create_engine
