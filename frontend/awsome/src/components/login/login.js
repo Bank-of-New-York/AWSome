@@ -39,7 +39,7 @@ class Login extends React.Component {
             if (response.status == 200) {
                 return response.json()
             } else {
-                alert("Your username has been taken")
+                alert("There has been a problem")
             }
         })).then( token => {
             sessionStorage.setItem("token", token.token)
