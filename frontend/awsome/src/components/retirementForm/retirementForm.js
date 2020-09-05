@@ -10,6 +10,7 @@ import "./retirementForm.css"
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
+
 // fake data generator
 const getItems = (count, offset = 0) =>
     Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -105,6 +106,15 @@ export default class RetirementForm extends Component {
     onDragEnd = result => {
         const { source, destination } = result;
 
+        var id2List = {
+            droppable: 'items',
+            droppable2: 'selected1',
+            droppable3: 'selected2',
+            droppable4: 'selected3',
+            droppable5: 'selected4',
+            droppable6: 'selected5',
+        };
+
         // dropped outside the list
         if (!destination) {
             return;
@@ -120,8 +130,14 @@ export default class RetirementForm extends Component {
             let state = { items };
 
             if (source.droppableId === 'droppable2') {
-                state = { selected: items };
-            }
+                state = { selected1: items };
+            } else if (source.droppableId === "droppable3") {
+                state = {selected2: items}
+            } else if (source.droppableId === "droppable4") {
+                state = {selected3: items}
+            } else if (source.droppableId === "droppable5") {
+                state = {selected4: items}
+            } 
 
             this.setState(state);
         } else {
@@ -132,10 +148,37 @@ export default class RetirementForm extends Component {
                 destination
             );
 
-            this.setState({
-                items: result.droppable,
-                selected: result.droppable2
+
+            Object.keys(result).forEach(droppable => {
+
+                if (droppable=== "droppable") {
+                    this.setState({
+                        items : result[droppable]
+                    })
+                } else if (droppable === 'droppable2') {
+                    this.setState({
+                        selected1 : result[droppable]
+                    })
+                } else if (droppable === "droppable3") {
+                    console.log(result[droppable])
+                    this.setState({
+                        selected2 : result[droppable]
+                    })
+                } else if (droppable === "droppable4") {
+                    this.setState({
+                        selected3 : result[droppable]
+                    })
+                } else if (droppable === "droppable5") {
+                    this.setState({
+                        selected4 : result[droppable]
+                    })
+                } 
             });
+
+            // this.setState({
+            //     items: result.droppable,
+            //     [id2List[result.droppableId]]: result.droppableId
+            // });
         }
     };
 
@@ -143,13 +186,12 @@ export default class RetirementForm extends Component {
 
 
     render() {
-        console.log(this.state)
 
         return (
-            <Container>
+            <Container fluid>
 
                 <Row>
-                    <Col>
+                    <Col xl={10}>
                         <br></br>
                         <h1 className="retire-title">Planning Your Future</h1>
                     </Col>
@@ -160,7 +202,7 @@ export default class RetirementForm extends Component {
                 <br></br>
 
                 <Row>
-                    <Col>
+                    <Col xl={10}>
 
                         <div>
                             <Form>
@@ -244,7 +286,7 @@ export default class RetirementForm extends Component {
                                             </Droppable>
                                         </Col>
                                         <Col className="center">
-                                            <h4>20-30 yrs old</h4>
+                                            <h4>30-40 yrs old</h4>
                                             <Droppable droppableId="droppable3">
                                                 {(provided, snapshot) => (
                                                     <div
@@ -275,7 +317,7 @@ export default class RetirementForm extends Component {
                                             </Droppable>
                                         </Col>
                                         <Col className="center">
-                                            <h4>20-30 yrs old</h4>
+                                            <h4>50-60 yrs old</h4>
                                             <Droppable droppableId="droppable4">
                                                 {(provided, snapshot) => (
                                                     <div
@@ -306,7 +348,7 @@ export default class RetirementForm extends Component {
                                             </Droppable>
                                         </Col>
                                         <Col className="center">
-                                            <h4>20-30 yrs old</h4>
+                                            <h4>> 60 yrs old</h4>
                                             <Droppable droppableId="droppable5">
                                                 {(provided, snapshot) => (
                                                     <div
@@ -336,44 +378,13 @@ export default class RetirementForm extends Component {
                                                 )}
                                             </Droppable>
                                         </Col>
-                                        <Col className="center">
-                                            <h4>20-30 yrs old</h4>
-                                            <Droppable droppableId="droppable6">
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        style={getListStyle(snapshot.isDraggingOver)}>
-                                                        {this.state.selected5.map((item, index) => (
-                                                            <Draggable
-                                                                key={item.id}
-                                                                draggableId={item.id}
-                                                                index={index}>
-                                                                {(provided, snapshot) => (
-                                                                    <div
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
-                                                                        style={getItemStyle(
-                                                                            snapshot.isDragging,
-                                                                            provided.draggableProps.style
-                                                                        )}>
-                                                                        {item.content}
-                                                                    </div>
-                                                                )}
-                                                            </Draggable>
-                                                        ))}
-                                                        {provided.placeholder}
-                                                    </div>
-                                                )}
-                                            </Droppable>
-                                        </Col>
                                     </DragDropContext>
                                 </Row>
 
 
                                 <br></br><br></br>
 
-                                <Link to="/stockDashboard">
+                                <Link to="/equityResult">
                                     <Button id="submit" variant="primary" type="submit">Next</Button>
                                 </Link>
                             </Form>
@@ -381,6 +392,9 @@ export default class RetirementForm extends Component {
 
                     </Col>
                 </Row>
+                <br></br>
+                <br></br>
+                <br></br>
             </Container>
         )
     }

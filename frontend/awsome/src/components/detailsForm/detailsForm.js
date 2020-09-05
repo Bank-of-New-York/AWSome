@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form"
 import Input from "react-bootstrap/InputGroup"
 import "bootstrap/dist/css/bootstrap.min.css"
 import DatePicker from 'react-datepicker'
-import { Link } from "react-router-dom" 
+import { Link } from "react-router-dom"
 import "react-datepicker/dist/react-datepicker.css";
 
 import "./detailsForm.css"
@@ -32,7 +32,7 @@ export default class detailsForm extends Component {
                         <br></br>
                         <h1 id="details-title">Let's get started...</h1>
                     </Col>
-                
+
                 </Row>
 
                 <br></br>
@@ -40,7 +40,7 @@ export default class detailsForm extends Component {
 
                 <Row>
                     <Col>
-                 
+
                         <div>
                             <Form>
                                 <Row>
@@ -59,21 +59,21 @@ export default class detailsForm extends Component {
                                 </Row>
                                 <br></br>
                                 <br></br>
-                                
+
                                 <Row>
-                                    <Col xs={8}>
+                                    <Col xs={7}>
                                         <Form.Group controlId="email">
                                             <Form.Label>What's your email?</Form.Label>
                                             <Form.Control type="text" placeholder="Email"></Form.Control>
                                         </Form.Group>
                                     </Col>
-                                    <Col>
+                                    <Col xs={5}>
                                         <Form.Group controlId="birthday">
                                             <Form.Label>When's your birthday?</Form.Label><br></br>
-                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange}/>
+                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
                                         </Form.Group>
                                     </Col>
-                                    
+
                                 </Row>
 
                                 <br></br><br></br>
@@ -96,11 +96,18 @@ export default class detailsForm extends Component {
                                 <Link to="/riskAssessment">
                                     <Button id="submit" variant="primary" type="submit">Next</Button>
                                 </Link>
+
                             </Form>
+
                         </div>
-                        
+
                     </Col>
+
                 </Row>
+                <br></br>
+                <br></br>
+                <br></br>
+
             </Container>
         )
     }
