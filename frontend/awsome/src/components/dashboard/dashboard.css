@@ -1,0 +1,20 @@
+.dashboard {
+    width: 80% !important;
+}
+
+.card {
+    height: 70vh;
+}
+
+.tab-content {
+    height: 65vh;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.text-left {
+    text-align: left !important;
+
+}
