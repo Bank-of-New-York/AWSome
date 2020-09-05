@@ -37,6 +37,13 @@ def get_stock_hist_list(stock_symb, end_d, start_d):
   return stock_close_history.to_dict("records")
 
 
+def get_stock_recommendations(stock_symb):
+  stock = yf.Ticker(stock_symb)
+  stock_history = stock.recommendations
+  print(stock_history.index)
+
+# get_stock_recommendations("MSFT")
+
 
 # # show actions (dividends, splits)
 # stock_actions = msft.actions

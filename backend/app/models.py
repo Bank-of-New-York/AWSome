@@ -34,6 +34,11 @@ class User(Base):
     id = Column(Integer, primary_key = True)
     username = Column(String(32), index = True)
     password_hash = Column(String(128))
+    risk_level = Column(Integer, default=-1)
+    retirement_amount = Column(Integer, default=-1)
+    years_till_retire = Column(Integer, default=-1)
+    expected_growth = Column(Float, default=-1)
+    monthly_deposit = Column(Float, default=-1)
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
@@ -44,6 +49,11 @@ class User(Base):
     def generate_auth_token(self, expiration = 60000):
         s = Serializer(SECRET_KEY, expires_in = expiration)
         return s.dumps({ 'id': self.id })
+
+    def update_questionnaire(self, data):
+        self.risk_level = data['risk_level']
+        self.retirement_amount = data['retirement_amount']
+        self.years_till_retire = data['years_till_retire']
 
     @staticmethod
     def verify_auth_token(token):

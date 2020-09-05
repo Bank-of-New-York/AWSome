@@ -13,6 +13,7 @@ from YahooFinance import get_stock_hist_list
 from db import session
 
 from flask_httpauth import HTTPBasicAuth
+
 auth = HTTPBasicAuth()
 
 parser = reqparse.RequestParser()
@@ -144,7 +145,6 @@ class HomeAuth(Resource):
 
 @auth.verify_password
 def verify_password(username_or_token, password):
-
     # first try to authenticate by token
     user = User.verify_auth_token(username_or_token)
     if not user:
@@ -153,6 +153,8 @@ def verify_password(username_or_token, password):
         user = session.query(User).filter_by(username=username_or_token).first()
         if not user or not user.verify_password(password):
             return False
+            
+    print(f"Verified password for user {user.id}")
     g.user = user
     return True
 
@@ -160,9 +162,9 @@ def verify_password(username_or_token, password):
 class StockTrend(Resource):
     @marshal_with(stock_price_fields)
     def post(self):
+        print("Getting stock trends...")
         args = parser.parse_args()
         stock_symb, end_date, start_date = args['stock_symb'], args['end_date'], args['start_date']
-
         stock_history_values = get_stock_hist_list(stock_symb, end_date, start_date)
         if stock_history_values == []:
             abort(404, message="Check that stock symbol is correct or that dates are valid")
@@ -170,10 +172,16 @@ class StockTrend(Resource):
         return { "stock_prices": stock_history_values }
 
 class Database(Resource):
+    # @auth.login_required
     def delete(self):
-        
-        engine = create_engine(DB_URI)
-        Base.metadata.drop_all(engine)
-        Base.metadata.create_all(engine)
 
-        return { "status": "success" }
+        for t in Base.metadata.sorted_tables:
+            print(t.name)
+
+        engine = create_engine(DB_URI)
+        Base.metadata.drop_all(bind=engine)
+        Base.metadata.create_all(bind=engine)
+
+        print("Resetted schemas..")
+
+        return jsonify({ "status": "success" })

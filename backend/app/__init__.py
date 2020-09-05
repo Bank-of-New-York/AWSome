@@ -9,6 +9,7 @@ from resources import Token
 from resources import HomeAuth
 from resources import StockTrend
 from resourcesSPFH import AddSPFH
+from resourcesUpdateUser import UpdateUser
 from resources import Database
 
 app = Flask(__name__)
@@ -24,7 +25,8 @@ api.add_resource(Token, '/api_token')
 api.add_resource(HomeAuth, '/api_home_auth')
 api.add_resource(AddSPFH, '/api_add_spfh')
 api.add_resource(StockTrend, '/api_stock_trends')
-api.add_resource(Database, '/api_database')
+api.add_resource(Database, '/api_database') # Http DELETE
+api.add_resource(UpdateUser, '/api_update_user')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, port=5000)
