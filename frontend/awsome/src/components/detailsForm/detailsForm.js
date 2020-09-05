@@ -8,9 +8,21 @@ import Input from "react-bootstrap/InputGroup"
 import "bootstrap/dist/css/bootstrap.min.css"
 import DatePicker from 'react-datepicker'
 import { Link } from "react-router-dom" 
+import "react-datepicker/dist/react-datepicker.css";
 
 import "./detailsForm.css"
 export default class detailsForm extends Component {
+
+    state = {
+        startDate: new Date()
+    }
+
+    handleChange = date => {
+        this.setState({
+            startDate: date
+        })
+    }
+
     render() {
         return (
             <Container>
@@ -18,7 +30,7 @@ export default class detailsForm extends Component {
                 <Row>
                     <Col>
                         <br></br>
-                        <h1>Let's get started...</h1>
+                        <h1 id="details-title">Let's get started...</h1>
                     </Col>
                 
                 </Row>
@@ -45,6 +57,8 @@ export default class detailsForm extends Component {
                                         </Form.Group>
                                     </Col>
                                 </Row>
+                                <br></br>
+                                <br></br>
                                 
                                 <Row>
                                     <Col xs={8}>
@@ -56,12 +70,28 @@ export default class detailsForm extends Component {
                                     <Col>
                                         <Form.Group controlId="birthday">
                                             <Form.Label>When's your birthday?</Form.Label><br></br>
-                                            <DatePicker/>
+                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange}/>
                                         </Form.Group>
                                     </Col>
                                     
                                 </Row>
+
                                 <br></br><br></br>
+
+                                <Row>
+                                    <Col xs={6}>
+                                        <Form.Group controlId="invested">
+                                            <Form.Label>Have you invested before?</Form.Label>
+                                            <Form.Control as="select" custom>
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={6}></Col>
+                                </Row>
+
+                                <br></br><br></br><br></br><br></br>
 
                                 <Link to="/riskAssessment">
                                     <Button id="submit" variant="primary" type="submit">Next</Button>

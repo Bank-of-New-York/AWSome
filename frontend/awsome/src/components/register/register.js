@@ -40,7 +40,7 @@ class Login extends React.Component {
             if (response.status == 404) {
                 alert("Your username has been taken")
             } else {
-                window.location.href="/detailsForm"
+                window.location.href="/signupLanding"
             }
         }))
     }
@@ -67,7 +67,7 @@ class Login extends React.Component {
                                     <input type="text" name="username" onChange={this.handleInputChange} className="form-control" placeholder="Username"/>
                                 </div>
                                 <div className="input-group mb-4">
-                                    <input type="password" name="password" onChange={this.handleInputChange} className="form-control" placeholder="password"/>
+                                    <input type="password" name="password" onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
                                 </div>
                                 <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleSubmit}>Sign Up</button>
                                 <p className="mb-0 text-muted">Already have an account? <NavLink to="/login">Login</NavLink></p>

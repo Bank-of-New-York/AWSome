@@ -1,5 +1,6 @@
-h1 {
-    font-size: 3rem;
+#details-title {
+    font-size: 3.5rem !important;
+    margin-left: 1%;
 }
 
 .container {
@@ -24,6 +25,18 @@ h1 {
     border-bottom: #FFA861 2px solid;
     box-shadow: none;
 }
+
+.form-group .custom-select {
+    border: none;
+    border-bottom: #5CD4EF 2px solid;
+}
+
+.form-group .custom-select:focus {
+    outline: none;
+    border-bottom: #FFA861 2px solid;
+    box-shadow: none;
+}
+
 
 #submit {
     float: right;
