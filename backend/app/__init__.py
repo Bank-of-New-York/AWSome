@@ -28,4 +28,4 @@ api.add_resource(UpdateUser, '/api_update_user')
 api.add_resource(GeneralNews, '/api_general_news')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0')
