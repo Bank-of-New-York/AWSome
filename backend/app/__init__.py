@@ -8,6 +8,7 @@ from resources import Home
 from resources import Register
 from resources import Token
 from resources import HomeAuth
+from resources import YahooPrice
 
 app = Flask(__name__)
 api = Api(app)
@@ -20,6 +21,7 @@ api.add_resource(Spot, '/spots/<int:spot_id>')
 api.add_resource(Register, '/register')
 api.add_resource(Token, '/token')
 api.add_resource(HomeAuth, '/home_auth')
+api.add_resource(YahooPrice, '/stock_prices')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
