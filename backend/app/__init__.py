@@ -15,12 +15,12 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 api.add_resource(Home, '/')
-api.add_resource(SpotList, '/api/spots')
-api.add_resource(Spot, '/api/spots/<int:spot_id>')
-api.add_resource(Register, '/api/register')
-api.add_resource(Token, '/api/token')
-api.add_resource(HomeAuth, '/api/home_auth')
-api.add_resource(YahooPrice, '/api/stock_prices')
+api.add_resource(SpotList, '/api_spots')
+api.add_resource(Spot, '/api_spots/<int:spot_id>')
+api.add_resource(Register, '/api_register')
+api.add_resource(Token, '/api_token')
+api.add_resource(HomeAuth, '/api_home_auth')
+api.add_resource(YahooPrice, '/api_stock_prices')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
