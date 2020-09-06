@@ -48,7 +48,7 @@ export default class SignupLanding extends Component {
                             <h4>Take the Risk Assessment quiz and Retirement Plan Calculator anytime from your profile page</h4>
                             <br></br>
 
-                            <Link to="/register">
+                            <Link to="/retirementDashboard">
                                 <Button variant="secondary" >Skip</Button>
                             </Link>
 
