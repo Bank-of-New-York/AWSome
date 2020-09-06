@@ -19,7 +19,9 @@ import CompoundCalculator from "./components/compoundCalculator/compoundCalculat
 import EquityListing from "./components/equityListing/equityListing"
 import { PrivateRoute } from './PrivateRoute';
 import Screener from './components/screener/screener';
-
+import EquitiesInfo from "./components/infopages/equitiesInfo"
+import BondsInfo from "./components/infopages/bondsInfo"
+import PortfolioInfo from "./components/infopages/portfolioInfo"
 function App() {
   return (
 
@@ -44,6 +46,9 @@ function App() {
             <Route exact path="/equityResult" component={EquityResult}></Route>
             <Route exact path="/compoundCalculator" component={CompoundCalculator}></Route>
             <Route exact path="/equityListing" component={EquityListing}></Route>
+            <Route exact path="/equitiesInfo" component={EquitiesInfo}></Route>
+            <Route exact path="/bondsInfo" component={BondsInfo}></Route>
+            <Route exact path="/portfolioInfo" component={PortfolioInfo}></Route>
 
             <PrivateRoute exact path="/screener" component={Screener}></PrivateRoute>
             <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>

@@ -18,10 +18,12 @@ const datum = [
 ];
 
 // function calc_chance_r(chance, yrs, bond_ratio, equity_ratio) {
+//     var EQUITY_CAGR = 0.0724259;
+//     var BOND_CAGR = 0.0095;
 //     let width_p = chance ** (1 / yrs) - 0.5;
 //       // width_p of 0.44406 should give z=-0.145
 //       // width_p of 0.555939 should give z=0.1405
-//     let z = percentile_z(width_p);
+//     // let z = percentile_z(width_p);
 //       let chance_equity_cagr = z * EQUITY_CAGR + BOND_CAGR;
 //     let chance_r = chance_equity_cagr * equity_ratio + BOND_CAGR * bond_ratio;
 //       return chance_r;
@@ -170,12 +172,12 @@ class RetirementDashboard extends React.Component {
                             <Row>
                                 <Col sm={5} >
                                     <br></br>
-                                    <Card className='Recent-Users' style={{ height: "80vh", top: "-20px" }}>
+                                    <Card className='Recent-Users' style={{ height: "90vh", top: "-20px" }}>
                                         <Card.Header>
                                             <Card.Title as='h5'>Compounding Calculator</Card.Title>
                                         </Card.Header>
-                                        <Card.Body className='px-0 py-2' style={{ width: "30vw", overflow: "none" }}>
-                                            <Form>
+                                        <Card.Body className='px-0 py-2' style={{ width: "25vw", overflow: "none" }}>
+                                            <Form className="center">
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="first_depo">
@@ -184,6 +186,7 @@ class RetirementDashboard extends React.Component {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                <br></br>
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="monthly_depo">
@@ -192,6 +195,7 @@ class RetirementDashboard extends React.Component {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                <br></br>
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="year">
@@ -200,6 +204,7 @@ class RetirementDashboard extends React.Component {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                <br></br>
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="r">
@@ -209,7 +214,12 @@ class RetirementDashboard extends React.Component {
                                                     </Col>
                                                 </Row>
 
-                                                <Button id="submit" variant="primary" type="submit" onClick={this.handleSubmit}>Calculate</Button>
+                                                <br></br>
+                                                <Row>
+                                                    <Col>
+                                                        <Button style={{width: "20vw", fontSize: "20px"}} id="submit" variant="primary" type="submit" onClick={this.handleSubmit}>Calculate</Button>
+                                                    </Col>
+                                                </Row>
 
                                             </Form>
 
@@ -222,7 +232,7 @@ class RetirementDashboard extends React.Component {
 
                                 <Col sm={7} >
 
-                                    <Card style={{ height: "80vh" }}>
+                                    <Card style={{ height: "90vh" }}>
                                         <Card.Body>
                                             <h3 className='mb-4'>Growth Potential</h3>
                                             {

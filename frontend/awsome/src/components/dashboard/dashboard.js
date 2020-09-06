@@ -69,6 +69,7 @@ class StockDashboard extends React.Component {
 
     }
 
+
     componentDidMount() {
         fetch("/api_stock_trends", 
         {
@@ -82,25 +83,24 @@ class StockDashboard extends React.Component {
             end_date: this.state.end_date,
             stock_symb: this.state.stock_symb
           })
-        }).then(response => 
-            response.json()
-        ).then(({ stock_prices, yesterday_sentiment, days_before_sentiment }) => {
-            console.log(yesterday_sentiment)
+        }).then(response => {
+            return response.json()
+        }
+
+        ).then((stock_prices) => {
+            console.log(stock_prices)
+            this.processStockPrices(stock_prices["stock_prices"])
+
             this.setState({
-                yesterday_sentiment: yesterday_sentiment,
-                days_before_sentiment: days_before_sentiment
+                yesterday_sentiment: stock_prices["yesterday_sentiment"],
+                days_before_sentiment: stock_prices["days_before_sentiment"]
             })
-            this.processStockPrices(stock_prices)
         }).catch(error => {
             console.log(error)
             alert("There has been a problem")
         })
     }
 
-    getSentiment(){
-        return parseInt(this.state.yesterday_sentiment) / 100 + 0.5
-        // return 100 / 100 + 0.5
-    }
 
     processStockPrices(prices0) {
         if (prices0 !== undefined) {
@@ -117,59 +117,6 @@ class StockDashboard extends React.Component {
         const data = getDatum();
 
 
-        const tabContent = (
-            <Aux>
-                <h3 align='center'>News</h3>
-
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Silje Larsen</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />3784</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar2} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Julie Vad</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />3544</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar3} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Storm Hanse</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red" />2739</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Frida Thomse</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red" />1032</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar2} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Silje Larsen</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />8750</span>
-                    </div>
-                </div>
-
-            </Aux>
-        );
-
         return (
             <Container fluid>
                 <Row>
@@ -178,7 +125,7 @@ class StockDashboard extends React.Component {
 
                     </Col>
                     <Col s={10} id="dashboard-body">
-                        <Container fluid style={{width: "78vw"}}>
+                        <Container fluid style={{ width: "78vw" }}>
                             <Aux >
                                 <Row>
                                     <Col xs={11}>
@@ -227,7 +174,7 @@ class StockDashboard extends React.Component {
 
                                     <Col xs={4} >
                                         <Card className='card-event center' >
-                                            <Card.Body style={{width:"20vw"}}>
+                                            <Card.Body style={{ width: "20vw" }}>
                                                 <Row >
                                                     <Col>
                                                         <br></br>
@@ -241,21 +188,8 @@ class StockDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <h3>Bullish Indicator</h3>
-                                                        {
-                                                            this.state.yesterday_sentiment &&
-                                                            <GaugeChart 
-                                                                textColor="black" 
-                                                                id="bullish" 
-                                                                percent={ this.getSentiment() }
-                                                                formatTextValue={ value => {
-                                                                    if(value > 50){
-                                                                        return "+" + ( value - 50) + "%"
-                                                                    } else {
-                                                                        return "-" + ( value - 50) + "%"
-                                                                    }
-                                                                    
-                                                                }}/>
-                                                        }
+                                                        <GaugeChart textColor="black" id="bullish" nrOfLevels={3} percent={(this.state.yesterday_sentiment + 100) / 200} />
+                                                        <h5>Previous Level: {(this.state.days_before_sentiment + 100) / 2}%</h5>
                                                     </Col>
                                                 </Row>
                                                 <br></br>
@@ -273,7 +207,7 @@ class StockDashboard extends React.Component {
                                             <Card.Header>
                                                 <Card.Title as='h5'>Information</Card.Title>
                                             </Card.Header>
-                                            <Card.Body className='px-0 py-2' style={{overflowX:"scroll", width:"40vw"}}> 
+                                            <Card.Body className='px-0 py-2' style={{ overflowX: "scroll", width: "40vw" }}>
                                                 <Table responsive hover >
                                                     <tbody >
                                                         <tr className="unread">
@@ -312,20 +246,13 @@ class StockDashboard extends React.Component {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col sm={5}>
+                                    <Col sm={5} >
                                         <br></br>
-                                        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
-                                            <Tab eventKey="today" title="Today">
-                                                {tabContent}
-                                            </Tab>
-                                            <Tab eventKey="week" title="This Week">
-                                                {tabContent}
-                                            </Tab>
-                                            <Tab eventKey="all" title="All">
-                                                {tabContent}
-                                            </Tab>
 
-                                        </Tabs>
+                                        <Card style={{ marginTop: "5px"}}>
+                                            <NewsContent></NewsContent>
+
+                                        </Card>
 
                                     </Col>
 
