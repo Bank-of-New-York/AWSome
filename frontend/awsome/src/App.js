@@ -16,6 +16,7 @@ import Dashboard from './components/dashboard/dashboard';
 import Logout from './components/logout/logout';
 import RetirementDashboard from "./components/retirementDashboard/retirementDashboard";
 import CompoundCalculator from "./components/compoundCalculator/compoundCalculator"
+import EquityListing from "./components/equityListing/equityListing"
 import { PrivateRoute } from './PrivateRoute';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route exact path="/bondResult" component={BondResult}></Route>
             <Route exact path="/equityResult" component={EquityResult}></Route>
             <Route exact path="/compoundCalculator" component={CompoundCalculator}></Route>
+            <Route exact path="/equityListing" component={EquityListing}></Route>
 
             <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
             <PrivateRoute exact path="/retirementDashboard" component={RetirementDashboard}></PrivateRoute>
