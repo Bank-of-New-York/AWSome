@@ -36,7 +36,6 @@ export default class RiskAssessment extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state)
 
         e.preventDefault()
         var score = 0

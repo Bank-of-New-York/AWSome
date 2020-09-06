@@ -63,12 +63,14 @@ class User(Base):
     def verify_auth_token(token):
         s = Serializer(SECRET_KEY)
         try:
+            print(token)
             data = s.loads(token)
         except SignatureExpired:
             return None # valid token, but expired
         except BadSignature:
             return None # invalid token
         user = session.query(User).filter(User.id == data['id']).first()
+        print("Verified with auth token")
         return user
 
 class SPFH(Base):

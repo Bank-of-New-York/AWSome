@@ -100,7 +100,7 @@ export default class EquityResult extends Component {
                         </div>
                         <br></br>
 
-                        <div class="center text-justify">
+                        <div className="center text-justify">
                             <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in fringilla eros. Etiam molestie
                             dui et sem fermentum, interdum condimentum mi condimentum. Curabitur convallis, massa quis mattis accumsan.</h4>
                             <br></br>

@@ -99,6 +99,7 @@ parser.add_argument('start_date', type=str)
 parser.add_argument('end_date', type=str)
 
 class StockTrend(Resource):
+    @auth.login_required
     @marshal_with(stock_price_fields)
     def post(self):
 

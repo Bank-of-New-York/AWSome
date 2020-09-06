@@ -63,7 +63,7 @@ export default class Screener extends Component {
                                                 <Card.Body className='px-0 py-2' style={{ width: "60vw", maxHeight: "80vh", overflowY: "scroll" }}>
                                                     <Table responsive hover  >
                                                         <tbody style={{ width: "60vw" }}>
-                                                            <thead class="center">
+                                                            <thead className="center">
                                                                 <th className="unread"></th>
                                                                 <th>Name</th>
                                                                 <th>Date</th>

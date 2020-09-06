@@ -5,8 +5,6 @@ import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
 import NVD3Chart from 'react-nvd3';
 
-// import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-// import 'react-pro-sidebar/dist/css/styles.css';
 import avatar1 from '../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../assets/images/user/avatar-3.jpg';
@@ -14,6 +12,20 @@ import avatar3 from '../../assets/images/user/avatar-3.jpg';
 import "./retirementDashboard.css";
 import Sidebar from "../sidebar/sidebar";
 
+const datum = [
+    { key: "Bonds", y: 80, color: "#5CD4EF" },
+    { key: "Equities", y: 20, color: "#FFA861" },
+];
+
+// function calc_chance_r(chance, yrs, bond_ratio, equity_ratio) {
+//     let width_p = chance ** (1 / yrs) - 0.5;
+//       // width_p of 0.44406 should give z=-0.145
+//       // width_p of 0.555939 should give z=0.1405
+//     let z = percentile_z(width_p);
+//       let chance_equity_cagr = z * EQUITY_CAGR + BOND_CAGR;
+//     let chance_r = chance_equity_cagr * equity_ratio + BOND_CAGR * bond_ratio;
+//       return chance_r;
+//   }
 
 function getDatum() {
     var sin = [],
@@ -111,60 +123,6 @@ class RetirementDashboard extends React.Component {
 
     render() {
 
-        console.log(this.state.total)
-        const tabContent = (
-            <Aux>
-                <h3 align='center'>News</h3>
-
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Silje Larsen</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />3784</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar2} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Julie Vad</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />3544</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar3} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Storm Hanse</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red" />2739</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Frida Thomse</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red" />1032</span>
-                    </div>
-                </div>
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                    <div className="m-r-10 photo-table">
-                        <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{ width: '40px' }} src={avatar2} alt="activity-user" /></a>
-                    </div>
-                    <div className="media-body">
-                        <h6 className="m-0 d-inline">Silje Larsen</h6>
-                        <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />8750</span>
-                    </div>
-                </div>
-
-            </Aux>
-        );
-
         return (
             <Aux >
                 <Container fluid>
@@ -182,25 +140,22 @@ class RetirementDashboard extends React.Component {
                             <Row>
 
                                 <Col>
-                                    <Card style={{ "height": "30vh", "width": "75vw" }} className='card-event center'>
+                                    <Card style={{ "height": "35vh", "width": "75vw" }} className='card-event'>
                                         <Card.Body>
-                                            <Row style={{ width: "75vw" }}>
+                                            <Row style={{ width: "75vw", left: "-70px" }}>
                                                 <Col l={2}>
                                                     <h3>Retire By:</h3>
                                                     <h3>62</h3>
                                                 </Col>
-                                                <Col l={1} style={{ left: "-70px" }}>
-                                                    <div style={{ "height": "20vh" }} className="vertical-line"></div>
-                                                </Col>
-                                                <Col l={3} style={{ left: "-140px" }}>
+                                        
+                                                <Col l={3} style={{ left: "-70px" }}>
                                                     <h3>Amount Needed:</h3>
                                                     <h3>$150,000</h3>
                                                 </Col>
-                                                <Col l={6} style={{ left: "-70px", textAlign: "left" }}>
-                                                    <h5>Wedding: $10,000</h5>
-                                                    <h5>Honeymoon: $10,000</h5>
-                                                    <h5>House: $10,000</h5>
-                                                    <h5>2 Children: $10,000</h5>
+                                                <Col l={6} style={{ left: "-70px", textAlign: "center" }} className="center">
+                                                    <h5>Portfolio Composition</h5>
+                                                    <NVD3Chart id="chart" height={150} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
+                                                    
                                                 </Col>
                                             </Row>
 
