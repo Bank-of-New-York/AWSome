@@ -13,17 +13,89 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./detailsForm.css"
 export default class detailsForm extends Component {
 
-    state = {
-        startDate: new Date()
+    constructor() {
+        super();
+        this.state = {
+            first_name : "",
+            last_name : "",
+            email : "",
+            birthday: "",
+            invested: ""
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleChange = date => {
+    handleInputChange(event) {
+        const target = event.target;
+        var value = target.value;
+        const name = target.name; 
+        console.log(name, value)
+        
         this.setState({
-            startDate: date
+            [name] : value
         })
     }
 
+
+    componentDidMount() {
+        fetch("/api_update_user", {
+            method: "GET",
+            headers: {
+                'Content-Type' : "application/json",
+                "Authorization": `Basic ${btoa(sessionStorage.getItem("token"))}`
+            }
+        }).then((resp) => {
+            return resp.json()
+        }).then((values) => {
+            console.log(values)
+            Object.keys(values).forEach(k => {
+                if (values[k] !== null) {
+                    this.setState({
+                        k : values[k]
+                    })
+                }
+            });
+        })
+    }
+    
+
+    handleSubmit =(e) => {
+        // e.preventDefault()
+        console.log({
+            first_name : this.state.first_name,
+            last_name : this.state.last_name,
+            email : this.state.email,
+            birthday: this.state.birthday,
+            invested: this.state.invested
+        })
+
+        fetch("/api_update_user", {
+            method: "POST",
+            headers: {
+                'Content-Type' : "application/json",
+                "Authorization": `Basic ${btoa(sessionStorage.getItem("token"))}`
+            },
+            body: JSON.stringify({
+                first_name : this.state.first_name,
+                last_name : this.state.last_name,
+                email : this.state.email,
+                birthday: this.state.birthday,
+                invested: this.state.invested
+            })
+        }).then((resp) => {
+            console.log(resp)
+            return resp.json()
+        })
+        
+        // window.location.href="/riskAssessment"
+    }
+
+    // <Link to="/riskAssessment">
+
+
     render() {
+
         return (
             <Container>
 
@@ -47,13 +119,13 @@ export default class detailsForm extends Component {
                                     <Col>
                                         <Form.Group controlId="first_name">
                                             <Form.Label>What's your first name?</Form.Label>
-                                            <Form.Control type="text" placeholder="First Name"></Form.Control>
+                                            <Form.Control name="first_name" type="text" placeholder="First Name" onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group controlId="last_name">
                                             <Form.Label>What's your last name?</Form.Label>
-                                            <Form.Control type="text" placeholder="Last Name"></Form.Control>
+                                            <Form.Control name="last_name" type="text" placeholder="Last Name" onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -64,13 +136,13 @@ export default class detailsForm extends Component {
                                     <Col xs={7}>
                                         <Form.Group controlId="email">
                                             <Form.Label>What's your email?</Form.Label>
-                                            <Form.Control type="text" placeholder="Email"></Form.Control>
+                                            <Form.Control name="email" type="email" placeholder="Email" onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col xs={5}>
                                         <Form.Group controlId="birthday">
                                             <Form.Label>When's your birthday?</Form.Label><br></br>
-                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
+                                            <DatePicker name="birthday" selected={this.state.birthday} onChange={(newDate) => this.setState({birthday: new Date(newDate)})} />
                                         </Form.Group>
                                     </Col>
 
@@ -82,7 +154,7 @@ export default class detailsForm extends Component {
                                     <Col xs={6}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>Have you invested before?</Form.Label>
-                                            <Form.Control as="select" custom>
+                                            <Form.Control as="select" name="invested" custom onChange={this.handleInputChange}>
                                                 <option>No</option>
                                                 <option>Yes</option>
                                             </Form.Control>
@@ -93,9 +165,8 @@ export default class detailsForm extends Component {
 
                                 <br></br><br></br><br></br><br></br>
 
-                                <Link to="/riskAssessment">
-                                    <Button id="submit" variant="primary" type="submit">Next</Button>
-                                </Link>
+                                <Button id="submit" variant="primary" onClick={this.handleSubmit}>Next</Button>
+
 
                             </Form>
 
