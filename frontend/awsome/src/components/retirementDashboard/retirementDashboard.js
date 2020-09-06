@@ -222,7 +222,7 @@ class RetirementDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="r">
-                                                            <Form.Label>r:</Form.Label>
+                                                            <Form.Label>CGAR (%):</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="r"></Form.Control>
                                                         </Form.Group>
                                                     </Col>

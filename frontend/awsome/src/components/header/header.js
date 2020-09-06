@@ -7,7 +7,7 @@ export default class Header extends Component {
     render() {
         return (
             <Navbar expand="lg">
-                <Navbar.Brand href="/" to="/">AWSome</Navbar.Brand>
+                <Navbar.Brand href="/" to="/">StockOverFlow</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
