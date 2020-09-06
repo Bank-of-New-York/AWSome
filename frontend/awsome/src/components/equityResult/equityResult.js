@@ -109,9 +109,8 @@ export default class EquityResult extends Component {
                             <h2>Risk Appetite: Higher</h2>
 
                             <p>
-                                neque lectus tincidunt dui, eu placerat magna libero ut lorem. Etiam ornare tempor euismod. Quisque in nibh lacinia,
-                                pharetra ex at, viverra risus. Morbi ac dui nibh. Sed ac dui eu magna egestas accumsan volutpat sagittis mi. Nunc vitae quam vel
-                                nibh mollis faucibus. Suspendisse ultrices, lectus ac imperdiet euismod, massa metus luctus elit, aliquam egestas ante est nec risus.
+                            Based on our risk assessment, you have a high risk tolerance. You are comfortable with subjecting your capital to volatility, as long as they are able to yield high returns on your investment over time.  
+                            We recommend that you deploy most of your investable capital towards higher risk assets like equities (hyperlink), and place a small low risk and risk-free assets like fixed deposit accounts and Singapore Savings bonds (hyperlink), and. To learn more about portfolio allocation in general, click here (hyperlink). 
                             </p>
 
                             <br></br>

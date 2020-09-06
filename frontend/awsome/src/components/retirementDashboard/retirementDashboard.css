@@ -38,4 +38,5 @@
 
 .sidebar-link {
     text-decoration: underline;
+    margin-bottom: 10px !important;
 }
