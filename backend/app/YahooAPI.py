@@ -1,11 +1,11 @@
 import requests
-from Config import YAHOO_API_KEY
+from Config import X_RAPIAPI_KEY
 import sys
 
 def get_response(url, querystring):
   headers = {
     'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com",
-    'x-rapidapi-key': YAHOO_API_KEY
+    'x-rapidapi-key': X_RAPIAPI_KEY
   }
   response = requests.request("GET", url, headers=headers, params=querystring)
   try:
@@ -73,12 +73,15 @@ def get_yf_financials(stock_id):
   url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-financials"
   querystring = {"symbol": stock_id}
 
-
-  response = get_response(url, querystring).json()
-
   return_dict = {
     "Beta": None
   }
+
+  try:
+    response = get_response(url, querystring).json()
+  except:
+    print("Unexpected error:", sys.exc_info()[0], "for yf analysis", stock_id)
+    return return_dict
 
   if response == []:
     return return_dict
