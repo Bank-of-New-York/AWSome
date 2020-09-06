@@ -70,25 +70,34 @@ export default class detailsForm extends Component {
             invested: this.state.invested
         })
 
-        fetch("/api_update_user", {
-            method: "POST",
-            headers: {
-                'Content-Type' : "application/json",
-                "Authorization": `Basic ${btoa(sessionStorage.getItem("token"))}`
-            },
-            body: JSON.stringify({
-                first_name : this.state.first_name,
-                last_name : this.state.last_name,
-                email : this.state.email,
-                birthday: this.state.birthday,
-                invested: this.state.invested
+        if(this.state.first_name && 
+            this.state.last_name && 
+            this.state.email && 
+            this.state.birthday
+        ){
+            fetch("/api_update_user", {
+                method: "POST",
+                headers: {
+                    'Content-Type' : "application/json",
+                    "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+                },
+                body: JSON.stringify({
+                    first_name : this.state.first_name,
+                    last_name : this.state.last_name,
+                    email : this.state.email,
+                    birthday: this.state.birthday,
+                    invested_before: this.state.invested
+                })
+            }).then((resp) => {
+                console.log(resp)
+                window.location.href="/riskAssessment"
+            }).catch(err =>{
+                console.log(err)
+                alert("There is a problem with submission")
             })
-        }).then((resp) => {
-            console.log(resp)
-            return resp.json()
-        })
-        
-        // window.location.href="/riskAssessment"
+        } else {
+            alert('Please fill in all details')
+        }
     }
 
     // <Link to="/riskAssessment">

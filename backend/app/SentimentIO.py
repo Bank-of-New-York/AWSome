@@ -36,3 +36,7 @@ def get_sentiments(stock_symb):
   yesterday_sentiment = df.iloc[-1, :][5]
 
   return yesterday_sentiment, days_before_sentiment
+
+
+# df = pd.DataFrame(json.loads(get_response("FB", 90).text))
+# df.to_csv("fb.csv", index=False)

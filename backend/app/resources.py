@@ -21,7 +21,7 @@ parser = reqparse.RequestParser()
 
 class Home(Resource):
     def get(self):
-        return 'Dockerized', 200
+        return 'Dockerized by AWSOME', 200
 
 user_fields = {
     'id': fields.Integer,
