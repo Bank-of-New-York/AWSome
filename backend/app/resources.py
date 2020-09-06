@@ -136,6 +136,7 @@ class Database(Resource):
         DROP_TABLES = [User.__table__]
         for table in DROP_TABLES:
             table.drop(engine)
+            table.create(engine)
         
         print("Resetted schemas..")
 
