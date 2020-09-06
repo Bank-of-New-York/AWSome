@@ -310,7 +310,7 @@ class StockDashboard extends React.Component {
                     <br></br>
                         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
                             <Tab eventKey="today" title="Today">
-                                <NewsContent />
+                                <NewsContent stock_symb = { this.state.stock_symb }/>
                             </Tab>
                             <Tab eventKey="week" title="This Week">
                                 {tabContent}
