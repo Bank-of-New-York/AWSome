@@ -95,7 +95,21 @@ class RetirementDashboard extends React.Component {
         })
     }
 
-    final_compound = []
+    
+    componentDidMount() {
+        fetch("/api_update_user", {
+            method: "GET",
+            headers: {
+                'Content-Type' : "application/json",
+                "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+            }
+        }).then((resp) => {
+            return resp.json()
+        }).then((values) => {
+
+            console.log(values)
+        })
+    }
 
     handleSubmit = (e) => {
 
