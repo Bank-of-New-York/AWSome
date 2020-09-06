@@ -61,7 +61,18 @@ export default class RiskAssessment extends Component {
         });
 
         if(filled){
-            sessionStorage.setItem("riskScore", score)
+            let risk_level = null;
+            if(score <= 5 && score >= 13){
+                risk_level = "low"
+            } else if (score >= 14 && score <= 24) {
+                risk_level = "medium"
+            } else if (score >= 25 ){
+                risk_level = "high"
+            } else {
+                alert("Risk level variable error")
+            }
+
+            sessionStorage.setItem("risk_level", risk_level)
             window.location.href="/retirementForm"
         } else {
             filled = true

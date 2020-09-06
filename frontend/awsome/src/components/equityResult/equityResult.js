@@ -54,170 +54,228 @@ function getDatum() {
     ];
 }
 
-const equitiesTabContent = (
+const RiskLow = (
+    <React.Fragment>
+    <h2>Risk Appetite: <span class = "text-success" >LOW</span></h2>
+    <p>
+        Based on our risk assessment, you have a low risk tolerance. Capital preservation is of paramount importance to you, and drawdowns could potentially be harmful to your long-term financial standing. 
+    </p>
+    </React.Fragment>
+);
+
+const RiskMedium = 
+    <React.Fragment>
+    <h2>Risk Appetite: <span class = "text-success" >MEDIUM</span></h2>
+    <h4>
+    Based on our risk assessment, you have a medium risk tolerance. While you are willing to subject your capital to some volatility in exchange for higher returns, you still view capital preservation is an important facet of your investing activities.   
+    </h4>
+    </React.Fragment>
+;
+
+const RiskHigh = 
+    <React.Fragment>
+    <h2>Risk Appetite: <span class = "text-success" >HIGH</span></h2>
+    <h4>
+    Based on our risk assessment, you have a high risk tolerance. You are comfortable with subjecting your capital to volatility, as long as they are able to yield high returns on your investment over time.
+    </h4>
+    </React.Fragment>
+;
+
+const equitiesTabContent = 
     <Aux>
         <h3 align='center'>Equities</h3>
 
-        <p>
-            neque lectus tincidunt dui, eu placerat magna libero ut lorem. Etiam ornare tempor euismod. Quisque in nibh lacinia,
-            pharetra ex at, viverra risus. Morbi ac dui nibh. Sed ac dui eu magna egestas accumsan volutpat sagittis mi. Nunc vitae quam vel
-            nibh mollis faucibus. Suspendisse ultrices, lectus ac imperdiet euismod, massa metus luctus elit, aliquam egestas ante est nec risus.
-        </p>
+        <h6>
+            Equities, also known as stocks, represent part-ownership in a company. Unlike the periodic interest that companies are required to pay on borrowings, companies are not legally required to pay their shareholders anything. As a result, equity values are determined by expectations of future cash flows. However, short term equity prices are dependent on market forces of supply and demand, creating volatility.
+        </h6>
 
     </Aux>
-);
+;
 
 const BondsTabContent = (
     <Aux>
         <h3 align='center'>Bonds</h3>
 
-        <p>
-            neque lectus tincidunt dui, eu placerat magna libero ut lorem. Etiam ornare tempor euismod. Quisque in nibh lacinia,
-            pharetra ex at, viverra risus. Morbi ac dui nibh. Sed ac dui eu magna egestas accumsan volutpat sagittis mi. Nunc vitae quam vel
-            nibh mollis faucibus. Suspendisse ultrices, lectus ac imperdiet euismod, massa metus luctus elit, aliquam egestas ante est nec risus.
-        </p>
+        <h6>
+        Bonds represent loans made by you, the investor to the borrower, which is usually a company or a government. Because it is difficult to invest in corporate bonds without large sums of money, we are advocating Singapore Savings Bonds (SSB) and fixed deposit accounts as risk-free substitutes for regular bonds. While SSB and fixed deposits provide an interest rate that is frequently below that of inflation, the risk of capital loss is virtually zero.
+        </h6>
 
     </Aux>
 );
 
 export default class EquityResult extends Component {
 
+    constructor(){
+        super()
+        this.state = {
+            risk_level : "#"
+        }
+    }
+
+    componentDidMount() {
+        fetch("/api_update_user", 
+        {
+          method: 'GET',
+          headers: {
+              'Content-Type' : "application/json",
+              "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+          }
+        }).then(response => 
+            response.json()
+        ).then(({ risk_level }) => {
+            this.setState({ risk_level: risk_level })
+        }).catch(error => {
+            console.log(error)
+            alert("There has been a problem")
+        })
+    }
 
 
     render() {
 
         const data = getDatum();
 
-        return (
-            <Container fluid>
-                <Row style={{ width: "80%" }}>
-                    <Col>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <div>
-                            <h2>Your Results</h2>
-                        </div>
-                        <br></br>
+        if(this.state.risk_level !== "#"){
+            return (
 
-                        <div className="center text-justify">
-                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in fringilla eros. Etiam molestie
-                            dui et sem fermentum, interdum condimentum mi condimentum. Curabitur convallis, massa quis mattis accumsan.</h4>
+                <Container fluid>
+                    <Row style={{ width: "80%" }}>
+                        { this.state.risk_level !== "#" ?
+                        <Col>
                             <br></br>
                             <br></br>
-
-                            <h2>Risk Appetite: Higher</h2>
-
-                            <p>
-                                neque lectus tincidunt dui, eu placerat magna libero ut lorem. Etiam ornare tempor euismod. Quisque in nibh lacinia,
-                                pharetra ex at, viverra risus. Morbi ac dui nibh. Sed ac dui eu magna egestas accumsan volutpat sagittis mi. Nunc vitae quam vel
-                                nibh mollis faucibus. Suspendisse ultrices, lectus ac imperdiet euismod, massa metus luctus elit, aliquam egestas ante est nec risus.
-                            </p>
-
                             <br></br>
-                            <br></br>
-                            <h2 align='left'>Your Recommended Portfolio Allocation</h2>
-                            <br></br>
-                            <Row>
-                                <Col>
-                                    <NVD3Chart id="chart" height={300} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
-                                </Col>
-                                <Col>
-                                    <Tabs defaultActiveKey="equities" id="uncontrolled-tab-example">
-                                        <Tab eventKey="equities" title="Equities">
-                                            {equitiesTabContent}
-                                        </Tab>
-                                        <Tab eventKey="bonds" title="Bonds">
-                                            {BondsTabContent}
-                                        </Tab>
-
-                                    </Tabs>
-                                </Col>
-                            </Row>
-
-
-                            <br></br>
-                            <br></br>
-                            <h2>Planning For Retirement</h2>
+                            <div class="text-center">
+                                <h2>Your Assessment</h2>
+                            </div>
                             <br></br>
 
-                            <Form>
+                            <div className="center text-justify">
+
+                                { this.state.risk_level === "low" && RiskLow  }
+                                { this.state.risk_level === "medium" && RiskMedium }
+                                { this.state.risk_level === "high" && RiskHigh }
+
+                                <br></br>
+                                <br></br>
+                                <h2 align='left'>Your Recommended Portfolio Allocation</h2>
+                                <br></br>
                                 <Row>
                                     <Col>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Principal Amount ($):</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Amount Needed ($):</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Years Before Retirement:</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
+                                        <NVD3Chart id="chart" height={300} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
                                     </Col>
                                     <Col>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Expected Portfolio Return (%):</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Monthly Deposit Needed ($):</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
-                                        <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                            <Form.Label>Principal Amount ($):</Form.Label>
-                                            <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                        </Form.Group>
+                                        <Tabs defaultActiveKey="equities" id="uncontrolled-tab-example">
+                                            <Tab eventKey="equities" title="Equities">
+                                                {equitiesTabContent}
+                                            </Tab>
+                                            <Tab eventKey="bonds" title="Bonds">
+                                                {BondsTabContent}
+                                            </Tab>
+
+                                        </Tabs>
                                     </Col>
                                 </Row>
 
 
+                                <br></br>
+                                <br></br>
+                                <h2>Planning For Retirement</h2>
+                                <br></br>
 
-                            </Form>
+                                <Form>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Principal Amount ($):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Amount Needed ($):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Years Before Retirement:</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Expected Portfolio Return (%):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Monthly Deposit Needed ($):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Principal Amount ($):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
 
-                            <br></br>
-                            <br></br>
-                            <div>
-                                {
-                                    React.createElement(NVD3Chart, {
-                                        xAxis: {
-                                            tickFormat: function (d) { return d; },
-                                            axisLabel: 'Time (ms)'
-                                        },
-                                        yAxis: {
-                                            axisLabel: 'Voltage (v)',
-                                            tickFormat: function (d) { return parseFloat(d).toFixed(2); }
-                                        },
-                                        type: 'lineChart',
-                                        datum: data,
-                                        x: 'x',
-                                        y: 'y',
-                                        height: 300,
-                                        renderEnd: function () {
-                                            console.log('renderEnd');
-                                        }
-                                    })
-                                }
+
+
+                                </Form>
+
+                                <br></br>
+                                <br></br>
+                                <div>
+                                    {
+                                        React.createElement(NVD3Chart, {
+                                            xAxis: {
+                                                tickFormat: function (d) { return d; },
+                                                axisLabel: 'Time (ms)'
+                                            },
+                                            yAxis: {
+                                                axisLabel: 'Voltage (v)',
+                                                tickFormat: function (d) { return parseFloat(d).toFixed(2); }
+                                            },
+                                            type: 'lineChart',
+                                            datum: data,
+                                            x: 'x',
+                                            y: 'y',
+                                            height: 300,
+                                            renderEnd: function () {
+                                                console.log('renderEnd');
+                                            }
+                                        })
+                                    }
+                                </div>
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+                                <Link to="/screener">
+                                    <Button variant="primary" >Learn More</Button>
+                                </Link>
+
                             </div>
+                        </Col>
+                        :
+                        <Col>
+                            <h1>Loading...</h1>
+                        </Col>
+                        }
+                    </Row>
+                    <br></br>
+                    <br></br>
+                    <br></br>
 
-                            <br></br>
-                            <br></br>
-                            <br></br>
-
-                            <Link to="/screener">
-                                <Button variant="primary" >Learn More</Button>
-                            </Link>
-
-                        </div>
-                    </Col>
-                </Row>
-                <br></br>
-                <br></br>
-                <br></br>
-
-            </Container>
-        )
+                </Container>
+            )
+        } else {
+            return(
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1>LOADING...</h1>
+                        </Col>
+                    </Row>
+                </Container>
+            )
+        }
     }
 }

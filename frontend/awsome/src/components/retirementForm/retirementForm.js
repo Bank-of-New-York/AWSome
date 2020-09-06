@@ -150,6 +150,8 @@ export default class RetirementForm extends Component {
 
 
     handleSubmit = (event) => {
+
+        let risk_level = sessionStorage.getItem("risk_level")
         if(this.state.retirement_amount){
             fetch("/api_update_user", {
                 method: "POST",
@@ -158,7 +160,8 @@ export default class RetirementForm extends Component {
                     "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
                 },
                 body: JSON.stringify({
-                    retirement_amount: this.state.retirement_amount
+                    retirement_amount: this.state.retirement_amount,
+                    risk_level: risk_level
                 })
             }).then((resp) => {
                 console.log(resp)

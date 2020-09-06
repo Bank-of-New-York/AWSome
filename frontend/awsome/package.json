@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.2",
     "html-react-parser": "^0.13.0",
     "node-sass": "^4.14.1",
+    "normal-distribution": "0.0.9",
     "nvd3": "^1.8.6",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",

@@ -12,11 +12,15 @@ export default class Header extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/home" to="/">Home</Nav.Link>
-                        <Nav.Link href="/login" to="/login">Login</Nav.Link>
-                        <Nav.Link href="/dashboard" to="/dashboard">Dashboard</Nav.Link>
-                        <Nav.Link href="/equityListing" to="/equityListing">Equities</Nav.Link>
-                        <Nav.Link href="/logout" to="/logout">Logout</Nav.Link>
+                        <Nav.Link href="/retirementDashboard" to="/">Home</Nav.Link>
+                        {/* <Nav.Link href="/dashboard" to="/dashboard">Dashboard</Nav.Link> */}
+                        {/* <Nav.Link href="/equityListing" to="/equityListing">Equities</Nav.Link> */}
+                        {
+                            sessionStorage.getItem("token") ?
+                            <Nav.Link href="/logout" to="/logout">Logout</Nav.Link>
+                            :
+                            <Nav.Link href="/login" to="/login">Login</Nav.Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
