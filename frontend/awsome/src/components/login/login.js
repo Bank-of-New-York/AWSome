@@ -29,7 +29,7 @@ class Login extends React.Component {
 
     handleSubmit = () => {
         fetch("/api_token", {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type' : "application/json",
                 "Authorization": `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
@@ -38,7 +38,7 @@ class Login extends React.Component {
             response.json()
         ).then( data  => {
             sessionStorage.setItem("token", data.token)
-            this.props.history.push("/detailsForm")
+            this.props.history.push("/retirementDashboard")
             // window.location.href="/detailsForm"
         }).catch(error => {
             console.log(error)

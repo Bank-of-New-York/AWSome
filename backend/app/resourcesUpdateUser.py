@@ -9,13 +9,51 @@ from resources import auth
 
 parser = reqparse.RequestParser()
 
-parser.add_argument('risk_level', type=int)
+# Can INPUT
+parser.add_argument('first_name', type=str)
+parser.add_argument('last_name', type=str)
+parser.add_argument('email_address', type=str)
+parser.add_argument('birthday', type=str)
+parser.add_argument('invested_before', type=str)
+
+parser.add_argument('risk_level', type=str)
 parser.add_argument('retirement_amount', type=int)
+
 parser.add_argument('years_till_retire', type=int)
-parser.add_argument('expected_growth', type=int)
-parser.add_argument('monthly_deposit', type=int)
+parser.add_argument('expected_growth', type=float)
+parser.add_argument('initial_deposit', type=float)
+parser.add_argument('monthly_deposit', type=float)
+
+# Will RETURN
+user_fields = {
+    'id': fields.Integer,
+    'username': fields.String,
+    # 'password_hash': fields.String,
+
+    'first_name': fields.String,
+    'last_name': fields.String,
+    'email_address': fields.String,
+    'birthday': fields.String,
+    'invested_before': fields.String,
+
+    'risk_level': fields.String,
+    'retirement_amount': fields.Integer,
+
+    'years_till_retire': fields.Integer,
+    'expected_growth': fields.Float,
+    'initial_deposit': fields.Float,
+    'monthly_deposit': fields.Float,
+}
 
 class UpdateUser(Resource):
+    @marshal_with(user_fields)
+    @auth.login_required
+    def get(self):
+        print("Getting User...")
+        user = g.user
+
+        return user
+
     @auth.login_required
     def post(self):
         print("Updating User...")

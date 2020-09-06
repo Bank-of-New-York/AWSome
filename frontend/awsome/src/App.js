@@ -18,6 +18,7 @@ import RetirementDashboard from "./components/retirementDashboard/retirementDash
 import CompoundCalculator from "./components/compoundCalculator/compoundCalculator"
 import EquityListing from "./components/equityListing/equityListing"
 import { PrivateRoute } from './PrivateRoute';
+import Screener from './components/screener/screener';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route exact path="/compoundCalculator" component={CompoundCalculator}></Route>
             <Route exact path="/equityListing" component={EquityListing}></Route>
 
+            <PrivateRoute exact path="/screener" component={Screener}></PrivateRoute>
             <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
             <PrivateRoute exact path="/retirementDashboard" component={RetirementDashboard}></PrivateRoute>
             <PrivateRoute exact path="/logout" component={Logout}></PrivateRoute>

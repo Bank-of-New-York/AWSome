@@ -9,7 +9,6 @@ import { Link } from "react-router-dom"
 import "./retirementForm.css"
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import Parser from "html-react-parser"
 
 // fake data generator
 const getItems = (count, offset = 0) =>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Table, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, Card, Table, Tabs, Tab, Container } from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
@@ -14,6 +14,7 @@ import GaugeChart from "react-gauge-chart";
 import NewsContent from './NewsContent.js';
 
 import "./dashboard.css"
+import Sidebar from '../sidebar/sidebar';
 
 function getDatum() {
     var sin = [],
@@ -95,7 +96,6 @@ class StockDashboard extends React.Component {
                 return { "x": Math.round(new Date(x).getTime() / 1000), "y": parseFloat(y) }
             }
             )
-            console.log(prices1)
             this.setState({ stock_prices: [{ values: prices1, key: "price", color: "#A389D4" }] })
         }
     }
@@ -103,6 +103,7 @@ class StockDashboard extends React.Component {
 
     render() {
         const data = getDatum();
+
 
         const tabContent = (
             <Aux>
@@ -153,183 +154,167 @@ class StockDashboard extends React.Component {
                         <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green" />8750</span>
                     </div>
                 </div>
-               
+
             </Aux>
         );
 
         return (
-            <Aux >
+            <Container fluid>
                 <Row>
-                    <Col xs={11}>
-                        <br></br>
-                        <h1>Name of Stock</h1>
-                        <br></br>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={8}>
+                    <Col s={2}>
+                        <Sidebar />
 
-                        <Card>
-                            <Card.Body>
-                                <h3 className='mb-4'>Stock Prices</h3>
-                                {
-                                    this.state.stock_prices &&
-                                    <div>
-                                        {
-                                            React.createElement(NVD3Chart, {
-                                                xAxis: {
-                                                    tickFormat: function (d) { var date = new Date(0); date.setUTCSeconds(d); return date.toISOString().substr(0,10); },
-                                                    axisLabel: 'Date',
-                                                },
-                                                yAxis: {
-                                                    axisLabel: 'Price ($ m)',
-                                                    tickFormat: function (d) { return parseFloat(d).toFixed(2); }
-                                                },
-                                                type: 'lineChart',
-                                                datum: this.state.stock_prices,
-                                                x: 'x',
-                                                y: 'y',
-                                                height: 300,
-                                                width: 700,
-                                                renderEnd: function () {
-                                                    console.log('renderEnd');
+                    </Col>
+                    <Col s={10} id="dashboard-body">
+                        <Container fluid style={{width: "78vw"}}>
+                            <Aux >
+                                <Row>
+                                    <Col xs={11}>
+                                        <br></br>
+                                        <h1>Name of Stock</h1>
+                                        <br></br>
+                                    </Col>
+                                </Row>
+                                <Row >
+                                    <Col xs={8}>
+
+                                        <Card >
+                                            <Card.Body>
+                                                <h3 className='mb-4'>Stock Prices</h3>
+                                                {
+                                                    this.state.stock_prices &&
+                                                    <div>
+                                                        {
+                                                            React.createElement(NVD3Chart, {
+                                                                xAxis: {
+                                                                    tickFormat: function (d) { var date = new Date(0); date.setUTCSeconds(d); return date.toISOString().substr(0, 10); },
+                                                                    axisLabel: 'Date',
+                                                                },
+                                                                yAxis: {
+                                                                    axisLabel: 'Price ($ m)',
+                                                                    tickFormat: function (d) { return parseFloat(d).toFixed(2); }
+                                                                },
+                                                                type: 'lineChart',
+                                                                datum: this.state.stock_prices,
+                                                                x: 'x',
+                                                                y: 'y',
+                                                                height: 250,
+                                                                width: 500,
+                                                                renderEnd: function () {
+                                                                    console.log('renderEnd');
+                                                                }
+                                                            })
+                                                        }
+                                                    </div>
                                                 }
-                                            })
-                                        }
-                                    </div>
-                                }
 
-                            </Card.Body>
-                        </Card>
-                    
-                        {/* <Card className='card-social'>
-                            <Card.Body className='border-bottom'>
-                                <div className="row align-items-center justify-content-center">
-                                    <div className="col-auto">
-                                        <i className="fa fa-google-plus text-c-red f-36" />
-                                    </div>
-                                    <div className="col text-right">
-                                        <h3>10,500</h3>
-                                        <h5 className="text-c-blue mb-0">+5.9% <span className="text-muted">Total Likes</span></h5>
-                                    </div>
-                                </div>
-                            </Card.Body>
-                            <Card.Body>
-                                <div className="row align-items-center justify-content-center card-active">
-                                    <div className="col-6">
-                                        <h6 className="text-center m-b-10"><span className="text-muted m-r-5">Target:</span>25,998</h6>
-                                        <div className="progress">
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{ width: '80%', height: '6px' }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" />
-                                        </div>
-                                    </div>
-                                    <div className="col-6">
-                                        <h6 className="text-center  m-b-10"><span className="text-muted m-r-5">Duration:</span>900</h6>
-                                        <div className="progress">
-                                            <div className="progress-bar progress-c-theme2" role="progressbar" style={{ width: '50%', height: '6px' }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card.Body>
-                        </Card> */}
-                    </Col>
+                                            </Card.Body>
+                                        </Card>
 
-                    <Col xs={4}>
-                        <Card className='card-event center'>
-                            <Card.Body>
-                                <Row>
-                                    <Col>
-                                    <br></br>
+                                    </Col>
 
-                                        <h1>79</h1>
-                                        <p>Stock Score</p>
+                                    <Col xs={4} >
+                                        <Card className='card-event center' >
+                                            <Card.Body style={{width:"20vw"}}>
+                                                <Row >
+                                                    <Col>
+                                                        <br></br>
+
+                                                        <h1>79</h1>
+                                                        <p>Stock Score</p>
+                                                    </Col>
+                                                </Row>
+                                                <br></br>
+                                                <br></br>
+                                                <Row>
+                                                    <Col>
+                                                        <h3>Bullish Indicator</h3>
+                                                        <GaugeChart textColor="black" id="bullish" />
+                                                    </Col>
+                                                </Row>
+                                                <br></br>
+                                                <br></br>
+                                            </Card.Body>
+                                        </Card>
+
                                     </Col>
                                 </Row>
                                 <br></br>
-                                <br></br>
                                 <Row>
-                                    <Col>
-                                        <h3>Bullish Indicator</h3>
-                                        <GaugeChart textColor="black" id="bullish"/>
+                                    <Col sm={7}>
+                                        <br></br>
+                                        <Card className='Recent-Users'>
+                                            <Card.Header>
+                                                <Card.Title as='h5'>Information</Card.Title>
+                                            </Card.Header>
+                                            <Card.Body className='px-0 py-2' style={{overflowX:"scroll", width:"40vw"}}> 
+                                                <Table responsive hover >
+                                                    <tbody >
+                                                        <tr className="unread">
+                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></td>
+                                                            <td>
+                                                                <h6 className="mb-1">Isabella Christensen</h6>
+                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />11 MAY 12:56</h6>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="unread">
+                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar3} alt="activity-user" /></td>
+                                                            <td>
+                                                                <h6 className="mb-1">Karla Sorensen</h6>
+                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />9 MAY 17:38</h6>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="unread">
+                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></td>
+                                                            <td>
+                                                                <h6 className="mb-1">Ida Jorgensen</h6>
+                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />19 MAY 12:56</h6>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </Table>
+                                            </Card.Body>
+                                        </Card>
                                     </Col>
+                                    <Col sm={5}>
+                                        <br></br>
+                                        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
+                                            <Tab eventKey="today" title="Today">
+                                                {tabContent}
+                                            </Tab>
+                                            <Tab eventKey="week" title="This Week">
+                                                {tabContent}
+                                            </Tab>
+                                            <Tab eventKey="all" title="All">
+                                                {tabContent}
+                                            </Tab>
+
+                                        </Tabs>
+
+                                    </Col>
+
+
+
                                 </Row>
                                 <br></br>
                                 <br></br>
-                            </Card.Body>
-                        </Card>
 
+                            </Aux>
+
+                        </Container>
                     </Col>
                 </Row>
-                <br></br>
-                <Row>
-                    <Col sm={7}>
-                    <br></br>
-                        <Card className='Recent-Users'>
-                            <Card.Header>
-                                <Card.Title as='h5'>Information</Card.Title>
-                            </Card.Header>
-                            <Card.Body className='px-0 py-2'>
-                                <Table responsive hover>
-                                    <tbody>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Isabella Christensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>11 MAY 12:56</h6>
-                                        </td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar3} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Karla Sorensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>9 MAY 17:38</h6>
-                                        </td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Ida Jorgensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15"/>19 MAY 12:56</h6>
-                                        </td>
-                                    </tr>
-                            
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col sm={5}>
-                    <br></br>
-                        <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
-                            <Tab eventKey="today" title="Today">
-                                <NewsContent stock_symb = { this.state.stock_symb }/>
-                            </Tab>
-                            <Tab eventKey="week" title="This Week">
-                                {tabContent}
-                            </Tab>
-                            <Tab eventKey="all" title="All">
-                                {tabContent}
-                            </Tab>
-
-                        </Tabs>
-
-                    </Col>
-
-
-
-                </Row>
-                <br></br>
-                <br></br>
-
-            </Aux>
+            </Container>
         );
     }
 }

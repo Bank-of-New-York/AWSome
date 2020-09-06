@@ -18,3 +18,7 @@
     text-align: left !important;
 
 }
+
+#dashboard-body {
+    margin-left: -20px !important;
+}

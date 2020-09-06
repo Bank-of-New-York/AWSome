@@ -18,3 +18,24 @@
     text-align: left !important;
 
 }
+
+.sidebar {
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    height: 100vh;
+    position: fixed;
+    padding: 30px;
+    margin:0;
+    top:0;
+    left:0;
+    z-index: 10000;
+    width: 17%;
+}
+
+.sidebar-title h5 {
+    font-weight: bold;
+}
+
+.sidebar-link {
+    text-decoration: underline;
+}

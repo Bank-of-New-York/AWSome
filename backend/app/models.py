@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from passlib.apps import custom_app_context as pwd_context
 
@@ -15,6 +15,17 @@ import time
 
 Base = declarative_base()
 
+class SportSpot(Base):
+
+    __tablename__ = 'spots'
+    
+    id = Column(Integer, primary_key=True)
+    title = Column(String(80))
+    address = Column(String(200))
+    author_id = Column(Integer, ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Spot %r>' % self.title
 
 class User(Base):
     
@@ -23,10 +34,19 @@ class User(Base):
     id = Column(Integer, primary_key = True)
     username = Column(String(32), index = True)
     password_hash = Column(String(128))
-    risk_level = Column(Integer, default=-1)
+
+    first_name = Column(String(32))
+    last_name = Column(String(32))
+    email_address = Column(String(64))
+    birthday = Column(String(32))
+    invested_before = Column(String(32))
+
+    risk_level = Column(String(32))
     retirement_amount = Column(Integer, default=-1)
+
     years_till_retire = Column(Integer, default=-1)
     expected_growth = Column(Float, default=-1)
+    initial_deposit = Column(Float, default=-1)
     monthly_deposit = Column(Float, default=-1)
 
     def hash_password(self, password):
@@ -38,11 +58,6 @@ class User(Base):
     def generate_auth_token(self, expiration = 60000):
         s = Serializer(SECRET_KEY, expires_in = expiration)
         return s.dumps({ 'id': self.id })
-
-    def update_questionnaire(self, data):
-        self.risk_level = data['risk_level']
-        self.retirement_amount = data['retirement_amount']
-        self.years_till_retire = data['years_till_retire']
 
     @staticmethod
     def verify_auth_token(token):
@@ -164,13 +179,9 @@ class SPFH(Base):
         return spfh
 
 
-if __name__ == "__main__":
-    from sqlalchemy import create_engine
-    from Config import DB_URI
-    engine = create_engine(DB_URI)
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
-
-
-
-
+# if __name__ == "__main__":
+#     from sqlalchemy import create_engine
+#     from Config import DB_URI
+#     engine = create_engine(DB_URI)
+#     Base.metadata.drop_all(engine)
+#     Base.metadata.create_all(engine)
