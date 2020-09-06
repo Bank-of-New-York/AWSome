@@ -20,7 +20,7 @@ export default class detailsForm extends Component {
             last_name : "",
             email : "",
             birthday: "",
-            invested: ""
+            invested: "no"
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -43,7 +43,7 @@ export default class detailsForm extends Component {
             method: "GET",
             headers: {
                 'Content-Type' : "application/json",
-                "Authorization": `Basic ${btoa(sessionStorage.getItem("token"))}`
+                "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
             }
         }).then((resp) => {
             return resp.json()
