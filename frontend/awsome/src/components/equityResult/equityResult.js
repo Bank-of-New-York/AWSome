@@ -11,9 +11,13 @@ import avatar2 from '../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../assets/images/user/avatar-3.jpg';
 import "bootstrap/dist/css/bootstrap.min.css"
 
+var risk = sessionStorage.getItem("risk_level")
+var bonds = sessionStorage.getItem("bonds%")
+var stocks = sessionStorage.getItem("stocks%")
+
 const datum = [
-    { key: "Bonds", y: 80, color: "#5CD4EF" },
-    { key: "Equities", y: 20, color: "#FFA861" },
+    { key: "Bonds", y: bonds, color: "#5CD4EF" },
+    { key: "Equities", y: stocks, color: "#FFA861" },
 ];
 
 function getDatum() {
@@ -108,7 +112,9 @@ export default class EquityResult extends Component {
     constructor(){
         super()
         this.state = {
-            risk_level : "#"
+            risk_level : "#",
+            years_till_retire : 0,
+            retirement_amount : 0
         }
     }
 
@@ -122,8 +128,15 @@ export default class EquityResult extends Component {
           }
         }).then(response => 
             response.json()
-        ).then(({ risk_level }) => {
-            this.setState({ risk_level: risk_level })
+        ).then((values) => {
+            var risk_level = values["risk_level"]
+            console.log(values)
+            this.setState({ 
+                risk_level: risk_level,
+                years_till_retire : values["years_till_retire"],
+                retirement_amount : values["retirement_amount"]
+             })
+
         }).catch(error => {
             console.log(error)
             alert("There has been a problem")
@@ -187,19 +200,20 @@ export default class EquityResult extends Component {
                                     <Row>
                                         <Col>
                                             <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                                <Form.Label>Principal Amount ($):</Form.Label>
-                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                            </Form.Group>
-                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
                                                 <Form.Label>Amount Needed ($):</Form.Label>
-                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange} value={this.state.retirement_amount}></Form.Control>
                                             </Form.Group>
                                             <Form.Group controlId="invested" style={{ display: "flex" }}>
                                                 <Form.Label>Years Before Retirement:</Form.Label>
-                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange} value={this.state.years_till_retire}></Form.Control>
                                             </Form.Group>
+                                            
                                         </Col>
                                         <Col>
+                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
+                                                <Form.Label>Principal Amount ($):</Form.Label>
+                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
+                                            </Form.Group>
                                             <Form.Group controlId="invested" style={{ display: "flex" }}>
                                                 <Form.Label>Expected Portfolio Return (%):</Form.Label>
                                                 <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
@@ -208,10 +222,7 @@ export default class EquityResult extends Component {
                                                 <Form.Label>Monthly Deposit Needed ($):</Form.Label>
                                                 <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
                                             </Form.Group>
-                                            <Form.Group controlId="invested" style={{ display: "flex" }}>
-                                                <Form.Label>Principal Amount ($):</Form.Label>
-                                                <Form.Control style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="text" onChange={this.handleInputChange}></Form.Control>
-                                            </Form.Group>
+                                       
                                         </Col>
                                     </Row>
 
@@ -248,7 +259,7 @@ export default class EquityResult extends Component {
                                 <br></br>
                                 <br></br>
 
-                                <Link to="/screener">
+                                <Link to="/retirementDashboard">
                                     <Button variant="primary" >Learn More</Button>
                                 </Link>
 
