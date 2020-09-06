@@ -62,7 +62,9 @@ class StockDashboard extends React.Component {
             start_date: "2020-06-10",
             end_date: "2020-08-10",
             stock_symb: "MSFT",
-            stock_prices: []
+            stock_prices: [],
+            yesterday_sentiment: 0,
+            days_before_sentiment: 0
         }
 
     }
@@ -82,12 +84,22 @@ class StockDashboard extends React.Component {
           })
         }).then(response => 
             response.json()
-        ).then(({ stock_prices }) => {
+        ).then(({ stock_prices, yesterday_sentiment, days_before_sentiment }) => {
+            console.log(yesterday_sentiment)
+            this.setState({
+                yesterday_sentiment: yesterday_sentiment,
+                days_before_sentiment: days_before_sentiment
+            })
             this.processStockPrices(stock_prices)
         }).catch(error => {
             console.log(error)
             alert("There has been a problem")
         })
+    }
+
+    getSentiment(){
+        return parseInt(this.state.yesterday_sentiment) / 100 + 0.5
+        // return 100 / 100 + 0.5
     }
 
     processStockPrices(prices0) {
@@ -229,7 +241,21 @@ class StockDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <h3>Bullish Indicator</h3>
-                                                        <GaugeChart textColor="black" id="bullish" />
+                                                        {
+                                                            this.state.yesterday_sentiment &&
+                                                            <GaugeChart 
+                                                                textColor="black" 
+                                                                id="bullish" 
+                                                                percent={ this.getSentiment() }
+                                                                formatTextValue={ value => {
+                                                                    if(value > 50){
+                                                                        return "+" + ( value - 50) + "%"
+                                                                    } else {
+                                                                        return "-" + ( value - 50) + "%"
+                                                                    }
+                                                                    
+                                                                }}/>
+                                                        }
                                                     </Col>
                                                 </Row>
                                                 <br></br>
