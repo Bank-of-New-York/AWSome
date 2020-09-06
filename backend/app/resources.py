@@ -9,6 +9,7 @@ from models import Base
 
 from YahooFinance import get_stock_hist_list
 from GeneralNews import get_news
+from SentimentIO import get_sentiments
 
 from db import session
 
@@ -89,7 +90,9 @@ def verify_password(username_or_token, password):
 
 
 stock_price_fields = {
-    'stock_prices': fields.List(fields.Nested({"x": fields.String, "y": fields.String}))
+    'stock_prices': fields.List(fields.Nested({"x": fields.String, "y": fields.String})),
+    'yesterday_sentiment': fields.Integer,
+    'days_before_sentiment': fields.Integer
 }
 parser.add_argument('stock_symb', type=str)
 parser.add_argument('start_date', type=str)
@@ -98,14 +101,18 @@ parser.add_argument('end_date', type=str)
 class StockTrend(Resource):
     @marshal_with(stock_price_fields)
     def post(self):
+
         print("Getting stock trends...")
         args = parser.parse_args()
         stock_symb, end_date, start_date = args['stock_symb'], args['end_date'], args['start_date']
         stock_history_values = get_stock_hist_list(stock_symb, end_date, start_date)
+
         if stock_history_values == []:
             abort(404, message="Check that stock symbol is correct or that dates are valid")
 
-        return { "stock_prices": stock_history_values }
+        yesterday_sentiment, days_before_sentiment = get_sentiments(stock_symb)
+
+        return { "stock_prices": stock_history_values, "yesterday_sentiment": yesterday_sentiment, "days_before_sentiment": days_before_sentiment }
 
 
 parser.add_argument('stock_symb', type=str)
