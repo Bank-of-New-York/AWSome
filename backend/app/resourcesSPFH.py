@@ -70,6 +70,7 @@ name_fields = {
 
 class MultipleSPFH(Resource):
 
+    @marshal_with(spfh_fields)
     def get(self):
         return session.query(SPFH).all()
 
