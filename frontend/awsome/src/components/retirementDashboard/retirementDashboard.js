@@ -14,6 +14,46 @@ import avatar3 from '../../assets/images/user/avatar-3.jpg';
 import "./retirementDashboard.css";
 import Sidebar from "../sidebar/sidebar";
 
+
+function getDatum() {
+    var sin = [],
+        sin2 = [],
+        cos = [];
+    for (var i = 0; i < 100; i++) {
+        sin.push({
+            x: i,
+            y: Math.sin(i / 10)
+        });
+        sin2.push({
+            x: i,
+            y: Math.sin(i / 10) * 0.25 + 0.5
+        });
+        cos.push({
+            x: i,
+            y: .5 * Math.cos(i / 10)
+        });
+    }
+    return [
+        {
+            values: sin,
+            key: 'Sine Wave',
+            color: '#A389D4'
+        },
+        {
+            values: cos,
+            key: 'Cosine Wave',
+            color: '#04a9f5'
+        },
+        {
+            values: sin2,
+            key: 'Another sine wave',
+            color: '#1de9b6',
+            area: true
+        }
+    ];
+}
+
+
 class RetirementDashboard extends React.Component {
 
     constructor() {

@@ -11,6 +11,8 @@ import avatar3 from '../../assets/images/user/avatar-3.jpg';
 
 import GaugeChart from "react-gauge-chart";
 
+import NewsContent from './NewsContent.js';
+
 import "./dashboard.css"
 import Sidebar from '../sidebar/sidebar';
 
@@ -66,25 +68,26 @@ class StockDashboard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("/api_stock_trends",
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': "application/json",
-                    "Authorization": `${sessionStorage.getItem("token")}`
-                },
-                body: JSON.stringify({
-                    start_date: this.state.start_date,
-                    end_date: this.state.end_date,
-                    stock_symb: this.state.stock_symb
-                })
-            }).then(response =>
-                response.json()
-            ).then(({ stock_prices }) => {
-                this.processStockPrices(stock_prices)
-            }).catch(error => {
-                alert("There has been a problem")
-            })
+        fetch("/api_stock_trends", 
+        {
+          method: 'POST',
+          headers: {
+              'Content-Type' : "application/json",
+              "Authorization": `${sessionStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            stock_symb: this.state.stock_symb
+          })
+        }).then(response => 
+            response.json()
+        ).then(({ stock_prices }) => {
+            this.processStockPrices(stock_prices)
+        }).catch(error => {
+            console.log(error)
+            alert("There has been a problem")
+        })
     }
 
     processStockPrices(prices0) {
