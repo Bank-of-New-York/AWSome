@@ -1,13 +1,9 @@
 import React from 'react';
-import { Row, Col, Card, Table, Tabs, Tab, Container } from 'react-bootstrap';
+import { Row, Col, Card, Table, Container, Tabs, Tab } from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
 import NVD3Chart from 'react-nvd3';
-
-import avatar1 from '../../assets/images/user/avatar-1.jpg';
-import avatar2 from '../../assets/images/user/avatar-2.jpg';
-import avatar3 from '../../assets/images/user/avatar-3.jpg';
 
 import GaugeChart from "react-gauge-chart";
 
@@ -59,18 +55,23 @@ class StockDashboard extends React.Component {
     constructor() {
         super();
         this.state = {
-            start_date: "2020-06-10",
-            end_date: "2020-08-10",
+            // start_date: "2020-06-10",
+            // end_date: "2020-08-10",
             stock_symb: "MSFT",
             stock_prices: [],
             yesterday_sentiment: 0,
-            days_before_sentiment: 0
+            days_before_sentiment: 0,
+            stock_data: null
         }
 
     }
 
 
     componentDidMount() {
+
+        const stock_data = JSON.parse(sessionStorage.getItem("stock_data"))
+        this.setState({ stock_data: stock_data, stock_symb: stock_data.name })
+
         fetch("/api_stock_trends", 
         {
           method: 'POST',
@@ -79,9 +80,7 @@ class StockDashboard extends React.Component {
               "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
           },
           body: JSON.stringify({
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            stock_symb: this.state.stock_symb
+            stock_symb: this.state.stock_data.name
           })
         }).then(response => {
             return response.json()
@@ -99,6 +98,8 @@ class StockDashboard extends React.Component {
             console.log(error)
             alert("There has been a problem")
         })
+
+
     }
 
 
@@ -180,7 +181,7 @@ class StockDashboard extends React.Component {
                                                         <br></br>
 
                                                         <h1>79</h1>
-                                                        <p>Stock Score</p>
+                                                        <a>Stock Score</a>
                                                     </Col>
                                                 </Row>
                                                 <br></br>
@@ -206,48 +207,191 @@ class StockDashboard extends React.Component {
                                 <Row>
                                     <Col sm={7}>
                                         <br></br>
-                                        <Card className='Recent-Users'>
-                                            <Card.Header>
-                                                <Card.Title as='h5'>Information</Card.Title>
-                                            </Card.Header>
-                                            <Card.Body className='px-0 py-2' style={{ overflowX: "scroll", width: "40vw" }}>
-                                                <Table responsive hover >
-                                                    <tbody >
-                                                        <tr className="unread">
-                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></td>
-                                                            <td>
-                                                                <h6 className="mb-1">Isabella Christensen</h6>
-                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                                            </td>
-                                                            <td>
-                                                                <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />11 MAY 12:56</h6>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="unread">
-                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar3} alt="activity-user" /></td>
-                                                            <td>
-                                                                <h6 className="mb-1">Karla Sorensen</h6>
-                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                                            </td>
-                                                            <td>
-                                                                <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />9 MAY 17:38</h6>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="unread">
-                                                            <td><img className="rounded-circle" style={{ width: '40px' }} src={avatar1} alt="activity-user" /></td>
-                                                            <td>
-                                                                <h6 className="mb-1">Ida Jorgensen</h6>
-                                                                <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                                            </td>
-                                                            <td>
-                                                                <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />19 MAY 12:56</h6>
-                                                            </td>
-                                                        </tr>
+                                        <Tabs defaultActiveKey="key_metrics" id="uncontrolled-tab-example" >
+                                            <Tab eventKey="key_metrics" title="Key Metrics" >
+                                            <Card className='Recent-Users' >
+                                                <Card.Body className='px-0 mx-0' fluid style={{ overflowY: "scroll", width: "40vw" }}>
+                                                    <Table responsive hover >
+                                                        <tbody >
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Market Cap</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.market_cap }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Total Asset</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.total_asset }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Debt</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.debt }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Gross Profit</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.gross_profit }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Beta</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.beta }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Revenue (3 yrs back)</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.revenue_3y_bk  }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Revenue (1 yr back)</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.revenue_1y_bk }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Revenue (1 yr forward)</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.revenue_1y_fd }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Current P/E</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.current_pe }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Estimated PEG</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.est_peg }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Dividend</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.dividend }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Average Volume</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.ave_vol }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">GPTA</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.gpta }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Avg Sales Growth</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.ave_sales_growth }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Debt to MCAP</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.debt_to_mcap }</h6>
+                                                                </td>
+                                                            </tr>
 
-                                                    </tbody>
-                                                </Table>
-                                            </Card.Body>
-                                        </Card>
+                                                        </tbody>
+                                                    </Table>
+                                                </Card.Body>
+                                            </Card>
+                                            </Tab>
+                                            <Tab eventKey="stock_score" title="Stock Score">
+                                                <Card className='Recent-Users'>
+                                                <Card.Body className='px-0 py-2' style={{ overflowY: "scroll", width: "40vw" }}>
+                                                    <Table responsive hover >
+                                                        <tbody >
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">GPTA Rank</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.gpta_rank }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Beta Rank</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{ this.state.stock_data.beta_rank }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Avg Sales Growth Rank</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{ this.state.stock_data.ave_sales_growth_rank }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Debt To Mcap</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.debt_to_mcap }</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="unread">
+                                                                <td>
+                                                                    <h6 className="mb-1">Final Score</h6>
+                                                                </td>
+                                                                <td>
+                                                        <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" /> { this.state.stock_data.final_score }</h6>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </Table>
+                                                </Card.Body>
+                                            </Card>
+                                            </Tab>
+                                        </Tabs>
+                                        
                                     </Col>
                                     <Col sm={5} >
                                         <br></br>

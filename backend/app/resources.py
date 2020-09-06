@@ -1,6 +1,8 @@
 from flask_restful import reqparse, abort, Resource, fields, marshal_with
 from flask import g, jsonify
 
+import datetime
+
 from sqlalchemy import create_engine
 from Config import DB_URI
 
@@ -95,8 +97,6 @@ stock_price_fields = {
     'days_before_sentiment': fields.Integer
 }
 parser.add_argument('stock_symb', type=str)
-parser.add_argument('start_date', type=str)
-parser.add_argument('end_date', type=str)
 
 class StockTrend(Resource):
     @auth.login_required
@@ -104,9 +104,17 @@ class StockTrend(Resource):
     def post(self):
 
         print("Getting stock trends...")
+
+        today = datetime.date.today()
+        yesterday = today - datetime.timedelta(days=1)
+        days_before = yesterday - datetime.timedelta(days=730)
+
+        yesterday_str = yesterday.strftime("%Y-%m-%d")
+        days_before_str = days_before.strftime("%Y-%m-%d")
+
         args = parser.parse_args()
-        stock_symb, end_date, start_date = args['stock_symb'], args['end_date'], args['start_date']
-        stock_history_values = get_stock_hist_list(stock_symb, end_date, start_date)
+        stock_symb = args['stock_symb']
+        stock_history_values = get_stock_hist_list(stock_symb, yesterday_str, days_before_str)
 
         if stock_history_values == []:
             abort(404, message="Check that stock symbol is correct or that dates are valid")
