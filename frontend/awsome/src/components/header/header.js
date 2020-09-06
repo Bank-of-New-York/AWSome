@@ -15,6 +15,7 @@ export default class Header extends Component {
                         <Nav.Link href="/home" to="/">Home</Nav.Link>
                         <Nav.Link href="/login" to="/login">Login</Nav.Link>
                         <Nav.Link href="/dashboard" to="/dashboard">Dashboard</Nav.Link>
+                        <Nav.Link href="/equityListing" to="/equityListing">Equities</Nav.Link>
                         <Nav.Link href="/logout" to="/logout">Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
