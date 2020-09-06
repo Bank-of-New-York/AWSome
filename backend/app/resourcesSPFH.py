@@ -34,7 +34,13 @@ spfh_fields = {
 
     'gpta': fields.Float,
     'ave_sales_growth': fields.Float,
-    'debt_to_mcap': fields.Float
+    'debt_to_mcap': fields.Float,
+
+    'gpta_rank': fields.Integer,
+    'beta_rank': fields.Integer,
+    'ave_sales_growth_rank': fields.Integer,
+    'debt_to_mcap': fields.Integer,
+    'final_score': fields.Float
 }
 
 message_field = {

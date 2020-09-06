@@ -4,7 +4,7 @@ from flask import g, jsonify
 from sqlalchemy import create_engine
 from Config import DB_URI
 
-from models import User
+from models import User, SPFH
 from models import Base
 
 from YahooFinance import get_stock_hist_list

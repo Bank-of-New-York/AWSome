@@ -63,8 +63,8 @@ def get_all_spfh(name_list, readd_list=[]):
     print(f"Rejected: {rej_list}")
     return added_list
     
-readd_list = [] # To be customised
-shorter_name_list = name_list[12:50]
+readd_list = [] #['HUM', 'GRMN', 'PG', 'ZTS', 'ODFL'] # To be customised
+shorter_name_list = name_list[1:50]
 # combined_name_list = rej_list + shorter_name_list
 print("Readding these:", readd_list)
 print("Adding these in progress:", shorter_name_list)

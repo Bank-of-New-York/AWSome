@@ -84,6 +84,13 @@ class SPFH(Base):
     ave_sales_growth = Column(Float)
     debt_to_mcap = Column(Float)
 
+    gpta_rank = Column(Integer)
+    beta_rank = Column(Integer)
+    ave_sales_growth_rank = Column(Integer)
+    debt_to_mcap = Column(Integer)
+
+    final_score = Column(Float)
+
     def set_id(self, name):
         self.bb_id = get_bb_id(name)
         self.yf_id = get_yf_id(name)
@@ -121,8 +128,9 @@ class SPFH(Base):
 
     def set_yf_metrics(self):
         analysis_dict = get_yf_analysis(self.yf_id)
-        time.sleep(1)
+        time.sleep(2)
         financial_dict = get_yf_financials(self.yf_id)
+        time.sleep(1)
         analysis_dict.update(financial_dict)
         yf_dict= analysis_dict.copy()
 
