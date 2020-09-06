@@ -38,7 +38,23 @@ class Login extends React.Component {
         }).then((response => {
             console.log(response.status)
             if (response.status == 200) {
-                this.props.history.push("/login")
+
+                fetch("/api_token", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : "application/json",
+                        "Authorization": `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
+                    }
+                }).then(response =>
+                    response.json()
+                ).then( data  => {
+                    sessionStorage.setItem("token", data.token)
+                }).catch(error => {
+                    console.log(error)
+                    alert("There has been a problem")
+                })
+
+                this.props.history.push("/signupLanding")
             } else {
                 alert("There has been a problem")
             }
