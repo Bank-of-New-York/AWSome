@@ -2,7 +2,7 @@ from flask_restful import reqparse, abort, Resource, fields, marshal_with
 
 from models import SPFH
 from db import session
-from sqlalchemy import func
+from sqlalchemy import func, or_, and_
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql import label
 import pandas as pd
@@ -12,7 +12,7 @@ parser = reqparse.RequestParser()
 
 parser.add_argument('name', type=str)
 parser.add_argument('id', type=int)
-parser.add_argument('names_list', type=list)
+parser.add_argument('names_sep_comma', type=str)
 
 spfh_fields = {
     'id': fields.Integer,
@@ -55,67 +55,73 @@ messages_field = {
 }
 
 add_multiple_spfh_fields = {
-    'name_rejects': fields.List(fields.String),
-    'n_added': fields.Integer
+    'rej_list': fields.List(fields.Nested({"name": fields.String, "error": fields.String})), 
+    'added_list': fields.List(fields.String)
 }
 
 row_fields = {
     'row': fields.Integer
 }
 
+name_fields = {
+    'name': fields.String
+}
+
 
 class MultipleSPFH(Resource):
 
-    @marshal_with(row_fields)
     def get(self):
-        row = session.query(SPFH.name).count()
-        return {'row': row}
+        return session.query(SPFH).all()
 
-    # @marshal_with(add_multiple_spfh_fields)
-    # def post(self):
-    #     args = parser.parse_args()
-    #     names_list = args['names_list']
+    @marshal_with(add_multiple_spfh_fields)
+    def post(self):
+        args = parser.parse_args()
+        names_sep_comma = args['names_sep_comma']
 
-    #     if names_list is None or names_list == []:
-    #         abort(400, message="names list is empty")
+        if names_sep_comma is None or names_sep_comma == '':
+            abort(400, message="names list is empty")
         
-    #     name_rejects = []
-    #     n_added = 0
+        name_list = [word.strip() for word in names_sep_comma.split(',')]
+        rej_list = []
+        added_list =[]
 
-    #     for name in names_list:
-    #         print(name)
-    #         continue
+        for name in name_list:
 
-    #         if name is None or name == '':
-    #             name_rejects.append(name)
-    #             continue
-    #         if session.query(SPFH).filter_by(name = name).first() is not None:
-    #             name_rejects.append(name)
-    #             continue
+            if name is None or name == '':
+                rej_list.append({"name": name,
+                                "error": "Invalid name"})
+                continue
+            if session.query(SPFH).filter_by(name = name).first() is not None:
+                rej_list.append({"name": name,
+                                "error": "Stock already exists"})
+                continue
 
-    #         # If no problem, add the s&p500 stock
-    #         spfh = SPFH.create(name)
+            # If no problem, add the s&p500 stock
+            spfh = SPFH.create(name)
+            if spfh == None:
+                rej_list.append({"name": name,
+                                "error": "Invalid ID"})
+                continue
 
-    #         if spfh == None:
-    #             name_rejects.append(name)
-    #             continue
+            session.add(spfh)
+            session.commit()
 
-    #         session.add(spfh)
-    #         session.commit()
+            reged_spfh = session.query(SPFH).filter(SPFH.name == name).first()
+            if not reged_spfh:
+                print("SPFH stock {} doesn't exist".format(name))
+                rej_list.append({"name": name,
+                                "error": "Not added successfully"})
+            else:
+                added_list.append(name)
+                
+            time.sleep(2)
 
-    #         # Check that successfully added
-    #         reged_spfh = session.query(SPFH).filter(SPFH.name == name).first()
-    #         if not reged_spfh:
-    #             name_rejects.append(name)
-    #         else:
-    #             n_added += 1
-
-    #     return {'name_rejects': name_rejects, 'n_added': n_added}
+        return {'rej_list': rej_list, 'added_list': added_list}
 
 
-    @marshal_with(message_field)
-    def delete(self):
-        return {"message": "are u sure? go uncomment"}
+    # @marshal_with(message_field)
+    # def delete(self):
+    #     return {"message": "are u sure? uncomment"}
         # try:
         #     num_rows_deleted = session.query(SPFH).delete()
         #     session.commit()
@@ -244,4 +250,5 @@ class OneSPFH(Resource):
             return {"message": "{} number of row(s) deleted.".format(num_rows_deleted)}
         except:
             session.rollback()
+
 
