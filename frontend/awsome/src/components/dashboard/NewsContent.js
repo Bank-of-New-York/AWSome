@@ -12,30 +12,83 @@ class NewsContent extends React.Component {
   constructor() {
       super();
       this.state = {
-          articles: []
+          // articles: []
+          articles : [
+            {
+              source: {
+                name: "Bloomberg?"
+              },
+              title: "This is title 1 It is very long, may take more than one line. ",
+              url: "1"
+            },
+            {
+              source: {
+                name: "Yahoo?"
+              },
+              title: "This is title 1 It is very long, may take more than one line. ",
+              url: "2"
+            },
+            {
+              source: {
+                name: "Bloomberg?"
+              },
+              title: "This is title 2. short.",
+              url: "3"
+            },
+            {
+              source: {
+                name: "Yahoo?"
+              },
+              title: "This is title 1 It is very long, may take more than one line. ",
+              url: "4"
+            },
+            {
+              source: {
+                name: "Yahoo?"
+              },
+              title: "This is title 2. short.",
+              url: "5"
+            },
+            {
+              source: {
+                name: "Bloomberg?"
+              },
+              title: "This is title 1 It is very long, may take more than one line. ",
+              url: "6"
+            },
+            {
+              source: {
+                name: "Bloomberg?"
+              },
+              title: "This is title 2. short.",
+              url: "7"
+            }
+          ]
       }
   }
 
-  componentDidMount() {
-    fetch("/api_general_news", 
-      {
-        method: 'POST',
-        headers: {
-            'Content-Type' : "application/json"
-        },
-        body: JSON.stringify({
-          stock_symb: "MSFT"
-        })
-      }).then(response => 
-          response.json()
-      ).then( data  => {
-          console.log(data)
-          this.setState({ articles: data.articles })
-      }).catch(error => {
-          console.log(error)
-          alert("There has been a problem")
-      })
-  }
+  // Cannot call too many times during development
+
+  // componentDidMount() {
+  //   fetch("/api_general_news", 
+  //     {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type' : "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         stock_symb: this.props.stock_symb
+  //       })
+  //     }).then(response => 
+  //         response.json()
+  //     ).then( data  => {
+  //         console.log(data)
+  //         this.setState({ articles: data.articles })
+  //     }).catch(error => {
+  //         console.log(error)
+  //         alert("There has been a problem")
+  //     })
+  // }
 
   render(){
     return(

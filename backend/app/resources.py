@@ -130,9 +130,13 @@ class Database(Resource):
             print(t.name)
 
         engine = create_engine(DB_URI)
-        Base.metadata.drop_all(bind=engine)
-        Base.metadata.create_all(bind=engine)
+        # Base.metadata.drop_all(bind=engine)
+        # Base.metadata.create_all(bind=engine)
 
+        DROP_TABLES = [User.__table__]
+        for table in DROP_TABLES:
+            table.drop(engine)
+        
         print("Resetted schemas..")
 
         return jsonify({ "status": "success" })
