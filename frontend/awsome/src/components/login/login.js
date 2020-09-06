@@ -29,7 +29,7 @@ class Login extends React.Component {
 
     handleSubmit = () => {
         fetch("/api_token", {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type' : "application/json",
                 "Authorization": `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
