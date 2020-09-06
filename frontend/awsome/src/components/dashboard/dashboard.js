@@ -61,7 +61,7 @@ class StockDashboard extends React.Component {
             stock_prices: [],
             yesterday_sentiment: 0,
             days_before_sentiment: 0,
-            stock_data: null
+            stock_data: []
         }
 
     }
@@ -71,33 +71,33 @@ class StockDashboard extends React.Component {
 
         const stock_data = JSON.parse(sessionStorage.getItem("stock_data"))
         this.setState({ stock_data: stock_data, stock_symb: stock_data.name })
+        console.log(stock_data)
+        // fetch("/api_stock_trends", 
+        // {
+        //   method: 'POST',
+        //   headers: {
+        //       'Content-Type' : "application/json",
+        //       "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+        //   },
+        //   body: JSON.stringify({
+        //     stock_symb: this.state.stock_data.name
+        //   })
+        // }).then(response => {
+        //     return response.json()
+        // }
 
-        fetch("/api_stock_trends", 
-        {
-          method: 'POST',
-          headers: {
-              'Content-Type' : "application/json",
-              "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
-          },
-          body: JSON.stringify({
-            stock_symb: this.state.stock_data.name
-          })
-        }).then(response => {
-            return response.json()
-        }
+        // ).then((stock_prices) => {
+        //     console.log(stock_prices)
+        //     this.processStockPrices(stock_prices["stock_prices"])
 
-        ).then((stock_prices) => {
-            console.log(stock_prices)
-            this.processStockPrices(stock_prices["stock_prices"])
-
-            this.setState({
-                yesterday_sentiment: stock_prices["yesterday_sentiment"],
-                days_before_sentiment: stock_prices["days_before_sentiment"]
-            })
-        }).catch(error => {
-            console.log(error)
-            alert("There has been a problem")
-        })
+        //     this.setState({
+        //         yesterday_sentiment: stock_prices["yesterday_sentiment"],
+        //         days_before_sentiment: stock_prices["days_before_sentiment"]
+        //     })
+        // }).catch(error => {
+        //     console.log(error)
+        //     alert("There has been a problem")
+        // })
 
 
     }
@@ -131,7 +131,7 @@ class StockDashboard extends React.Component {
                                 <Row>
                                     <Col xs={11}>
                                         <br></br>
-                                        <h1>Name of Stock</h1>
+                                        <h1>{this.state.stock_data.name}</h1>
                                         <br></br>
                                     </Col>
                                 </Row>

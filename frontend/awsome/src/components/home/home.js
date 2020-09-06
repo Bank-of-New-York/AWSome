@@ -8,15 +8,14 @@ import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./home.css"
 
+import image from "../../assets/images/5240.svg"
+
 export default class Home extends Component {
     render() {
         return (
             <Container>
                 <Row>
                     <Col>
-                        <br></br>
-                        <br></br>
-                        <br></br>
                         <br></br>
                         <br></br>
 
@@ -28,6 +27,9 @@ export default class Home extends Component {
                                 <Button variant="primary" >Get Started</Button>
                             </Link>
 
+                            <br></br>
+                            <br></br>
+                            <img src={image} width="500vw"></img>
                         </div>
                     </Col>
                 </Row>

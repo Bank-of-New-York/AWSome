@@ -77,6 +77,8 @@ class RetirementDashboard extends React.Component {
             monthly_depo: 0,
             years: 0,
             r: 0,
+            retire_age: 0,
+            amount_needed: 0,
             total: []
         }
 
@@ -107,6 +109,11 @@ class RetirementDashboard extends React.Component {
             return resp.json()
         }).then((values) => {
 
+            this.setState({
+                retire_age : values["years_till_retire"],
+                amount_needed : values["retirement_amount"]
+            })
+            
             console.log(values)
         })
     }
@@ -161,12 +168,12 @@ class RetirementDashboard extends React.Component {
                                             <Row style={{ width: "75vw", left: "-70px" }}>
                                                 <Col l={2}>
                                                     <h3>Retire By:</h3>
-                                                    <h3>62</h3>
+                                                    <h3>{this.state.retire_age}</h3>
                                                 </Col>
                                         
                                                 <Col l={3} style={{ left: "-70px" }}>
                                                     <h3>Amount Needed:</h3>
-                                                    <h3>$150,000</h3>
+                                                    <h3>${this.state.amount_needed}</h3>
                                                 </Col>
                                                 <Col l={6} style={{ left: "-70px", textAlign: "center" }} className="center">
                                                     <h5>Portfolio Composition</h5>
