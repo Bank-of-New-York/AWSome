@@ -18,7 +18,7 @@ export default class detailsForm extends Component {
         this.state = {
             first_name : "",
             last_name : "",
-            email : "",
+            email_address : "",
             birthday: "",
             invested: "no"
         }
@@ -30,7 +30,6 @@ export default class detailsForm extends Component {
         const target = event.target;
         var value = target.value;
         const name = target.name; 
-        console.log(name, value)
         
         this.setState({
             [name] : value
@@ -50,11 +49,18 @@ export default class detailsForm extends Component {
         }).then((values) => {
             console.log(values)
             Object.keys(values).forEach(k => {
-                if (values[k] !== null) {
-                    this.setState({
-                        k : values[k]
-                    })
-                }
+                Object.keys(this.state).forEach(i => {
+                    if (values[k] !== undefined) {
+
+                        if (k == "birthday") {
+                            values[k] = new Date(values[k])
+                        }
+
+                        this.setState({
+                            [k] : values[k]
+                        })
+                    }
+                })
             });
         })
     }
@@ -62,17 +68,9 @@ export default class detailsForm extends Component {
 
     handleSubmit =(e) => {
         // e.preventDefault()
-        console.log({
-            first_name : this.state.first_name,
-            last_name : this.state.last_name,
-            email : this.state.email,
-            birthday: this.state.birthday,
-            invested: this.state.invested
-        })
-
         if(this.state.first_name && 
             this.state.last_name && 
-            this.state.email && 
+            this.state.email_address && 
             this.state.birthday
         ){
             fetch("/api_update_user", {
@@ -84,13 +82,13 @@ export default class detailsForm extends Component {
                 body: JSON.stringify({
                     first_name : this.state.first_name,
                     last_name : this.state.last_name,
-                    email : this.state.email,
+                    email_address : this.state.email_address,
                     birthday: this.state.birthday,
                     invested_before: this.state.invested
                 })
             }).then((resp) => {
-                console.log(resp)
-                window.location.href="/riskAssessment"
+                console.log(resp.json())
+                window.location.href="/retirementForm"
             }).catch(err =>{
                 console.log(err)
                 alert("There is a problem with submission")
@@ -128,13 +126,13 @@ export default class detailsForm extends Component {
                                     <Col>
                                         <Form.Group controlId="first_name">
                                             <Form.Label>What's your first name?</Form.Label>
-                                            <Form.Control name="first_name" type="text" placeholder="First Name" onChange={this.handleInputChange}></Form.Control>
+                                            <Form.Control name="first_name" type="text" placeholder="First Name" value={this.state.first_name} onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group controlId="last_name">
                                             <Form.Label>What's your last name?</Form.Label>
-                                            <Form.Control name="last_name" type="text" placeholder="Last Name" onChange={this.handleInputChange}></Form.Control>
+                                            <Form.Control name="last_name" type="text" placeholder="Last Name" value={this.state.last_name} onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -145,7 +143,7 @@ export default class detailsForm extends Component {
                                     <Col xs={7}>
                                         <Form.Group controlId="email">
                                             <Form.Label>What's your email?</Form.Label>
-                                            <Form.Control name="email" type="email" placeholder="Email" onChange={this.handleInputChange}></Form.Control>
+                                            <Form.Control name="email_address" type="email" placeholder="Email" value={this.state.email_address} onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col xs={5}>
@@ -163,7 +161,7 @@ export default class detailsForm extends Component {
                                     <Col xs={6}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>Have you invested before?</Form.Label>
-                                            <Form.Control as="select" name="invested" custom onChange={this.handleInputChange}>
+                                            <Form.Control as="select" name="invested" custom onChange={this.handleInputChange} value={this.state.invested}>
                                                 <option>No</option>
                                                 <option>Yes</option>
                                             </Form.Control>

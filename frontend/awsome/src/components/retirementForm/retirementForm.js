@@ -94,6 +94,9 @@ export default class RetirementForm extends Component {
 
 
         this.state = {
+            birthday: 0,
+            years_till_retire: 0,
+            retirement_age: 0,
             retirement_amount: 0,
             btoroom: "$150,000",
             resaleroom: "$350,000",
@@ -148,11 +151,35 @@ export default class RetirementForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    componentDidMount() {
+        fetch("/api_update_user", 
+        {
+          method: 'GET',
+          headers: {
+              'Content-Type' : "application/json",
+              "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+          }
+        }).then(response => 
+            response.json()
+        ).then((values) => {
+            console.log(values)
+
+            this.setState({
+                birthday : values["birthday"]
+            })
+            
+        }).catch(error => {
+            console.log(error)
+            alert("There has been a problem")
+        })
+    }
+
 
     handleSubmit = (event) => {
 
+
         let risk_level = sessionStorage.getItem("risk_level")
-        if(this.state.retirement_amount){
+        if(this.state.retirement_amount && this.state.years_till_retire){
             fetch("/api_update_user", {
                 method: "POST",
                 headers: {
@@ -161,11 +188,11 @@ export default class RetirementForm extends Component {
                 },
                 body: JSON.stringify({
                     retirement_amount: this.state.retirement_amount,
-                    risk_level: risk_level
+                    years_till_retire: this.state.years_till_retire,
                 })
             }).then((resp) => {
                 console.log(resp)
-                window.location.href="/equityResult"
+                window.location.href="/riskAssessment"
             }).catch(err =>{
                 console.log(err)
                 alert("There is a problem with submission")
@@ -200,7 +227,6 @@ export default class RetirementForm extends Component {
         if (name == "children") {
             document.querySelector("#children").innerHTML = "$" + (value * 400000).toLocaleString();
         }
-
         this.setState({
             [name] : value
         })
@@ -305,7 +331,6 @@ export default class RetirementForm extends Component {
         var total = 0
         var all = this.state.selected1.concat(this.state.selected2, this.state.selected3, this.state.selected4);
         all.forEach(item => {
-            console.log(item, typeof item["content"])
             if (typeof item["content"] == "string") {
                 total += parseInt(item["content"].replace(',', "").split(" ")[1].substr(1))
             } else {
@@ -323,8 +348,11 @@ export default class RetirementForm extends Component {
             
 
         });
-        console.log("total", total)
-        console.log(document.querySelector("#totalneeded").innerHTML)
+
+        var today = new Date().getFullYear()
+        var birthday = new Date(this.state.birthday).getFullYear()
+        this.setState({ years_till_retire : this.state.retirement_age - (today - birthday) })
+
         document.querySelector("#totalneeded").innerHTML = "$" + (total).toLocaleString()
         this.setState({ retirement_amount: total })
 
@@ -335,7 +363,6 @@ export default class RetirementForm extends Component {
 
     render() {
 
-        console.log(this.state.btoroom)
         return (
             <Container fluid>
 
@@ -359,7 +386,7 @@ export default class RetirementForm extends Component {
                                     <Col>
                                         <Form.Group controlId="first_name">
                                             <Form.Label>When do you plan to retire? </Form.Label>
-                                            <Form.Control type="number" placeholder="62"></Form.Control>
+                                            <Form.Control type="number" placeholder="62" name="retirement_age" onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col xs={3}>
@@ -538,9 +565,7 @@ export default class RetirementForm extends Component {
                                 <br></br><br></br>
 
                                 
-                                {/* <Link to="/equityResult"> */}
                                 <Button id="submit" variant="primary" onClick={this.handleSubmit}>Next</Button>
-                                {/* </Link> */}
                                 
                             </Form>
                         </div>
