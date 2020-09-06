@@ -73,7 +73,7 @@ class StockDashboard extends React.Component {
           method: 'POST',
           headers: {
               'Content-Type' : "application/json",
-              "Authorization": `${sessionStorage.getItem("token")}`
+              "Authorization": `Basic ${btoa(sessionStorage.getItem("token"))}`
           },
           body: JSON.stringify({
             start_date: this.state.start_date,

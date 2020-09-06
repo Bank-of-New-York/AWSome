@@ -1,0 +1,5 @@
+app/sp500.xlsx
+app/data/
+app/.vscode/
+app/__pycache__/
+venv/

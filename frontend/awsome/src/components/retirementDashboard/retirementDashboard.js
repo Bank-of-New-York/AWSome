@@ -5,8 +5,8 @@ import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
 import NVD3Chart from 'react-nvd3';
 
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+// import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+// import 'react-pro-sidebar/dist/css/styles.css';
 import avatar1 from '../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../assets/images/user/avatar-3.jpg';
