@@ -2,6 +2,9 @@ from flask_restful import reqparse, abort, Resource, fields, marshal_with
 
 from models import SPFH
 from db import session
+from sqlalchemy import func
+from sqlalchemy.orm import aliased
+from sqlalchemy.sql import label
 import pandas as pd
 import time
 
@@ -47,13 +50,27 @@ message_field = {
     "message": fields.String
 }
 
+messages_field = {
+    "message": fields.List(fields.String)
+}
+
 add_multiple_spfh_fields = {
     'name_rejects': fields.List(fields.String),
     'n_added': fields.Integer
 }
 
+row_fields = {
+    'row': fields.Integer
+}
+
 
 class MultipleSPFH(Resource):
+
+    @marshal_with(row_fields)
+    def get(self):
+        row = session.query(SPFH.name).count()
+        return {'row': row}
+
     # @marshal_with(add_multiple_spfh_fields)
     # def post(self):
     #     args = parser.parse_args()
@@ -98,12 +115,77 @@ class MultipleSPFH(Resource):
 
     @marshal_with(message_field)
     def delete(self):
-        try:
-            num_rows_deleted = session.query(SPFH).delete()
-            session.commit()
-            return {"message": "{} number of row(s) deleted.".format(num_rows_deleted)}
-        except:
-            session.rollback()
+        return {"message": "are u sure? go uncomment"}
+        # try:
+        #     num_rows_deleted = session.query(SPFH).delete()
+        #     session.commit()
+        #     return {"message": "{} number of row(s) deleted.".format(num_rows_deleted)}
+        # except:
+        #     session.rollback()
+
+class RankSPFH(Resource):
+
+    @marshal_with(messages_field)
+    def post(self):
+        '''
+        Ranks the 4 metrics GPTA, Ave Sales Growth, Beta, and Debt to MCAP in respective attributes
+        '''
+        spfh1 = aliased(SPFH)
+        subq = session.query(func.count(spfh1.gpta)).filter(spfh1.gpta > SPFH.gpta).as_scalar()
+        session.query(SPFH).update({"gpta_rank": subq + 1}, synchronize_session=False)
+
+        subq = session.query(func.count(spfh1.ave_sales_growth)).filter(spfh1.ave_sales_growth > SPFH.ave_sales_growth).as_scalar()
+        session.query(SPFH).update({"ave_sales_growth_rank": subq + 1}, synchronize_session=False)
+        
+        subq = session.query(func.count(spfh1.beta)).filter(spfh1.beta > SPFH.beta).as_scalar()
+        session.query(SPFH).update({"beta_rank": subq + 1}, synchronize_session=False)
+        
+        subq = session.query(func.count(spfh1.name)).filter(spfh1.debt/spfh1.market_cap > SPFH.debt/SPFH.market_cap).as_scalar()
+        session.query(SPFH).update({"debt_to_mcap": subq + 1}, synchronize_session=False)
+        session.commit()
+
+        first_gpta_spfh = session.query(SPFH).filter(SPFH.gpta_rank == 1).first()
+        first_growth_spfh = session.query(SPFH).filter(SPFH.ave_sales_growth_rank == 1).first()
+        first_beta_spfh = session.query(SPFH).filter(SPFH.beta_rank == 1).first()
+        first_debt_to_mcap_spfh = session.query(SPFH).filter(SPFH.debt_to_mcap == 1).first()
+        
+        return_dict = {"message": []}
+        if not first_gpta_spfh:
+            return_dict['message'].append("GPTA does not have rank 1")
+        
+        if not first_growth_spfh:
+            return_dict['message'].append("Ave Growth Rate does not have rank 1")
+        
+        if not first_beta_spfh:
+            return_dict['message'].append("Beta does not have rank 1")
+
+        if not first_debt_to_mcap_spfh:
+            return_dict['message'].append("Debt to MCAP does not have rank 1")
+            
+        return return_dict
+
+    def get(self):
+        '''
+        Calculates the final score of each stock according to the rank for 4 metrics,
+        each metrics is given a maximum score of 25
+        '''
+        n_rows = session.query(SPFH.name).count()
+        divide_rank_by = n_rows / 25
+
+        session.query(SPFH).update({"final_score": (n_rows + 1 - SPFH.gpta_rank) / divide_rank_by +
+                                (n_rows + 1 - SPFH.ave_sales_growth_rank) / divide_rank_by +
+                                (n_rows + 1 - SPFH.beta_rank) / divide_rank_by +
+                                (n_rows + 1 - SPFH.debt_to_mcap) / divide_rank_by}, synchronize_session=False)
+        session.commit()
+
+        final_spfh = session.query(SPFH).filter(SPFH.final_score >= 0).first()
+        
+        return_dict = {"message": []}
+        if not final_spfh:
+            return_dict['message'].append("Final Score not added")
+
+        return return_dict
+
 
 class OneSPFH(Resource):
     @marshal_with(spfh_fields)

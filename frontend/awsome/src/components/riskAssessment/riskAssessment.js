@@ -15,11 +15,11 @@ export default class RiskAssessment extends Component {
     constructor() {
         super();
         this.state = {
-            longterm: "A",
-            fluctuate: "A",
-            loss: "A",
-            protect: "A",
-            retire: "A"
+            longterm: "#",
+            fluctuate: "#",
+            loss: "#",
+            protect: "#",
+            retire: "#"
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -38,27 +38,36 @@ export default class RiskAssessment extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault()
-        var score = 0
+        let score = 0
 
-
+        var filled = true
         Object.keys(this.state).forEach(res => {
-            var answer = this.state[res]
+            let answer = this.state[res]
+            
 
-            if (answer == "A") {
+            if (answer === "A") {
                 score += 1
-            } else if (answer == "B") {
+            } else if (answer === "B") {
                 score += 3
-            } else if (answer == "C") {
+            } else if (answer === "C") {
                 score += 5
-            } else if (answer == "D") {
+            } else if (answer === "D") {
                 score += 7
+            } else if (answer === "#") {
+                score = 0
+                filled = false
             }
-
             
         });
 
-        sessionStorage.setItem("riskScore", score)
-        window.location.href="/retirementForm"
+        if(filled){
+            sessionStorage.setItem("riskScore", score)
+            window.location.href="/retirementForm"
+        } else {
+            filled = true
+            alert("Please fill all values")
+        }
+        
         
     }
 

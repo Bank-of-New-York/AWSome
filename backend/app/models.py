@@ -144,6 +144,7 @@ class SPFH(Base):
 
 
     def set_yf_metrics(self):
+        time.sleep(2)
         analysis_dict = get_yf_analysis(self.yf_id)
         time.sleep(2)
         financial_dict = get_yf_financials(self.yf_id)
@@ -162,7 +163,7 @@ class SPFH(Base):
         if self.gross_profit != None and self.total_asset != None:
             self.gpta = round(self.gross_profit / self.total_asset, 6)
 
-        if self.revenue_1y_bk != None and self.revenue_3y_bk != None and self.revenue_1y_fd != None:
+        if self.revenue_1y_bk != None and self.revenue_3y_bk != None and self.revenue_1y_fd != None and self.revenue_3y_bk != 0 and self.revenue_1y_bk != 0:
             prev_growth_r = ( (self.revenue_1y_bk / self.revenue_3y_bk) ** 0.5 ) - 1
             future_growth_r = ( (self.revenue_1y_fd / self.revenue_1y_bk) ** 0.5 ) - 1
             self.ave_sales_growth = round( (prev_growth_r + future_growth_r) / 2, 6)

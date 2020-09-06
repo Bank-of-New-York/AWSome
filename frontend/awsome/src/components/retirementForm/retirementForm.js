@@ -94,6 +94,7 @@ export default class RetirementForm extends Component {
 
 
         this.state = {
+            retirement_amount: 0,
             btoroom: "$150,000",
             resaleroom: "$350,000",
             condoroom: "$640,000",
@@ -145,6 +146,30 @@ export default class RetirementForm extends Component {
             selected5: [],
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+
+    handleSubmit = (event) => {
+        if(this.state.retirement_amount){
+            fetch("/api_update_user", {
+                method: "POST",
+                headers: {
+                    'Content-Type' : "application/json",
+                    "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+                },
+                body: JSON.stringify({
+                    retirement_amount: this.state.retirement_amount
+                })
+            }).then((resp) => {
+                console.log(resp)
+                window.location.href="/equityResult"
+            }).catch(err =>{
+                console.log(err)
+                alert("There is a problem with submission")
+            })
+        } else {
+            alert('Please fill in all details')
+        }
     }
 
 
@@ -298,6 +323,7 @@ export default class RetirementForm extends Component {
         console.log("total", total)
         console.log(document.querySelector("#totalneeded").innerHTML)
         document.querySelector("#totalneeded").innerHTML = "$" + (total).toLocaleString()
+        this.setState({ retirement_amount: total })
 
     }
 
@@ -509,9 +535,9 @@ export default class RetirementForm extends Component {
                                 <br></br><br></br>
 
                                 
-                                <Link to="/equityResult">
-                                    <Button id="submit" variant="primary" type="submit">Next</Button>
-                                </Link>
+                                {/* <Link to="/equityResult"> */}
+                                <Button id="submit" variant="primary" onClick={this.handleSubmit}>Next</Button>
+                                {/* </Link> */}
                                 
                             </Form>
                         </div>

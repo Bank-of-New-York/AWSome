@@ -59,8 +59,14 @@ class UpdateUser(Resource):
         print("Updating User...")
         user = g.user
 
-        args = parser.parse_args()
-        print(dict(args))
+        args = dict(parser.parse_args())
+
+        non_null_args = {}
+        for key, value in args.items():
+            if value:
+                non_null_args[key] = args[key]
+
+        print(non_null_args)
 
         session.query(User)\
             .filter(User.id == user.id)\

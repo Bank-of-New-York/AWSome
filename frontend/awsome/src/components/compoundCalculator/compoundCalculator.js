@@ -51,8 +51,8 @@ class CompoundCalculator extends React.Component {
         e.preventDefault()
         console.log(compound)
 
-        this.setState({total: compound})
-
+        this.setState({ total: compound })
+        
         
     }
 
@@ -72,7 +72,7 @@ class CompoundCalculator extends React.Component {
                                     <Row>
                                         <Col>
                                             <Form.Group controlId="first_depo">
-                                                <Form.Label>First Deposit:</Form.Label>
+                                                <Form.Label>Initial Deposit:</Form.Label>
                                                 <Form.Control type="number" onChange={this.handleInputChange} name="first_depo"></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -96,7 +96,7 @@ class CompoundCalculator extends React.Component {
                                     <Row>
                                         <Col>
                                             <Form.Group controlId="r">
-                                                <Form.Label>r:</Form.Label>
+                                                <Form.Label>CAGR: (%)</Form.Label>
                                                 <Form.Control type="number" onChange={this.handleInputChange} name="r"></Form.Control>
                                             </Form.Group>
                                         </Col>
