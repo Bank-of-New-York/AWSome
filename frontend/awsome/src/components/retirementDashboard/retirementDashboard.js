@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Table, Tabs, Tab, Form, Container,Button, Collapse } from 'react-bootstrap';
+import { Row, Col, Card, Table, Tabs, Tab, Form, Container,Button, Collapse, Popover, OverlayTrigger } from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
@@ -12,10 +12,6 @@ import avatar3 from '../../assets/images/user/avatar-3.jpg';
 import "./retirementDashboard.css";
 import Sidebar from "../sidebar/sidebar";
 
-const datum = [
-    { key: "Bonds", y: 80, color: "#5CD4EF" },
-    { key: "Equities", y: 20, color: "#FFA861" },
-];
 
 // function calc_chance_r(chance, yrs, bond_ratio, equity_ratio) {
 //     var EQUITY_CAGR = 0.0724259;
@@ -110,6 +106,7 @@ class RetirementDashboard extends React.Component {
         }).then((values) => {
 
             this.setState({
+                be_ratio : values["be_ratio"],
                 retire_age : values["years_till_retire"],
                 amount_needed : values["retirement_amount"]
             })
@@ -143,6 +140,11 @@ class RetirementDashboard extends React.Component {
     }
 
     render() {
+
+        const datum = [
+            { key: "Bonds", y: this.state.be_ratio * 100, color: "#5CD4EF" },
+            { key: "Equities", y: 100 - this.state.be_ratio * 100, color: "#FFA861" },
+        ];
 
         return (
             <Aux >
@@ -191,6 +193,16 @@ class RetirementDashboard extends React.Component {
                             <Row>
                                 <Col sm={5} >
                                     <br></br>
+                                    <OverlayTrigger 
+                                        placement="right" 
+                                        overlay={
+                                            <Popover id={"stockscore"}>
+                                                <Popover.Title as="h3"><strong>Compounding Calculator</strong></Popover.Title>
+                                                <Popover.Content>
+                                                    Investments can help us grow our money, especially over the long term. To figure out how much growth you could potentially see based on your recommended investment portfolio, enter how much you'd like to invest and for how long.
+                                                </Popover.Content> 
+                                            </Popover>
+                                        }>
                                     <Card className='Recent-Users' style={{ height: "90vh", top: "-20px" }}>
                                         <Card.Header>
                                             <Card.Title as='h5'>Compounding Calculator</Card.Title>
@@ -229,6 +241,7 @@ class RetirementDashboard extends React.Component {
                                                         <Form.Group controlId="r">
                                                             <Form.Label>Compound Annual Growth Rate (%)</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="r"></Form.Control>
+                                                            <Form.Text className="text-muted text-left">Calculated based on your recommended investment portfolio</Form.Text>
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
@@ -245,7 +258,8 @@ class RetirementDashboard extends React.Component {
                                             <br></br>
                                         </Card.Body>
                                     </Card>
-
+                                    
+                                    </OverlayTrigger>
 
                                 </Col>
 
