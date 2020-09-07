@@ -144,10 +144,10 @@ class RankSPFH(Resource):
         subq = session.query(func.count(spfh1.ave_sales_growth)).filter(spfh1.ave_sales_growth > SPFH.ave_sales_growth).as_scalar()
         session.query(SPFH).update({"ave_sales_growth_rank": subq + 1}, synchronize_session=False)
         
-        subq = session.query(func.count(spfh1.beta)).filter(spfh1.beta > SPFH.beta).as_scalar()
+        subq = session.query(func.count(spfh1.beta)).filter(spfh1.beta < SPFH.beta).as_scalar()
         session.query(SPFH).update({"beta_rank": subq + 1}, synchronize_session=False)
         
-        subq = session.query(func.count(spfh1.name)).filter(spfh1.debt/spfh1.market_cap > SPFH.debt/SPFH.market_cap).as_scalar()
+        subq = session.query(func.count(spfh1.name)).filter(spfh1.debt/spfh1.market_cap < SPFH.debt/SPFH.market_cap).as_scalar()
         session.query(SPFH).update({"debt_to_mcap": subq + 1}, synchronize_session=False)
         session.commit()
 
