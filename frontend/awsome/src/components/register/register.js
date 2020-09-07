@@ -73,7 +73,7 @@ class Login extends React.Component {
                             <span className="r s"/>
                             <span className="r"/>
                         </div>
-                        <div className="card" style={{height: "80vh"}}>
+                        <div className="card">
                             <div className="card-body text-center">
                                 <div className="mb-4">
                                     <i className="feather icon-unlock auth-icon"/>

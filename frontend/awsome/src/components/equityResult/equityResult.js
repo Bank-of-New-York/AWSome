@@ -179,7 +179,27 @@ export default class EquityResult extends Component {
                 alert("There has been a problem")
             })
     }
-    
+
+    handleClick = () => {
+        fetch("/api_update_user", {
+            method: "POST",
+            headers: {
+                'Content-Type' : "application/json",
+                "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
+            },
+            body: JSON.stringify({
+                initial_deposit: this.state.principal,
+                monthly_deposit: this.state.monthly
+            })
+        }).then((resp) => {
+            console.log(resp.json())
+            window.location.href="/retirementDashboard"
+        }).catch(err =>{
+            console.log(err)
+            alert("There is a problem with submission")
+        })
+    }
+
 
     render() {
 
@@ -264,7 +284,7 @@ export default class EquityResult extends Component {
                                                 <br></br>
                                                 <Form.Group controlId="invested" style={{ display: "flex" }}>
                                                     <Form.Label>Monthly Deposit Needed ($):</Form.Label>
-                                                    <Form.Control name="monthly" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.monthly}></Form.Control>
+                                                    <Form.Control disabled name="monthly" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.monthly}></Form.Control>
                                                 </Form.Group>
                                                 <br></br>
                                                 <Button variant="primary" onClick={() => { var value = calc_monthly_savings(this.state.expected / 100, this.state.retirement_amount, this.state.principal, this.state.years_till_retire); console.log(value); this.setState({monthly: value})}}>Calculate</Button>
@@ -306,9 +326,9 @@ export default class EquityResult extends Component {
                                     <br></br>
                                     <br></br>
 
-                                    <Link to="/retirementDashboard">
-                                        <Button variant="primary" >Learn More</Button>
-                                    </Link>
+
+                                    <Button variant="primary" onClick={this.handleClick} >Next</Button>
+    
 
                                 </div>
                             </Col>

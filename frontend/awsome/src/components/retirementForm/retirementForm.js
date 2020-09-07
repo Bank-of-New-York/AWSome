@@ -370,6 +370,9 @@ export default class RetirementForm extends Component {
                     <Col xl={10}>
                         <br></br>
                         <h1 className="retire-title">Planning Your Future</h1>
+                        <h4>To understand how you should invest now, it's important to understand where you're going in the future! 
+                         Try out our future planner to calculate how much you'd need to achieve certain life milestones.</h4>
+                        <h5>Note: The values below are calculated based on averages from Singapore-based Data</h5>
                     </Col>
 
                 </Row>

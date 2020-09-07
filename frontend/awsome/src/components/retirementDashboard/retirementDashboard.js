@@ -70,6 +70,26 @@ function calc_implied_return(bond_ratio, equity_ratio) {
     return bond_ratio * BOND_CAGR + equity_ratio * EQUITY_CAGR;
 }
 
+function handleCalculation (r, years, first_depo, monthly_depo) {
+    let monthly_r = r / 100 / 12;
+    let compound = [{ "x": 0, "y": first_depo }]
+
+    for (let yr = 1; yr <= years; yr++) {
+        let multiplier = Math.pow(1 + monthly_r, 12 * yr);
+        let compound_principal = first_depo * multiplier;
+        let compound_monthly = monthly_depo * (multiplier - 1) / monthly_r;
+        compound.push({
+            'x': yr,
+            'y': parseFloat(compound_principal + compound_monthly),
+            "series": 0
+        });
+    }
+
+    console.log("help", compound)
+
+    return compound
+}
+
 class RetirementDashboard extends React.Component {
 
     constructor() {
@@ -101,6 +121,9 @@ class RetirementDashboard extends React.Component {
 
     
     componentDidMount() {
+
+   
+
         fetch("/api_update_user", {
             method: "GET",
             headers: {
@@ -111,33 +134,30 @@ class RetirementDashboard extends React.Component {
             return resp.json()
         }).then((values) => {
 
+            var compound = handleCalculation((calc_implied_return(values["be_ratio"], 1-values["be_ratio"]) * 100).toFixed(2), values["years_till_retire"], values["initial_deposit"], values["monthly_deposit"])
+            this.setState({ total: [{ values: compound, key: "Growth ($)", color: "#A389D4" }] })
+
+
             this.setState({
                 be_ratio : values["be_ratio"],
                 retire_age : values["years_till_retire"],
                 amount_needed : values["retirement_amount"],
+                first_depo : values["initial_deposit"],
+                monthly_depo : values["monthly_deposit"],
                 r : (calc_implied_return(values["be_ratio"], 1-values["be_ratio"]) * 100).toFixed(2)
             })
             
             console.log(values)
         })
+
+        
     }
+
+    
 
     handleSubmit = (e) => {
 
-        let monthly_r = this.state.r / 100 / 12;
-        let compound = [{ "x": 0, "y": this.state.first_depo }]
-
-        for (let yr = 1; yr <= this.state.years; yr++) {
-            let multiplier = Math.pow(1 + monthly_r, 12 * yr);
-            let compound_principal = this.state.first_depo * multiplier;
-            let compound_monthly = this.state.monthly_depo * (multiplier - 1) / monthly_r;
-            console.log(monthly_r, multiplier, compound_principal, compound_monthly)
-            compound.push({
-                'x': yr,
-                'y': parseFloat(compound_principal + compound_monthly),
-                "series": 0
-            });
-        }
+        var compound = this.handleCalculation(this.state.r, this.state.years, this.state.first_depo, this.state.monthly_depo)
 
         e.preventDefault()
         this.setState({ total: [{ values: compound, key: "compound", color: "#A389D4" }] })
@@ -222,7 +242,7 @@ class RetirementDashboard extends React.Component {
                                                     <Col>
                                                         <Form.Group controlId="first_depo">
                                                             <Form.Label>First Deposit ($)</Form.Label>
-                                                            <Form.Control type="number" onChange={this.handleInputChange} name="first_depo"></Form.Control>
+                                                            <Form.Control type="number" onChange={this.handleInputChange} name="first_depo" value={this.state.first_depo}></Form.Control>
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
@@ -231,7 +251,7 @@ class RetirementDashboard extends React.Component {
                                                     <Col>
                                                         <Form.Group controlId="monthly_depo">
                                                             <Form.Label>Monthly Deposit ($)</Form.Label>
-                                                            <Form.Control type="number" onChange={this.handleInputChange} name="monthly_depo"></Form.Control>
+                                                            <Form.Control type="number" onChange={this.handleInputChange} name="monthly_depo" value={this.state.monthly_depo}></Form.Control>
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
@@ -240,7 +260,7 @@ class RetirementDashboard extends React.Component {
                                                     <Col>
                                                         <Form.Group controlId="year">
                                                             <Form.Label>No. Years</Form.Label>
-                                                            <Form.Control type="number" onChange={this.handleInputChange} name="years"></Form.Control>
+                                                            <Form.Control type="number" onChange={this.handleInputChange} name="years" value={this.state.retire_age}></Form.Control>
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
