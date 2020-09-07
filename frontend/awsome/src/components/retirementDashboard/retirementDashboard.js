@@ -120,7 +120,7 @@ class RetirementDashboard extends React.Component {
 
     handleSubmit = (e) => {
 
-        let monthly_r = this.state.r / 12;
+        let monthly_r = this.state.r / 100 / 12;
         let compound = [{ "x": 0, "y": this.state.first_depo }]
 
         for (let yr = 1; yr <= this.state.years; yr++) {
@@ -134,8 +134,6 @@ class RetirementDashboard extends React.Component {
                 "series": 0
             });
         }
-
-
 
         e.preventDefault()
         this.setState({ total: [{ values: compound, key: "compound", color: "#A389D4" }] })
@@ -202,7 +200,7 @@ class RetirementDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="first_depo">
-                                                            <Form.Label>First Deposit:</Form.Label>
+                                                            <Form.Label>First Deposit ($)</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="first_depo"></Form.Control>
                                                         </Form.Group>
                                                     </Col>
@@ -211,7 +209,7 @@ class RetirementDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="monthly_depo">
-                                                            <Form.Label>Monthly Deposit:</Form.Label>
+                                                            <Form.Label>Monthly Deposit ($)</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="monthly_depo"></Form.Control>
                                                         </Form.Group>
                                                     </Col>
@@ -220,7 +218,7 @@ class RetirementDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="year">
-                                                            <Form.Label>No. Years:</Form.Label>
+                                                            <Form.Label>No. Years</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="years"></Form.Control>
                                                         </Form.Group>
                                                     </Col>
@@ -229,7 +227,7 @@ class RetirementDashboard extends React.Component {
                                                 <Row>
                                                     <Col>
                                                         <Form.Group controlId="r">
-                                                            <Form.Label>CGAR (%):</Form.Label>
+                                                            <Form.Label>Compound Annual Growth Rate (%)</Form.Label>
                                                             <Form.Control type="number" onChange={this.handleInputChange} name="r"></Form.Control>
                                                         </Form.Group>
                                                     </Col>
@@ -263,10 +261,10 @@ class RetirementDashboard extends React.Component {
                                                         React.createElement(NVD3Chart, {
                                                             xAxis: {
                                                                 tickFormat: function (d) { console.log("x", d); return d },
-                                                                axisLabel: 'Date',
+                                                                axisLabel: 'Years',
                                                             },
                                                             yAxis: {
-                                                                axisLabel: 'Price ($ m)',
+                                                                axisLabel: 'Growth ($)',
                                                                 tickFormat: function (d) { console.log("y", d); return d }
                                                             },
                                                             type: 'lineChart',

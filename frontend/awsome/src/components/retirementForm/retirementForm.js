@@ -97,7 +97,7 @@ export default class RetirementForm extends Component {
             birthday: 0,
             years_till_retire: 0,
             retirement_age: 0,
-            retirement_amount: 0,
+            retirement_amount: 62,
             btoroom: "$150,000",
             resaleroom: "$350,000",
             condoroom: "$640,000",
@@ -386,7 +386,7 @@ export default class RetirementForm extends Component {
                                     <Col>
                                         <Form.Group controlId="first_name">
                                             <Form.Label>When do you plan to retire? </Form.Label>
-                                            <Form.Control type="number" placeholder="62" name="retirement_age" onChange={this.handleInputChange}></Form.Control>
+                                            <Form.Control type="number" placeholder={ this.state.retirement_age } name="retirement_age" onChange={this.handleInputChange}></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col xs={3}>
