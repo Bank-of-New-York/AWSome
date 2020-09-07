@@ -134,7 +134,7 @@ class RetirementDashboard extends React.Component {
             console.log(monthly_r, multiplier, compound_principal, compound_monthly)
             compound.push({
                 'x': yr,
-                'y': parseFloat(compound_principal + compound_monthly),
+                'y': parseFloat(compound_principal + compound_monthly).toFixed(2),
                 "series": 0
             });
         }
@@ -276,19 +276,19 @@ class RetirementDashboard extends React.Component {
 
                                     <Card style={{ height: "90vh" }}>
                                         <Card.Body>
-                                            <h3 className='mb-4'>Growth Potential</h3>
+                                            <h3 className='mb-4'>Growth Potential ($)</h3>
                                             {
                                                 this.state.total &&
                                                 <div>
                                                     {
                                                         React.createElement(NVD3Chart, {
                                                             xAxis: {
-                                                                tickFormat: function (d) { console.log("x", d); return d },
+                                                                tickFormat: function (d) { return d },
                                                                 axisLabel: 'Years',
                                                             },
                                                             yAxis: {
                                                                 axisLabel: 'Growth ($)',
-                                                                tickFormat: function (d) { console.log("y", d); return d }
+                                                                tickFormat: function (d) { return d }
                                                             },
                                                             type: 'lineChart',
                                                             datum: this.state.total,
