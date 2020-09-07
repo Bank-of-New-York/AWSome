@@ -242,8 +242,8 @@ class EquityListing extends React.Component {
                                                         <h4 id={stock.id}>{(stock.final_score).toFixed(2)}</h4>
                                                     </td>
 
-                                                    <td>
-                                                        <Button id="more-info-btn" href="/dashboard">More Info</Button>
+                                                    <td id="more-info">
+                                                        <Button id={stock.id} onClick={this.handleRowClick}>More Info</Button>
                                                     </td>
                                                     
 

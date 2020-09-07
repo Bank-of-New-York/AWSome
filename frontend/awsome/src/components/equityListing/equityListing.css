@@ -2,7 +2,7 @@
     border: transparent !important;
 }
 
-#more-info-btn {
+#more-info .btn{
     font-size: 15px !important;
     width: 10vw !important;
 }
