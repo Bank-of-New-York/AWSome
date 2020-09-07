@@ -154,7 +154,7 @@ export default class EquityResult extends Component {
 
     
     componentDidMount() {
-        this.setState({ expected: calc_implied_return(bonds/100, stocks/100).toFixed(2)})
+        this.setState({ expected: (calc_implied_return(bonds/100, stocks/100) * 100).toFixed(2)})
     
         fetch("/api_update_user",
             {
@@ -267,7 +267,7 @@ export default class EquityResult extends Component {
                                                     <Form.Control name="monthly" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.monthly}></Form.Control>
                                                 </Form.Group>
                                                 <br></br>
-                                                <Button variant="primary" onClick={() => { var value = calc_monthly_savings(this.state.expected, this.state.retirement_amount, this.state.principal, this.state.years_till_retire); console.log(value); this.setState({monthly: value})}}>Calculate</Button>
+                                                <Button variant="primary" onClick={() => { var value = calc_monthly_savings(this.state.expected / 100, this.state.retirement_amount, this.state.principal, this.state.years_till_retire); console.log(value); this.setState({monthly: value})}}>Calculate</Button>
 
 
                                             </Col>
