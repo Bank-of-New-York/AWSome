@@ -42,13 +42,13 @@ class User(Base):
     invested_before = Column(String(32))
 
     risk_level = Column(String(32))
-    be_ratio = Column(Float, default=-1)
-    retirement_amount = Column(Integer, default=-1)
+    be_ratio = Column(Float, default=0)
+    retirement_amount = Column(Integer, default=0)
 
-    years_till_retire = Column(Integer, default=-1)
-    expected_growth = Column(Float, default=-1)
-    initial_deposit = Column(Float, default=-1)
-    monthly_deposit = Column(Float, default=-1)
+    years_till_retire = Column(Integer, default=0)
+    expected_growth = Column(Float, default=0)
+    initial_deposit = Column(Float, default=0)
+    monthly_deposit = Column(Float, default=0)
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)

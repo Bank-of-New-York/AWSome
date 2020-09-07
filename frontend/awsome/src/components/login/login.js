@@ -38,9 +38,12 @@ class Login extends React.Component {
             response.json()
         ).then( data  => {
             sessionStorage.setItem("token", data.token)
+            this.props.setLoggedIn(true)
+        }).then(() => {
+            // window.location.href="/retirementDashboard"
             this.props.history.push("/retirementDashboard")
-            // window.location.href="/detailsForm"
-        }).catch(error => {
+        })
+        .catch(error => {
             console.log(error)
             alert("There has been a problem")
         })

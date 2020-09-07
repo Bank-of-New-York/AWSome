@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Aux from "../../hoc/_Aux";
 import { Link } from 'react-router-dom';
 
-function Logout() {
-  sessionStorage.clear()
+function Logout(props) {
+  
+  useEffect(() => {
+    props.setLoggedIn(false)
+    sessionStorage.clear()
+  }, [])
+
   return (
     <Aux>
     <div className="auth-wrapper">

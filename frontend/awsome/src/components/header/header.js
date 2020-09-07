@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 export default class Header extends Component {
+
     render() {
         return (
             <Navbar expand="lg">
@@ -15,7 +16,7 @@ export default class Header extends Component {
                         {/* <Nav.Link href="/dashboard" to="/dashboard">Dashboard</Nav.Link> */}
                         {/* <Nav.Link href="/equityListing" to="/equityListing">Equities</Nav.Link> */}
                         {
-                            sessionStorage.getItem("token") ?
+                            this.props.loggedIn ?
                             <Nav.Link href="/logout" to="/logout">Logout</Nav.Link>
                             :
                             <Nav.Link href="/login" to="/login">Login</Nav.Link>

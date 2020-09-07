@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 import './App.css';
 
@@ -23,20 +23,28 @@ import EquitiesInfo from "./components/infopages/equitiesInfo"
 import BondsInfo from "./components/infopages/bondsInfo"
 import PortfolioInfo from "./components/infopages/portfolioInfo"
 function App() {
+
+  const [ loggedIn, setLoggedIn ] = useState(false)
+
+  useEffect(() => {
+    if(sessionStorage.getItem("token")){
+      setLoggedIn(true)
+    }
+  }, [])
+
   return (
-
-
     <div className="App">
 
         <header className="App-header">
-          <Header></Header>
+          <Header loggedIn = { loggedIn }></Header>
         </header>
 
 
         <Router>
           <Switch>
             <Route exact path="/home" component={Home}></Route>
-            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/login" render={props => <Login setLoggedIn = {setLoggedIn} {...props}/>} ></Route>
+            <Route exact path="/logout" render={props => <Logout setLoggedIn = {setLoggedIn} {...props}/>}></Route>
             <Route exact path="/register" component={Register}></Route>
             <Route exact path="/signupLanding" component={SignupLanding}></Route>
             <Route exact path="/detailsForm" component={detailsForm}></Route>
@@ -53,7 +61,7 @@ function App() {
             <PrivateRoute exact path="/screener" component={Screener}></PrivateRoute>
             <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
             <PrivateRoute exact path="/retirementDashboard" component={RetirementDashboard}></PrivateRoute>
-            <PrivateRoute exact path="/logout" component={Logout}></PrivateRoute>
+            
 
             <Route path="/" component={Home}></Route>
           </Switch>
