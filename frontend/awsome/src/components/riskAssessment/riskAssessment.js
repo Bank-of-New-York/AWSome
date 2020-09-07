@@ -113,7 +113,8 @@ export default class RiskAssessment extends Component {
                     "Authorization": `Basic ${btoa(`${sessionStorage.getItem("token")}:`)}`
                 },
                 body: JSON.stringify({
-                    risk_level : risk_level
+                    risk_level : risk_level,
+                    be_ratio : bonds / 100
                 })
             }).then((resp) => {
 
