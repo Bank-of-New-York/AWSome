@@ -70,7 +70,7 @@ class UpdateUser(Resource):
 
         session.query(User)\
             .filter(User.id == user.id)\
-            .update(dict(args))
+            .update(dict(non_null_args))
 
         session.commit()
         return jsonify({ "status": "success"})
