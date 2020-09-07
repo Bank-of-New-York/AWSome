@@ -164,7 +164,7 @@ export default class RiskAssessment extends Component {
                                 <Row>
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
-                                            <Form.Label>When making a long-term investment, I play to keep the money invested for...</Form.Label>
+                                            <Form.Label>When making a long-term investment, I plan to keep the money invested for...</Form.Label>
                                             <Form.Control onChange={this.handleInputChange} name="longterm" as="select" placeholder="Select an Option" defaultValue="" custom>
                                                 <option value='' disabled>Select an Option</option>
                                                 <option value='A'>1-5 years</option>
@@ -220,7 +220,7 @@ export default class RiskAssessment extends Component {
                                 <Row>
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
-                                            <Form.Label>To what extend do you agree with this statement: "Protecting my portfolio value is more important to me than high returns."</Form.Label>
+                                            <Form.Label>To what extent do you agree with this statement: "Protecting my portfolio value is more important to me than high returns."</Form.Label>
                                             <Form.Control onChange={this.handleInputChange} name="protect"  as="select" custom defaultValue="">
                                                 <option value='' disabled>Select an Option</option>
                                                 <option value='A'>Strongly Agree</option>
