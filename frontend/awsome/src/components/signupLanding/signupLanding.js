@@ -22,7 +22,7 @@ export default class SignupLanding extends Component {
 
                         <div className="center">
                             <h1>Start Your<br></br> Journey Now</h1>
-                            <h4>Find out what investments suit you through our Risk Assessment and Retirement Planning Calculator</h4>
+                            <h4>Find out what investments<br></br>suit you through our Risk Assessment and Retirement Planning Calculator</h4>
                             <br></br>
 
                             <Link to="/detailsForm">
