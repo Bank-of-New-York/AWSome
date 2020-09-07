@@ -137,7 +137,6 @@ class GeneralNews(Resource):
         except Exception as e:
             return jsonify({ "error": e })
 
-
 class Database(Resource):
     # @auth.login_required
     def delete(self):

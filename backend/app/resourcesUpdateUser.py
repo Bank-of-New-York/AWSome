@@ -17,6 +17,7 @@ parser.add_argument('birthday', type=str)
 parser.add_argument('invested_before', type=str)
 
 parser.add_argument('risk_level', type=str)
+parser.add_argument('be_ratio', type=float)
 parser.add_argument('retirement_amount', type=int)
 
 parser.add_argument('years_till_retire', type=int)
@@ -37,6 +38,7 @@ user_fields = {
     'invested_before': fields.String,
 
     'risk_level': fields.String,
+    'be_ratio': fields.Float,
     'retirement_amount': fields.Integer,
 
     'years_till_retire': fields.Integer,
