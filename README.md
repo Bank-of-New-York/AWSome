@@ -4,6 +4,21 @@
 
 Stock OverFlow aims to empower new investors by creating a systematic structure to guide them along their planning and investing journey. By obtaining their personal financial requirements going into adulthood, and their risk levels, Stock OverFlow is able to recommend them a portfolio mix of stocks and bonds, as well as their monthly savings amount to reach their retirement goals. Users are also able to do quick research on stocks through our summarised dashboard, which includes a carefully curated quality score based on a few metrics, as well as the latest news and sentiment indicator on social media about the stocks.
 
+## Team "AWSOME"
+
+Built during the SMU Ellipsis Goldman Sachs Tech Series Hackathon.
+
+### Analysts
+
+- **Kang Wei** - [LinkedIn](https://www.linkedin.com/in/ongkangwei/)
+- **Kenny** - [LinkedIn](https://www.linkedin.com/in/kpyh/)
+
+### Developers
+
+- **Tammi** - [LinkedIn](https://www.linkedin.com/in/tammi-chng/)
+- **Phyo** - [LinkedIn](https://www.linkedin.com/in/yar-khine-phyo/)
+- **Wa Thone** - [LinkedIn](https://www.linkedin.com/in/wathone/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -40,7 +55,7 @@ backend
 For deploying React Application locally:
 
 ```
-1) cd ./AWSome/awsome/
+1) cd ./AWSome/frontend/awsome/
 2) docker build -t frontend .
 3) docker run \
 -p 80:8080 \
@@ -67,15 +82,7 @@ Afterwards, it should be accessible via browser in localhost.
 - [AWS Fargate](https://aws.amazon.com/fargate/) - Load Balancer & Container Engine
 - [AWS RDS](https://aws.amazon.com/rds/) - Relational Database
 
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## Acknowledgments
-
-* [Social Sentiment.io](https://socialsentiment.io/api/v1/getting-started/) for blessing us with access to their API 
-* the frontend code
-* etc
-
+- Frontend templates are adapted from [Datta Able](http://lite.codedthemes.com/datta-able/react/default/dashboard/default#)
+- Huge thanks to [Social Sentiment.io](https://socialsentiment.io/api/v1/getting-started/) for blessing us with access to their API 
