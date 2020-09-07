@@ -269,6 +269,9 @@ export default class EquityResult extends Component {
                                                     <Form.Label>Years Before Retirement:</Form.Label>
                                                     <Form.Control name="years_till_retire" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.years_till_retire}></Form.Control>
                                                 </Form.Group>
+                                                <br></br>
+                                                <Button variant="primary" onClick={() => { var value = calc_monthly_savings(this.state.expected / 100, this.state.retirement_amount, this.state.principal, this.state.years_till_retire); console.log(value); this.setState({monthly: value})}}>Calculate</Button>
+
 
                                             </Col>
                                             <Col>
@@ -286,9 +289,14 @@ export default class EquityResult extends Component {
                                                     <Form.Label>Monthly Deposit Needed ($):</Form.Label>
                                                     <Form.Control disabled name="monthly" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.monthly}></Form.Control>
                                                 </Form.Group>
-                                                <br></br>
-                                                <Button variant="primary" onClick={() => { var value = calc_monthly_savings(this.state.expected / 100, this.state.retirement_amount, this.state.principal, this.state.years_till_retire); console.log(value); this.setState({monthly: value})}}>Calculate</Button>
 
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <Button variant="primary" onClick={this.handleClick} >Next</Button>
 
                                             </Col>
                                         </Row>
@@ -297,38 +305,6 @@ export default class EquityResult extends Component {
 
                                     </Form>
 
-                                    <br></br>
-                                    <br></br>
-                                    <div>
-                                        {
-                                            React.createElement(NVD3Chart, {
-                                                xAxis: {
-                                                    tickFormat: function (d) { return d; },
-                                                    axisLabel: 'Time (ms)'
-                                                },
-                                                yAxis: {
-                                                    axisLabel: 'Voltage (v)',
-                                                    tickFormat: function (d) { return parseFloat(d).toFixed(2); }
-                                                },
-                                                type: 'lineChart',
-                                                datum: data,
-                                                x: 'x',
-                                                y: 'y',
-                                                height: 300,
-                                                renderEnd: function () {
-                                                    console.log('renderEnd');
-                                                }
-                                            })
-                                        }
-                                    </div>
-
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-
-
-                                    <Button variant="primary" onClick={this.handleClick} >Next</Button>
-    
 
                                 </div>
                             </Col>

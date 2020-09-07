@@ -285,7 +285,7 @@ class RetirementDashboard extends React.Component {
 
                                     <Card style={{ height: "97vh" }}>
                                         <Card.Body>
-                                            <h3 className='mb-4'>Growth Potential</h3>
+                                            <h3 className='mb-4'>Growth Potential ($)</h3>
                                             {
                                                 this.state.total &&
                                                 <div>
