@@ -1,6 +1,6 @@
 app/data/
 Config.py
-data/Config.py
+app/Config.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
