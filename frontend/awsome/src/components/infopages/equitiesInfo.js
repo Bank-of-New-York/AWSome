@@ -96,34 +96,23 @@ export default class EquitiesInfo extends Component {
                         <br></br>
                         <br></br>
                         <div>
-                            <h1>Your Results</h1>
-                            <h4>Welcome to the resource page for low risk assets. The two asset classes here- Singapore Savings Bonds and Fixed Deposit Accounts- will provide small interest payments while successfully preserving your wealth over long periods of time.  </h4>
+                            <h2>Learning About Equities</h2>
+                            <h4>Welcome to the resource page for higher risk assets known as equities.</h4>
                         </div>
                         <br></br>
 
                         <div>
-                            <h2>Fixed Deposit Accounts</h2>
-                            <p>
-                                What are Fixed Deposit Accounts (https://blog.moneysmart.sg/invest/what-every-singaporean-needs-to-know-about-fixed-deposit-accounts/)  
+                            <h4>
+                                What are Equities: <br></br> <a href="https://smartasset.com/investing/what-are-equities">https://smartasset.com/investing/what-are-equities</a> 
+                                <br></br>
+                                <br></br>
+                                Basic Guide to Stocks:<br></br> <a href="https://www.valuechampion.sg/basic-guide-stocks">https://www.valuechampion.sg/basic-guide-stocks</a>
+                                <br></br>
+                                <br></br>
 
-                                Moneysmart (https://blog.moneysmart.sg/fixed-deposits/best-fixed-deposit-accounts-singapore/): Compares Fixed Deposit Rates across various local banks 
+                                Guide to Investing: <br></br> <a href="https://dollarsandsense.sg/beginners-guide-start-investing-singapore/">https://dollarsandsense.sg/beginners-guide-start-investing-singapore/</a>
 
-                                DBS Fixed Deposit Schedule (https://www.dbs.com.sg/personal/rates-online/singapore-dollar-fixed-deposits.page)  
-
-                                UOB Fixed Deposit Information (https://www.uob.com.sg/personal/save/fixed-deposit/singapore-dollar-fixed-deposit.page)  
-
-                                OCBC Fixed Deposit Information (https://www.ocbc.com/personal-banking/deposits/fixed-deposit-account)  
-
-                                Singapore Savings Bonds 
-
-                                What are Singapore Savings Bonds (https://www.singsaver.com.sg/blog/savings-bonds-singapore)  
-
-                                Current Bond Information (https://www.mas.gov.sg/bonds-and-bills/Singapore-Savings-Bonds)  
-
-                                Click here to return to your risk assessment result (hyperlink) 
-
-                                Click here to access the compounding calculator (hyperlink) 
-                            </p>
+                            </h4>
                         </div>
 
                         </Col>

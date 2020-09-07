@@ -96,13 +96,13 @@ export default class PortfolioInfo extends Component {
                         <br></br>
                         <br></br>
                         <div>
-                            <h1>Your Results</h1>
+                            <h1>Portfolio Allocation</h1>
                             <h4>Welcome to the resource page for portfolio allocation. While our risk assessment page provides recommendations on which asset class to overweight based on your risk tolerance, we are not experts. Here are some resources to help you decide exactly how to allocate your assets between stocks and bonds/fixed deposits.</h4>
                         </div>
                         <br></br>
 
                         <div>
-                            <p>
+                            <h4>
                             
                             Vanguard: Historical returns by allocation <br></br>
                             <a href="https://personal.vanguard.com/us/insights/saving-investing/model-portfolio-allocations">https://personal.vanguard.com/us/insights/saving-investing/model-portfolio-allocations</a>
@@ -113,7 +113,7 @@ export default class PortfolioInfo extends Component {
                             Financial Samurai:<br></br>
                             <a href="https://www.financialsamurai.com/the-proper-asset-allocation-of-stocks-and-bonds-by-age/">https://www.financialsamurai.com/the-proper-asset-allocation-of-stocks-and-bonds-by-age/</a>
 
-                            </p>
+                            </h4>
                         </div>
                     </Col>
                 </Row>

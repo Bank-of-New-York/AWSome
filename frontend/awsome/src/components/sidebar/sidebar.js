@@ -32,13 +32,13 @@ class Sidebar extends React.Component {
                                 </div>
 
                                 <hr></hr>
-                                {/* <div className="sidebar-title">
+                                <div className="sidebar-title">
                                     <h5>Plan Your Investments</h5>
                                 </div>
                             
                                 <div className="sidebar-link">
-                                    <a style={{width: "120px"}} href="/riskAssessment"><h5>Take the Quiz</h5></a>
-                                </div> */}
+                                    <a style={{width: "120px"}} href="/detailsForm"><h5>Take the Quiz</h5></a>
+                                </div>
 
                                 
                             </div>

@@ -1,16 +1,16 @@
 .vertical-line:after {
     content:"";
     position: absolute;
-    z-index: -1;
+    z-index: 1000;
     top: 0;
     bottom: 0;
     left: 50%;
-    border-left: 2px rgb(54, 54, 54) solid;
+    border-left: 2px rgb(54, 54, 54) solid !important;
     transform: translate(-50%);
 }
 
 .vertical-line {
-    height: 90vh;
+    height: 85vh;
 }
 
 h4 {
