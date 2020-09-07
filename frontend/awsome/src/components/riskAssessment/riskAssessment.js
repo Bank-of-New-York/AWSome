@@ -62,6 +62,7 @@ export default class RiskAssessment extends Component {
 
         if(filled){
             let risk_level = null;
+            console.log("scoree", score)
             if(score <= 5 && score >= 13){
                 risk_level = "low"
             } else if (score >= 14 && score <= 24) {
@@ -163,8 +164,8 @@ export default class RiskAssessment extends Component {
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>When making a long-term investment, I play to keep the money invested for...</Form.Label>
-                                            <Form.Control onChange={this.handleInputChange} name="longterm" as="select" placeholder="Select an Option" custom>
-                                                <option value='' selected disabled>Select an Option</option>
+                                            <Form.Control onChange={this.handleInputChange} name="longterm" as="select" placeholder="Select an Option" defaultValue="" custom>
+                                                <option value='' disabled>Select an Option</option>
                                                 <option value='A'>1-5 years</option>
                                                 <option value='B'>6-10 years</option>
                                                 <option value='C'>11-20 years</option>
@@ -181,8 +182,8 @@ export default class RiskAssessment extends Component {
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>Typically, assets that fluctuate more also deliver higher returns. Which of the following statements do you agree with most?</Form.Label>
-                                            <Form.Control onChange={this.handleInputChange} name="fluctuate" as="select"  custom>
-                                                <option value='' selected disabled>Select an Option</option>
+                                            <Form.Control onChange={this.handleInputChange} name="fluctuate" as="select"  custom defaultValue="">
+                                                <option value='' disabled>Select an Option</option>
                                                 <option value='A'>In order to minimise fluctuations in asset values, I am willing to accept returns below the rate of inflation</option>
                                                 <option value='B'>I am willing to accept small, occasional drawdowns in exchange for returns slightly above the rate of inflation </option>
                                                 <option value='C'>I am willing to accept large, occasional drawdowns in exchange for returns well above the rate of inflation </option>
@@ -200,8 +201,8 @@ export default class RiskAssessment extends Component {
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>In the 2008 financial crisis, stocks plunged over 50% from their peak. What is the maximum loss of value you could accept in a one-year period?</Form.Label>
-                                            <Form.Control onChange={this.handleInputChange} name="loss" as="select"  custom>
-                                                <option value='' selected disabled>Select an Option</option>
+                                            <Form.Control onChange={this.handleInputChange} name="loss" as="select"  custom defaultValue="">
+                                                <option value='' disabled>Select an Option</option>
                                                 <option value='A'>5%</option>
                                                 <option value='B'>10%</option>
                                                 <option value='C'>30%</option>
@@ -219,8 +220,8 @@ export default class RiskAssessment extends Component {
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>To what extend do you agree with this statement: "Protecting my portfolio value is more important to me than high returns."</Form.Label>
-                                            <Form.Control onChange={this.handleInputChange} name="protect"  as="select" custom>
-                                                <option value='' selected disabled>Select an Option</option>
+                                            <Form.Control onChange={this.handleInputChange} name="protect"  as="select" custom defaultValue="">
+                                                <option value='' disabled>Select an Option</option>
                                                 <option value='A'>Strongly Agree</option>
                                                 <option value='B'>Agree</option>
                                                 <option value='C'>Disagree</option>
@@ -238,8 +239,8 @@ export default class RiskAssessment extends Component {
                                     <Col xs={9}>
                                         <Form.Group controlId="invested">
                                             <Form.Label>Should there be a 30% shortfall in your investment proceeds at the end of the investment period, to what extent will it affect your retirement lifestyle?</Form.Label>
-                                            <Form.Control onChange={this.handleInputChange} name="retire"  as="select" custom>
-                                                <option value='' selected disabled>Select an Option</option>
+                                            <Form.Control onChange={this.handleInputChange} name="retire"  as="select" custom defaultValue="">
+                                                <option value='' disabled>Select an Option</option>
                                                 <option value='A'>I will not be able to support my basic needs</option>
                                                 <option value='B'>I will have to downgrade my lifestyle to one that I am unable to accept</option>
                                                 <option value='C'>I will have to downgrade my lifestyle to one that I am able to accept</option>

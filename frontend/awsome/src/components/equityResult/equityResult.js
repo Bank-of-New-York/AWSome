@@ -91,8 +91,8 @@ const equitiesTabContent =
     <Aux>
         <h3 align='center'>Equities</h3>
 
-        <h6>
-            Equities, also known as stocks, represent part-ownership in a company. Unlike the periodic interest that companies are required to pay on borrowings, companies are not legally required to pay their shareholders anything. As a result, equity values are determined by expectations of future cash flows. However, short term equity prices are dependent on market forces of supply and demand, creating volatility.
+        <h6 style={{lineHeight:"20px"}}>
+            Equities, also known as stocks, represent part-ownership in a company. Unlike the periodic interest that companies are required to pay on borrowings, companies are not legally required to pay their shareholders anything. <br></br><br></br>As a result, equity values are determined by expectations of future cash flows. However, short term equity prices are dependent on market forces of supply and demand, creating volatility.
         </h6>
 
     </Aux>
@@ -102,8 +102,8 @@ const BondsTabContent = (
     <Aux>
         <h3 align='center'>Bonds</h3>
 
-        <h6>
-            Bonds represent loans made by you, the investor to the borrower, which is usually a company or a government. Because it is difficult to invest in corporate bonds without large sums of money, we are advocating Singapore Savings Bonds (SSB) and fixed deposit accounts as risk-free substitutes for regular bonds. While SSB and fixed deposits provide an interest rate that is frequently below that of inflation, the risk of capital loss is virtually zero.
+        <h6 style={{lineHeight:"20px"}}>
+            Bonds represent loans made by you, the investor to the borrower, which is usually a company or a government.<br></br><br></br> Because it is difficult to invest in corporate bonds without large sums of money, we are advocating Singapore Savings Bonds (SSB) and fixed deposit accounts as risk-free substitutes for regular bonds. <br></br><br></br>While SSB and fixed deposits provide an interest rate that is frequently below that of inflation, the risk of capital loss is virtually zero.
         </h6>
 
     </Aux>
@@ -216,7 +216,7 @@ export default class EquityResult extends Component {
                                     <br></br>
                                     <Row>
                                         <Col>
-                                            <NVD3Chart id="chart" height={300} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
+                                            <NVD3Chart id="chart" height={400} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
                                         </Col>
                                         <Col>
                                             <Tabs defaultActiveKey="equities" id="uncontrolled-tab-example">
@@ -260,6 +260,8 @@ export default class EquityResult extends Component {
                                                     <Form.Label>Expected Portfolio Return (%):</Form.Label>
                                                     <Form.Control name="expected" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.expected}></Form.Control>
                                                 </Form.Group>
+                                                <br></br>
+                                                <br></br>
                                                 <Form.Group controlId="invested" style={{ display: "flex" }}>
                                                     <Form.Label>Monthly Deposit Needed ($):</Form.Label>
                                                     <Form.Control name="monthly" style={{ marginLeft: "10px", width: "120px", marginTop: "-10px", marginBottom: "15px" }} type="number" onChange={this.handleInputChange} value={this.state.monthly}></Form.Control>

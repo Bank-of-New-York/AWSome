@@ -59,6 +59,11 @@ class EquityListing extends React.Component {
             }).then((resp) => {
                 return resp.json()
             }).then((values) => {
+
+                values.sort(function(first, second) {
+                    return -(first["final_score"] - second["final_score"])
+                });
+
                 this.setState({stocks : values})
                 sessionStorage.setItem("stocks", JSON.stringify(values))
             })
@@ -67,6 +72,8 @@ class EquityListing extends React.Component {
         }
         
     }
+
+
 
     handleRowClick = (e) => {
         this.state.stocks.forEach(s => {
@@ -82,6 +89,8 @@ class EquityListing extends React.Component {
 
     render() {
 
+
+
         return (
             <Aux>
                 <Row>
@@ -92,20 +101,21 @@ class EquityListing extends React.Component {
                       <Row>
                         <Col>
                           <Form.Group controlId="range1">
-                            <Form.Label>Min. Market Cap</Form.Label>
-                            <Form.Control type="range" custom onChange={this.handleInputChange} defaultValue={this.state.minMarketCap} name="minMarketCap" max="999999"/>
+                            <Form.Label>Min. Market Cap: {this.state.minMarketCap}</Form.Label>
+                            <Form.Control type="range" custom onChange={this.handleInputChange} defaultValue={this.state.minMarketCap} name="minMarketCap" max="10000"/>
                           </Form.Group>
                         </Col>
                         <Col>
                           <Form.Group controlId="range2">
-                            <Form.Label>Max. Market Cap</Form.Label>
-                            <Form.Control type="range" custom onChange={this.handleInputChange} defaultValue={this.state.maxMarketCap} name="maxMarketCap" max="999999"/>
+                            <Form.Label>Max. Market Cap: {this.state.maxMarketCap}</Form.Label>
+                            <Form.Control type="range" custom onChange={this.handleInputChange} value={this.state.maxMarketCap} name="maxMarketCap" max="10000"/>
                           </Form.Group>
                         </Col>
    
                       </Row>
                       
                     </Card.Body>
+                        <br></br>
                   </Card>
                   </Col>
                 </Row>
