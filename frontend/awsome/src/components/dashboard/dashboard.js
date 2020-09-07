@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover, Tooltip, Overlay, OverlayTrigger, Row, Col, Card, Table, Container, Tabs, Tab } from 'react-bootstrap';
+import { Popover, Tooltip, Overlay, OverlayTrigger, Row, Col, Card, Table, Container, Tabs, Tab,  } from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
@@ -237,7 +237,7 @@ class StockDashboard extends React.Component {
                                                         placement="left" 
                                                         overlay={
                                                             <Popover id={"stockscore"}>
-                                                                <Popover.Title as="h3"><strong>Stock Sentiment</strong></Popover.Title>
+                                                                <Popover.Title as="h3"><strong>Investor Sentiment</strong></Popover.Title>
                                                                 <Popover.Content>
                                                                     The sentiment of a stock is a leading indicator of how stock prices could be, going forward. 
                                                                     if a large increase in sentiment occurs without a corresponding increase in stock price, the price
@@ -251,12 +251,12 @@ class StockDashboard extends React.Component {
                                                     <Row>
                                                         <Col>
                                                         <br></br>
-                                                            <h3>Sentiment</h3>
+                                                            <h3>Investor Sentiment</h3>
                                                             <GaugeChart textColor="black" id="bullish" nrOfLevels={3} percent={this.state.yesterday_sentiment / 100 + 0.5}
                                                                 formatTextValue={
                                                                     value => this.state.yesterday_sentiment + "%"
                                                                 } />
-                                                            <h5>Previous Level: {this.state.days_before_sentiment}%</h5>
+                                                            <h5>1 Mth Ago: {this.state.days_before_sentiment}%</h5>
                                                         </Col>
                                                     </Row>
                                                     </OverlayTrigger>
@@ -275,7 +275,7 @@ class StockDashboard extends React.Component {
                                             
                                                 <Tab eventKey="key_metrics" title="Key Metrics" >
                             
-                                                    <Card className='Recent-Users' >
+                                                    <Card className='Recent-Users' style={{height: "50vh" }}>
                                                         <Card.Body className='px-0 mx-0' fluid style={{ overflowY: "scroll", width: "40vw" }}>
                                                             <Table responsive hover >
                                                                 <tbody >
@@ -286,40 +286,18 @@ class StockDashboard extends React.Component {
                                                                             <Popover.Title as="h3"><strong>Market Cap</strong></Popover.Title>
                                                                             <Popover.Content>
                                                                                 Market Capitalization refers to the total dollar market value of a company's outstanding shares of stock.<br></br>
-                                                                                Simply put: Market Cap refers to how much the comapny is worth based on the stock market
+                                                                                Simply put: Market Cap refers to how much the company is worth based on the stock market
                                                                             </Popover.Content> 
                                                                         </Popover>
                                                                     }>
                                                                     <tr className="unread">
                                                                         <td>
-                                                                            <h6 className="mb-1">Market Cap ($ mil)</h6>
+                                                                            <h6 className="mb-1">Market Cap ($ billion)</h6>
                                                                         </td>
                                                                         <td>
-                                                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.market_cap / 1000000}</h6>
+                                                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{(this.state.stock_data.market_cap / 1000000000).toFixed(2)}</h6>
                                                                         </td>
                                                                     </tr>
-                                                                    </OverlayTrigger>
-
-                                                                    <OverlayTrigger 
-                                                                    placement="right" 
-                                                                    overlay={
-                                                                        <Popover id={"stockscore"}>
-                                                                            <Popover.Title as="h3"><strong>Gross Profit</strong></Popover.Title>
-                                                                            <Popover.Content>
-                                                                                Gross profit refers to the profit a company makes after deducting costs.<br></br>
-                                                                                This can indicate a company's efficiency at producing goods and services.
-                                                                            </Popover.Content> 
-                                                                        </Popover>
-                                                                    }>
-                                                                    <tr className="unread">
-                                                                        <td>
-                                                                            <h6 className="mb-1">Gross Profit</h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.gross_profit}</h6>
-                                                                        </td>
-                                                                    </tr>
-                                                                    
                                                                     </OverlayTrigger>
 
                                                                     <OverlayTrigger 
@@ -385,7 +363,7 @@ class StockDashboard extends React.Component {
                                                                             <h6 className="mb-1">Dividend Yield</h6>
                                                                         </td>
                                                                         <td>
-                                                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.dividend}</h6>
+                                                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.dividend}%</h6>
                                                                         </td>
                                                                     </tr>
                                                                     </OverlayTrigger>
@@ -394,7 +372,7 @@ class StockDashboard extends React.Component {
                                                                     placement="right" 
                                                                     overlay={
                                                                         <Popover id={"stockscore"}>
-                                                                            <Popover.Title as="h3"><strong>Volume</strong></Popover.Title>
+                                                                            <Popover.Title as="h3"><strong>Average Daily Trading Volume</strong></Popover.Title>
                                                                             <Popover.Content>
                                                                                 Volume refers to amount of an asset/security that changes hands over a period of time (often a day)<br></br><br></br>
                                                                                 Shares that are more active tend to be more liquid. Volume is also an important measure of the relative significance of a market move. The higher the volume during a price move, the more significant the move.
@@ -403,10 +381,10 @@ class StockDashboard extends React.Component {
                                                                     }>
                                                                     <tr className="unread">
                                                                         <td>
-                                                                            <h6 className="mb-1">Average Volume</h6>
+                                                                            <h6 className="mb-1">Average Daily Trading Volume (mil)</h6>
                                                                         </td>
                                                                         <td>
-                                                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{this.state.stock_data.ave_vol}</h6>
+                                                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{(this.state.stock_data.ave_vol/1000000).toFixed(2)}</h6>
                                                                         </td>
                                                                     </tr>
                                                                     </OverlayTrigger>
@@ -414,7 +392,7 @@ class StockDashboard extends React.Component {
                                                                     placement="right" 
                                                                     overlay={
                                                                         <Popover id={"stockscore"}>
-                                                                            <Popover.Title as="h3"><strong>Average Sales Growth</strong></Popover.Title>
+                                                                            <Popover.Title as="h3"><strong>Sales Growth (Past 2 Years)</strong></Popover.Title>
                                                                             <Popover.Content>
                                                                                 Sales Growth rates refer to the percentage change of sales over a specific time period. They are used to express the annual change in sales as a percentage. <br></br><br></br>
                                                                                 This is a great indicator for assessing a company's current and future performance.
@@ -423,10 +401,10 @@ class StockDashboard extends React.Component {
                                                                     }>
                                                                     <tr className="unread">
                                                                         <td>
-                                                                            <h6 className="mb-1">Avg Sales Growth</h6>
+                                                                            <h6 className="mb-1">Sales Growth (Past 2 Years)</h6>
                                                                         </td>
                                                                         <td>
-                                                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{this.state.stock_data.ave_sales_growth}</h6>
+                                                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{((this.state.stock_data.revenue_1y_bk/ this.state.stock_data.revenue_3y_bk) ** (0.5) - 1).toFixed(2)}</h6>
                                                                         </td>
                                                                     </tr>
                                                                     </OverlayTrigger>
@@ -438,7 +416,7 @@ class StockDashboard extends React.Component {
                                          
                                                 <Tab eventKey="stock_score" title="Stock Score">
                         
-                                                    <Card className='Recent-Users'>
+                                                    <Card className='Recent-Users' style={{height: "50vh" }}>
                                                         <Card.Body className='px-0 py-2' style={{ overflowY: "scroll", width: "40vw" }}>
                                                             <Table responsive hover >
                                                                 <tbody >
@@ -448,14 +426,17 @@ class StockDashboard extends React.Component {
                                                                         <Popover id={"stockscore"}>
                                                                             <Popover.Title as="h3"><strong>Gross Profit to Assets</strong></Popover.Title>
                                                                             <Popover.Content>
-                                                                                GPTA is a good measure of the company's profitablity and ability to use its assets to generate earnings. <br></br><br></br>
-                                                                                Note: There are some concerns that GPTA may look higher than reality because it's based on the book value of their assets rather than their market value.
+                                                                            GP/TA measures the efficiency of the company in generating returns with its assets. The GP/TA level is usually a reflection of the industry that the business is in. 
+                                                                            A business that does not need to employ much capital to scale up is preferable because it has the ability to grow much quicker when given the opportunity to.
                                                                             </Popover.Content> 
                                                                         </Popover>
                                                                     }>
                                                                     <tr className="unread">
                                                                         <td>
                                                                             <h6 className="mb-1">Gross Profit to Assets Rank</h6>
+                                                                            <p class="text-muted">We use GPTA instead of Return on Assets<br></br>
+                                                                            since GPTA unaffected by one-off charges, <br></br>
+                                                                            screening out low-gross margin businesses</p>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />{this.state.stock_data.gpta_rank}</h6>
@@ -469,7 +450,8 @@ class StockDashboard extends React.Component {
                                                                             <Popover.Content>
                                                                                 Beta is a measure of a stock's volatility in relation to the overall market.<br></br><br></br>
                                                                                 e.g. if a stock swings less than the market, it'll have a beta > 1.0<br></br><br></br>
-                                                                                High-beta stocks are generally riskier but may provide higher (generally short-term) returns
+                                                                                High-beta stocks are generally riskier but may provide higher (generally short-term) returns<br></br><br></br>
+                                                                                In this scoring system, we use beta as a gauge of the company's cyclicality. While this is not a perfect indicator of cyclicality, it is the most straightforward way to do so. Empirical observations also supports this method of usage
                                                                             </Popover.Content> 
                                                                         </Popover>
                                                                     }>
@@ -483,7 +465,7 @@ class StockDashboard extends React.Component {
                                                                     </tr></OverlayTrigger>
                                                                     <tr className="unread">
                                                                         <td>
-                                                                            <h6 className="mb-1">Avg Sales Growth Rank</h6>
+                                                                            <h6 className="mb-1">Sales Growth (Past 2 Years) Rank</h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15" />{this.state.stock_data.ave_sales_growth_rank}</h6>
@@ -537,7 +519,7 @@ class StockDashboard extends React.Component {
                                                 }>
                                             <Card style={{ marginTop: "5px" }}>
                                                 
-                                                <NewsContent></NewsContent>
+                                                <NewsContent {...{"stock_symb" : this.state.stock_symb}}></NewsContent>
 
                                             </Card>
                                             </OverlayTrigger>

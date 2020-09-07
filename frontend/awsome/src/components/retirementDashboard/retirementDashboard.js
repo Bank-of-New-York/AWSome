@@ -205,7 +205,7 @@ class RetirementDashboard extends React.Component {
                                                 </Popover.Content> 
                                             </Popover>
                                         }>
-                                    <Card className='Recent-Users' style={{ height: "90vh", top: "-20px" }}>
+                                    <Card className='Recent-Users' style={{ height: "97vh", top: "-20px" }}>
                                         <Card.Header>
                                             <Card.Title as='h5'>Compounding Calculator</Card.Title>
                                         </Card.Header>
@@ -267,7 +267,7 @@ class RetirementDashboard extends React.Component {
 
                                 <Col sm={7} >
 
-                                    <Card style={{ height: "90vh" }}>
+                                    <Card style={{ height: "97vh" }}>
                                         <Card.Body>
                                             <h3 className='mb-4'>Growth Potential</h3>
                                             {
@@ -291,12 +291,8 @@ class RetirementDashboard extends React.Component {
                                                             width: 400,
                                                             yAxis: {
                                                                 max: 10000
-                                                            },
-                                                            
-                                                            
-                                                            renderEnd: function () {
-                                                                console.log('renderEnd');
                                                             }
+                                                    
                                                         })
 
                                                     }
