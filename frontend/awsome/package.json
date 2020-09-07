@@ -1,6 +1,6 @@
 {
   "name": "awsome",
-  "proxy": "http://3.0.16.176/",
+  "proxy": "http://18.136.200.120/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -63,7 +63,7 @@ export default class RiskAssessment extends Component {
         if(filled){
             let risk_level = null;
             console.log("scoree", score)
-            if(score <= 5 && score >= 13){
+            if(score <= 13){
                 risk_level = "low"
             } else if (score >= 14 && score <= 24) {
                 risk_level = "medium"

@@ -13,18 +13,6 @@ import "./retirementDashboard.css";
 import Sidebar from "../sidebar/sidebar";
 
 
-// function calc_chance_r(chance, yrs, bond_ratio, equity_ratio) {
-//     var EQUITY_CAGR = 0.0724259;
-//     var BOND_CAGR = 0.0095;
-//     let width_p = chance ** (1 / yrs) - 0.5;
-//       // width_p of 0.44406 should give z=-0.145
-//       // width_p of 0.555939 should give z=0.1405
-//     // let z = percentile_z(width_p);
-//       let chance_equity_cagr = z * EQUITY_CAGR + BOND_CAGR;
-//     let chance_r = chance_equity_cagr * equity_ratio + BOND_CAGR * bond_ratio;
-//       return chance_r;
-//   }
-
 function getDatum() {
     var sin = [],
         sin2 = [],
@@ -72,7 +60,7 @@ function calc_implied_return(bond_ratio, equity_ratio) {
 
 function handleCalculation (r, years, first_depo, monthly_depo) {
     let monthly_r = r / 100 / 12;
-    let compound = [{ "x": 0, "y": first_depo }]
+    let compound = [{ "x": 0, "y": 0 }]
 
     for (let yr = 1; yr <= years; yr++) {
         let multiplier = Math.pow(1 + monthly_r, 12 * yr);
@@ -80,12 +68,11 @@ function handleCalculation (r, years, first_depo, monthly_depo) {
         let compound_monthly = monthly_depo * (multiplier - 1) / monthly_r;
         compound.push({
             'x': yr,
-            'y': parseFloat(compound_principal + compound_monthly).toFixed(2),
+            'y': parseFloat(compound_principal + compound_monthly) ,
             "series": 0
         });
     }
 
-    console.log("help", compound)
 
     return compound
 }
@@ -140,6 +127,7 @@ class RetirementDashboard extends React.Component {
 
             this.setState({
                 be_ratio : values["be_ratio"],
+                years : values["years_till_retire"],
                 retire_age : values["years_till_retire"],
                 amount_needed : values["retirement_amount"],
                 first_depo : values["initial_deposit"],
@@ -157,11 +145,10 @@ class RetirementDashboard extends React.Component {
 
     handleSubmit = (e) => {
 
-        var compound = this.handleCalculation(this.state.r, this.state.years, this.state.first_depo, this.state.monthly_depo)
+        var compound = handleCalculation(this.state.r, this.state.years, this.state.first_depo, this.state.monthly_depo)
+        console.log(this.state.r, this.state.years, this.state.first_depo, this.state.monthly_depo)
+        this.setState({ total: [{ values: compound, key: "Growth ($)", color: "#A389D4" }] })
 
-        e.preventDefault()
-        this.setState({ total: [{ values: compound, key: "compound", color: "#A389D4" }] })
-        // this.final_compound = compound
 
 
     }
@@ -174,6 +161,8 @@ class RetirementDashboard extends React.Component {
             { key: "Bonds", y: this.state.be_ratio * 100, color: "#5CD4EF" },
             { key: "Equities", y: 100 - this.state.be_ratio * 100, color: "#FFA861" },
         ];
+
+
 
         return (
             <Aux >
@@ -278,7 +267,7 @@ class RetirementDashboard extends React.Component {
                                                 <br></br>
                                                 <Row>
                                                     <Col>
-                                                        <Button style={{width: "20vw", fontSize: "20px"}} id="submit" variant="primary" type="submit" onClick={this.handleSubmit}>Calculate</Button>
+                                                        <Button style={{width: "20vw", fontSize: "20px"}} id="submit" variant="primary" onClick={this.handleSubmit}>Calculate</Button>
                                                     </Col>
                                                 </Row>
 
@@ -300,6 +289,9 @@ class RetirementDashboard extends React.Component {
                                             {
                                                 this.state.total &&
                                                 <div>
+
+
+
                                                     {
                                                         React.createElement(NVD3Chart, {
                                                             xAxis: {
@@ -308,16 +300,16 @@ class RetirementDashboard extends React.Component {
                                                             },
                                                             yAxis: {
                                                                 axisLabel: 'Growth ($)',
-                                                                tickFormat: function (d) { return d }
+                                                                tickFormat: function (d) { return parseInt((d).toFixed()).toLocaleString() }
                                                             },
                                                             type: 'lineChart',
                                                             datum: this.state.total,
                                                             x: 'x',
                                                             y: 'y',
-                                                            height: 300,
-                                                            width: 400,
-                                                            yAxis: {
-                                                                max: 10000
+                                                            height: 400,
+                                                            width: 450,
+                                                            margin: {
+                                                                left: 100
                                                             }
                                                     
                                                         })

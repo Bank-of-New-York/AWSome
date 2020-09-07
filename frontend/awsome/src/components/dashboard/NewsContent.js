@@ -70,26 +70,26 @@ class NewsContent extends React.Component {
 
   // Cannot call too many times during development
 
-  // componentDidMount() {
-  //   fetch("/api_general_news", 
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //           'Content-Type' : "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         stock_symb: this.props.stock_symb
-  //       })
-  //     }).then(response => 
-  //         response.json()
-  //     ).then( data  => {
-  //         console.log(data)
-  //         this.setState({ articles: data.articles })
-  //     }).catch(error => {
-  //         console.log(error)
-  //         alert("There has been a problem")
-  //     })
-  // }
+  componentDidMount() {
+    fetch("/api_general_news", 
+      {
+        method: 'POST',
+        headers: {
+            'Content-Type' : "application/json"
+        },
+        body: JSON.stringify({
+          stock_symb: this.props.stock_symb
+        })
+      }).then(response => 
+          response.json()
+      ).then( data  => {
+          console.log(data)
+          this.setState({ articles: data.articles })
+      }).catch(error => {
+          console.log(error)
+          alert("There has been a problem")
+      })
+  }
 
   render(){
     return(
@@ -104,12 +104,15 @@ class NewsContent extends React.Component {
             .map(article => 
 
               <tr key={article.url}>
-                <td style={{whiteSpace: "unset"}} >
-                <br></br>
-                  <h5>{ article.source.name }</h5>
-                  <p className="m-0 d-inline">{ article.title }</p>
-                  
-                </td>
+                <a href={article.url} target="_blank">
+                  <td style={{whiteSpace: "unset"}} >
+                  <br></br>
+                    <h5>{ article.source.name }</h5>
+                    <p className="m-0 d-inline">{ article.title }</p>
+                    
+                  </td>
+                </a>
+                
                 
               </tr>
 
