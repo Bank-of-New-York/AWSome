@@ -42,6 +42,7 @@ class User(Base):
     invested_before = Column(String(32))
 
     risk_level = Column(String(32))
+    be_ratio = Column(Float, default=-1)
     retirement_amount = Column(Integer, default=-1)
 
     years_till_retire = Column(Integer, default=-1)
