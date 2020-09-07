@@ -124,7 +124,7 @@ class RetirementDashboard extends React.Component {
             let multiplier = Math.pow(1 + monthly_r, 12 * yr);
             let compound_principal = this.state.first_depo * multiplier;
             let compound_monthly = this.state.monthly_depo * (multiplier - 1) / monthly_r;
-            console.log(yr, parseFloat(compound_principal + compound_monthly))
+            console.log(monthly_r, multiplier, compound_principal, compound_monthly)
             compound.push({
                 'x': yr,
                 'y': parseFloat(compound_principal + compound_monthly),
@@ -138,6 +138,8 @@ class RetirementDashboard extends React.Component {
 
 
     }
+
+
 
     render() {
 
@@ -287,10 +289,16 @@ class RetirementDashboard extends React.Component {
                                                             y: 'y',
                                                             height: 300,
                                                             width: 400,
+                                                            yAxis: {
+                                                                max: 10000
+                                                            },
+                                                            
+                                                            
                                                             renderEnd: function () {
                                                                 console.log('renderEnd');
                                                             }
                                                         })
+
                                                     }
                                                 </div>
                                             }

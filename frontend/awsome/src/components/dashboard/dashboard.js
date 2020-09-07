@@ -250,6 +250,7 @@ class StockDashboard extends React.Component {
                                                         }>
                                                     <Row>
                                                         <Col>
+                                                        <br></br>
                                                             <h3>Sentiment</h3>
                                                             <GaugeChart textColor="black" id="bullish" nrOfLevels={3} percent={this.state.yesterday_sentiment / 100 + 0.5}
                                                                 formatTextValue={
