@@ -63,6 +63,12 @@ function getDatum() {
     ];
 }
 
+var EQUITY_CAGR = 0.0724259;
+var BOND_CAGR = 0.0095;
+
+function calc_implied_return(bond_ratio, equity_ratio) {
+    return bond_ratio * BOND_CAGR + equity_ratio * EQUITY_CAGR;
+}
 
 class RetirementDashboard extends React.Component {
 
@@ -108,7 +114,8 @@ class RetirementDashboard extends React.Component {
             this.setState({
                 be_ratio : values["be_ratio"],
                 retire_age : values["years_till_retire"],
-                amount_needed : values["retirement_amount"]
+                amount_needed : values["retirement_amount"],
+                r : (calc_implied_return(values["be_ratio"], 1-values["be_ratio"]) * 100).toFixed(2)
             })
             
             console.log(values)
@@ -242,7 +249,7 @@ class RetirementDashboard extends React.Component {
                                                     <Col>
                                                         <Form.Group controlId="r">
                                                             <Form.Label>Compound Annual Growth Rate (%)</Form.Label>
-                                                            <Form.Control type="number" onChange={this.handleInputChange} name="r"></Form.Control>
+                                                            <Form.Control type="number" onChange={this.handleInputChange} value={this.state.r} name="r"></Form.Control>
                                                             <Form.Text className="text-muted text-left">Calculated based on your recommended investment portfolio</Form.Text>
                                                         </Form.Group>
                                                     </Col>
