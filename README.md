@@ -19,6 +19,11 @@ Built during the SMU Ellipsis Goldman Sachs Tech Series Hackathon.
 - **Phyo** - [LinkedIn](https://www.linkedin.com/in/yar-khine-phyo/)
 - **Wa Thone** - [LinkedIn](https://www.linkedin.com/in/wathone/)
 
+## Pitch Video
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Kbes_d5wtys
+" target="_blank"><img src="http://img.youtube.com/vi/Kbes_d5wtys/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
